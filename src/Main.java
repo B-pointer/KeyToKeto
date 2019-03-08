@@ -11,6 +11,7 @@ public class Main extends Application{
 		Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
 		primaryStage.setTitle("Key To Keto");
 		primaryStage.setScene(new Scene(root, 640, 400));
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	

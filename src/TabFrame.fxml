@@ -18,96 +18,14 @@
               <tabs>
                 <Tab text="Home">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8c325" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
-                              <Label layoutX="14.0" layoutY="9.0" text="Daily Progress">
-                                 <font>
-                                    <Font name="Arial Black" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8c325" height="34.0" layoutY="152.0" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
-                              <Label layoutX="14.0" layoutY="161.0" text="Weekly Status">
-                                 <font>
-                                    <Font name="Arial Black" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="49.0" text="Total Calories:">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="71.0" text="Remaining:">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="249.0" layoutY="49.0" text="Keto Status:">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="328.0" layoutY="49.0" text="Good!" textFill="#5ad045">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="109.0" layoutY="49.0" text="1500" textFill="#5ad045">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="109.0" layoutY="71.0" text="465" textFill="#5ad045">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="197.0" text="Weekly Keto:">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="218.0" text="Weekly Calories:">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="106.0" layoutY="197.0" text="You have met your keto goal 7 times in the last 7 days" textFill="#5ad045">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="120.0" layoutY="218.0" text="You have met your caloric goals 5 times in the last 7 days" textFill="#e1bd49">
-                                 <font>
-                                    <Font name="Arial Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Intake">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <fx:include fx:id="homeTab" source = "HomeTab.fxml"/>
                   </content>
                 </Tab>
                 <Tab text="Current Stats">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TextField layoutX="246.0" layoutY="136.0" />
-                              <TextField layoutX="246.0" layoutY="186.0" />
-                              <TextField layoutX="246.0" layoutY="86.0" />
-                              <Label layoutX="207.0" layoutY="90.0" text="Age:" />
-                              <TextField layoutX="246.0" layoutY="236.0" />
-                              <Label layoutX="200.0" layoutY="140.0" text="Height:" />
-                              <Label layoutX="199.0" layoutY="190.0" text="Weight:" />
-                              <Label layoutX="198.0" layoutY="240.0" text="Gender:" />
-                              <Button layoutX="294.0" layoutY="295.0" mnemonicParsing="false" text="Save" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
+                  <content>
+                     <fx:include fx:id="currentStatsTab" source = "CurrentStatsTab.fxml"/>
+                  </content>
+                </Tab>
               </tabs>
             </TabPane>
       </children>
