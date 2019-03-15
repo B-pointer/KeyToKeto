@@ -26,6 +26,11 @@
                      <fx:include fx:id="currentStatsTab" source = "CurrentStatsTab.fxml"/>
                   </content>
                 </Tab>
+<!--                <Tab text="Account">
+                  <content>
+                     <fx:include fx:id="acctTab" source = "AccountTab.fxml"/>
+                  </content>
+                </Tab>			 --> 
               </tabs>
             </TabPane>
       </children>
