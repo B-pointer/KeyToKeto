@@ -29,4 +29,35 @@ public class LoginPageController {
 		}
 		
 	}
+	@FXML protected void createClick(ActionEvent event)
+	{
+		System.out.println("Create clicked");
+		username.setText("Create Clicked");
+		try {
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			Parent newScene = FXMLLoader.load(getClass().getResource("NewUserFrame.fxml"));
+			stage.getScene().setRoot(newScene);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error changing to Create New User");
+		}
+		
+	}
+	@FXML protected void backClick(ActionEvent event)
+	{
+		//obviously not really what we want to do, just making sure the button is buttoning
+		//System.out.println("Login clicked");
+		//username.setText("Login Clicked");
+		try {
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+			stage.getScene().setRoot(newScene);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error changing scenes withn back button");
+		}
+		
+	}
 }

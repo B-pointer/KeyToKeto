@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 
 public class AccountController {
 	
-	@FXML private TextField username;
-	@FXML private TextField password;
-	@FXML private Button loginButton;
-	@FXML private Button createButton;
+	@FXML private TextField txtName;
+	@FXML private TextField txtPass;
+	@FXML private Button create;
+	@FXML private Button back;
 	
 	@FXML protected void loginClick(ActionEvent event)
 	{
@@ -37,7 +37,7 @@ public class AccountController {
 	{
 		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
 			stage.getScene().setRoot(newScene);
 		}
 		catch(Exception e)
@@ -46,5 +46,20 @@ public class AccountController {
 		}
 		
 	}
-	
+	@FXML protected void backClick(ActionEvent event)
+	{
+		//obviously not really what we want to do, just making sure the button is buttoning
+		//System.out.println("Login clicked");
+		//username.setText("Login Clicked");
+		try {
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
+			stage.getScene().setRoot(newScene);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error changing scenes withn back button");
+		}
+		
+	}	
 }

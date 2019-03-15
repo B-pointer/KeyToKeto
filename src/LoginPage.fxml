@@ -7,13 +7,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "LoginPageController">
+<VBox prefHeight="400.0" prefWidth="640.0" 
+		xmlns="http://javafx.com/javafx/10.0.1" 
+		xmlns:fx="http://javafx.com/fxml/1" 
+		fx:controller = "LoginPageController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" 
+    			prefHeight="-1.0" prefWidth="-1.0" 
+    			VBox.vgrow="ALWAYS">
       <children>
             <TextField layoutX="246.0" layoutY="126.0" fx:id = "username"/>
             <TextField layoutX="246.0" layoutY="200.0" fx:id = "password"/>
-            <Button layoutX="294.0" layoutY="280.0" mnemonicParsing="false" text="Login" fx:id = "loginButton" onAction="#loginClick"/>
+            <Button layoutX="250.0" layoutY="280.0" mnemonicParsing="false" 
+            		text="New User" fx:id = "CreateAcctButton" onAction="#createClick"/>
+            <Button layoutX="350.0" layoutY="280.0" mnemonicParsing="false" 
+            		text="Login" fx:id = "loginButton" onAction="#loginClick"/>
             <Label layoutX="196.0" layoutY="125.0" text="User">
                <font>
                   <Font size="18.0" />
