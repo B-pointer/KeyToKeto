@@ -1,3 +1,7 @@
+/** This class is the GUI for New Client info
+ * 
+ * @author ddath
+ */
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,30 +16,20 @@ import javafx.stage.Stage;
 public class AccountController {
 	
 	@FXML private TextField txtName;
+	@FXML private TextField txtEmail;
 	@FXML private TextField txtPass;
+	@FXML private TextField txtRePass;
+	@FXML private TextField txtAge;
+	@FXML private TextField txtGender;
+	@FXML private TextField txtHeight;
+	@FXML private TextField txtWeight;
 	@FXML private Button create;
 	@FXML private Button back;
 	
-	@FXML protected void loginClick(ActionEvent event)
-	{
-		//obviously not really what we want to do, just making sure the button is buttoning
-		//System.out.println("Login clicked");
-		//username.setText("Login Clicked");
-		try {
-			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
-			stage.getScene().setRoot(newScene);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error changing scenes");
-		}
-		
-	}
-	
 	@FXML protected void createClick(ActionEvent event)
 	{
-		try {
+		showUserInfo();
+/**		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
 			stage.getScene().setRoot(newScene);
@@ -44,16 +38,16 @@ public class AccountController {
 		{
 			System.out.println("Error changing scenes");
 		}
-		
+*/		
 	}
 	@FXML protected void backClick(ActionEvent event)
 	{
 		//obviously not really what we want to do, just making sure the button is buttoning
-		//System.out.println("Login clicked");
+		System.out.println(txtName.getText());
 		//username.setText("Login Clicked");
 		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
+			Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
 			stage.getScene().setRoot(newScene);
 		}
 		catch(Exception e)
@@ -62,4 +56,27 @@ public class AccountController {
 		}
 		
 	}	
+	
+	private void showUserInfo() {
+		System.out.println(txtName.getText());
+		System.out.println(txtEmail.getText());
+		System.out.println(txtPass.getText());
+		System.out.println(txtRePass.getText());
+		System.out.println(txtAge.getText());
+		System.out.println(txtGender.getText());
+		System.out.println(txtHeight.getText());
+		System.out.println(txtWeight.getText());
+		boolean newPass = CheckPassword.CheckPassword(txtPass.getText());		
+		if (newPass == false) {
+			System.out.println(CheckPassword.getReason());
+		}
+		
+		boolean pWordMatch = CheckPassword.matchPassword(txtPass.getText(), txtRePass.getText());
+		if(pWordMatch == false) {
+			System.out.println("Passwords do not match.");
+		}
+		if(newPass == true && pWordMatch == true) {
+			System.out.println("Passwords are good!");
+		}		
+	}
 }
