@@ -8,7 +8,7 @@
 import java.util.*;
 public class CheckPassword {
 	private static int minPwSize = 5;			// Min password length
-	private static int minPwComplex = 1;		// Sets how complex the user password is (0-10)
+	private static int minPwComplex = 8;		// Sets how complex the user password is (0-10)
 	private static boolean goodPw = false;		// Pass or fail for a new password
 	private static String reason = "None";		// Why the password failed check
 	private static LinkedList<Character> newPW = new LinkedList<Character>();
