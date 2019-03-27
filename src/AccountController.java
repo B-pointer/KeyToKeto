@@ -77,6 +77,9 @@ public class AccountController {
 		}
 		if(newPass == true && pWordMatch == true) {
 			System.out.println("Passwords are good!");
-		}		
+		}
+/**		User newUser = new User(txtName.getText(), txtEmail.getText(),
+				txtPass.getText(), txtAge.getText(), txtGender.getText(),
+				txtHeight.getText(), txtWeight.getText());			*/
 	}
 }
