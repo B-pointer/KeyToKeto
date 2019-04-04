@@ -11,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id = "currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" 
-            xmlns:fx="http://javafx.com/fxml/1">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller = "CurrentStatsTabController">
 	<children>
-		<TextField layoutX="246.0" layoutY="136.0" />
-		<TextField layoutX="246.0" layoutY="186.0" />
-		<TextField layoutX="246.0" layoutY="86.0" />
-		 <Label layoutX="207.0" layoutY="90.0" text="Age:" />
-		<TextField layoutX="246.0" layoutY="236.0" />
-		<Label layoutX="200.0" layoutY="140.0" text="Height:" />
-		<Label layoutX="199.0" layoutY="190.0" text="Weight:" />
-		<Label layoutX="198.0" layoutY="240.0" text="Gender:" />
-		<Button layoutX="294.0" layoutY="295.0" mnemonicParsing="false" text="Save" />
+		<TextField layoutX="246.0" layoutY="136.0" fx:id= "ageField" />
+		<TextField layoutX="246.0" layoutY="186.0" fx:id = "heightField" />
+		<TextField layoutX="246.0" layoutY="86.0" fx:id = "weightField"/>	 
+		<TextField layoutX="246.0" layoutY="236.0" fx:id = "genderField"/>
+		<Label layoutX="207.0" layoutY="90.0" text="Age:" />
+		<Label layoutX="185" layoutY="140.0" text="Height:" />
+		<Label layoutX="185" layoutY="190.0" text="Weight:" />
+		<Label layoutX="185" layoutY="240.0" text="Gender:" />
+		<Button layoutX="294.0" layoutY="295.0" mnemonicParsing="false" text="Save" onAction= "#saveClick"/>
 	</children>
 </AnchorPane>

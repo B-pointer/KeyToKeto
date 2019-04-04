@@ -28,7 +28,8 @@ public class ParametricCheckPasswordTest{
 			{"test1", false},
 			{"Test1", false}, 
 			{"TEST1", false}, 
-			{"Tst1!", true}	
+			{"Tst1!", true}, 
+			{"tesT11!", true}
 		});
 	}
 	

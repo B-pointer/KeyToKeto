@@ -61,6 +61,7 @@ public class LoginPageController {
 		catch(Exception e)
 		{
 			System.out.println("Error changing scenes");
+			e.printStackTrace();
 		}
         //}
 		
