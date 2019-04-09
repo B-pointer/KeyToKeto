@@ -1,9 +1,12 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -15,10 +18,21 @@ public class CurrentStatsTabController {
 	@FXML TextField heightField;
 	@FXML TextField weightField;
 	@FXML TextField genderField;
+	@FXML ComboBox genderBox;
 	static int age;
 	static int weight;
 	static int height;
 	static String gender;
+	
+	
+	@FXML private void initialize()
+	{
+		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+		genderBox.setItems(genders);
+		genderBox.getSelectionModel().selectFirst();	
+	}
+	
+	
 	
 	@FXML private void saveClick(ActionEvent e)
 	{
