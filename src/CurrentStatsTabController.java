@@ -48,6 +48,7 @@ public class CurrentStatsTabController {
 		catch(Exception e1)
 		{
 			System.out.println("Error changing scenes with save button");
+			e1.printStackTrace();
 		}
 		
 		//Save current values to the database via API
