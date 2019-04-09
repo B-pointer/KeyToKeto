@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "ResultsController">
 	<children>
 		<AnchorPane layoutX="-2.0" layoutY="3.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="642.0">
 			<children>
@@ -56,7 +56,7 @@
 						</Menu>
 					</menus>
 				</MenuBar>
-            <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" text="See My Results" onAction="#newResults" />
+            <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" text="See My Results" onAction="#calcClick" />
 			</children>
 		</AnchorPane>
 	</children>
