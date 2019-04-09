@@ -15,11 +15,20 @@ public class CurrentStatsTabController {
 	@FXML TextField heightField;
 	@FXML TextField weightField;
 	@FXML TextField genderField;
-	double tdee = 0;
-	ResultsController rc = new ResultsController();
+	static int age;
+	static int weight;
+	static int height;
+	static String gender;
 	
 	@FXML private void saveClick(ActionEvent e)
 	{
+		User u = new User();
+		 age = Integer.parseInt(ageField.getText());
+		 weight = Integer.parseInt(weightField.getText());
+		 height = Integer.parseInt(heightField.getText());
+		 gender = genderField.getText();
+		
+		
 		
 		try {
 			//Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
