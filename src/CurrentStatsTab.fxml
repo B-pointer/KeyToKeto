@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id = "currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" 
+<AnchorPane fx:id = "currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/8" 
             xmlns:fx="http://javafx.com/fxml/1" fx:controller = "CurrentStatsTabController">
 	<children>
 		<TextField layoutX="246.0" layoutY="136.0" fx:id= "ageField" />

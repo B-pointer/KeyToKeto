@@ -10,16 +10,17 @@ public class ResultsController {
  
  @FXML public void newResults(ActionEvent e)
 	{
-	// Women BMR = 655 + (9.6 X weight in kg) + (1.8 x height in cm) – (4.7 x age in yrs)
-			// Men BMR = 66 + (13.7 X weight in kg) + (5 x height in cm) – (6.8 x age in yrs)
-	 
+	// BMR = 13.397W + 4.799H - 5.677A + 88.362
+			// For women:
+			 //BMR = 9.247W + 3.098H - 4.330A + 447.593
 		
 	   User u = new User();
-	    CurrentStatsTabController cn = new CurrentStatsTabController();
-	    u.setAge(cn.age);
-	    u.setHeight(cn.height);
-		u.setWeight(cn.weight);
-		u.setGender(cn.gender);
+	   CurrentStatsTabController cn = new CurrentStatsTabController();
+	   double newWeight = cn.weight /2.2;
+	   u.setAge(cn.age);
+	   u.setHeight(cn.height);
+	   u.setWeight((int) newWeight);
+	   u.setGender(cn.gender);
 	   int age = u.getAge();
 	   String gndr = u.getGender();
 	   double height = u.getHeight();
@@ -47,6 +48,8 @@ public class ResultsController {
 		   bmr = 655 + w + h - a;
 		   String newBMR = String.valueOf(bmr);
 		   calories.setText(newBMR);
+		   String carbs = calories.getText();
+		   
 	   }
 	
 	}
