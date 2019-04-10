@@ -6,15 +6,40 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 public class ResultsController {
- @FXML public TextField calories;
+	@FXML public TextField calories;
+	private User user;
  
- @FXML public void newResults(ActionEvent e)
+ 
+	public ResultsController()
 	{
-	// BMR = 13.397W + 4.799H - 5.677A + 88.362
+	 
+	}
+ 
+	public ResultsController(User aUser)
+	{
+		user = aUser;
+	}
+ 
+ 
+	@FXML public void newResults(ActionEvent e)
+	{
+		double BMR;
+		
+		if(user.getGender().equalsIgnoreCase("MALE"))
+		{
+			BMR = (13.397 * user.getWeight() * 0.453) + (4.799 * user.getHeight() * 2.54) - (5.677 * user.getAge()) + 88.362;
+		}
+		else
+		{
+			BMR = (9.247 * user.getWeight() * 0.453) + (3.098 * user.getHeight() * 2.54) - (4.330 * user.getAge()) + 447.593;
+		}
+		calories.setText(Integer.toString((int)BMR));
+	 // BMR = 13.397W + 4.799H - 5.677A + 88.362
 			// For women:
 			 //BMR = 9.247W + 3.098H - 4.330A + 447.593
 		
-	   User u = new User();
+	 /*  
+	 User u = new User();
 	   CurrentStatsTabController cn = new CurrentStatsTabController();
 	   double newWeight = cn.weight /2.2;
 	   u.setAge(cn.age);
@@ -29,6 +54,7 @@ public class ResultsController {
 	   double w;
 	   double h;
 	   double a;
+	   
 	   System.out.println(gndr);
 	   if(gndr.equals("Male") || gndr.equals("male"))
 	   {
@@ -51,6 +77,6 @@ public class ResultsController {
 		   String carbs = calories.getText();
 		   
 	   }
-	
+	*/
 	}
 }
