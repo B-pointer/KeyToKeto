@@ -41,25 +41,6 @@
 					</font>
 				</Label>
 				<Button layoutX="484.0" layoutY="312.0" mnemonicParsing="false" text="Return Home" />
-				<MenuBar layoutX="-8.0" layoutY="-11.0" prefHeight="25.0" prefWidth="652.0">
-					<menus>
-						<Menu mnemonicParsing="false" text="File">
-							<items>
-								<MenuItem mnemonicParsing="false" text="Close" />
-						</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Edit">
-							<items>
-								<MenuItem mnemonicParsing="false" text="Delete" />
-							</items>
-						</Menu>
-						<Menu mnemonicParsing="false" text="Help">
-							<items>
-								<MenuItem mnemonicParsing="false" text="About" />
-							</items>
-						</Menu>
-					</menus>
-				</MenuBar>
             <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" text="See My Results" onAction="#newResults" />
 			</children>
 		</AnchorPane>
