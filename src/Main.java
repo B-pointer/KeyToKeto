@@ -1,3 +1,5 @@
+import Controllers.LoginPageController;
+import Models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

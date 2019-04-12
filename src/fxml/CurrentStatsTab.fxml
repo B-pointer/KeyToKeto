@@ -5,8 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import Controllers.CurrentStatsTabController?>
 
-<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CurrentStatsTabController">
+<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CurrentStatsTabController">
 	<children>
 		<TextField fx:id="ageField" layoutX="246.0" layoutY="136.0" />
 		<TextField fx:id="heightField" layoutX="246.0" layoutY="186.0" />

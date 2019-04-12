@@ -1,4 +1,6 @@
+package Controllers;
 
+import Models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +48,7 @@ public class CurrentStatsTabController {
 		
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/results.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/results.fxml"));
 			loader.setController(new ResultsController(u));
 			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			Parent newScene = loader.load();

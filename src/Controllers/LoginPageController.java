@@ -1,3 +1,4 @@
+package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+
+import Models.User;
 
 public class LoginPageController {
 	
@@ -72,7 +75,7 @@ public class LoginPageController {
 		System.out.println("Create clicked");
 		username.setText("Create Clicked");
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/NewUser.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewUser.fxml"));
 			loader.setController(this);
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Parent newScene = loader.load();
@@ -91,7 +94,7 @@ public class LoginPageController {
 			//Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
 		//	stage.getScene().setRoot(newScene);
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/LoginPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 			loader.setController(this);
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Parent newScene = loader.load();
@@ -108,7 +111,7 @@ public class LoginPageController {
 	private void loadTabs(Stage stage) throws Exception
 	{
 		//Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		Parent newScene = FXMLLoader.load(getClass().getResource("fxml/TabFrame.fxml"));
+		Parent newScene = FXMLLoader.load(getClass().getResource("/fxml/TabFrame.fxml"));
 		stage.getScene().setRoot(newScene);
 		
 		/*
