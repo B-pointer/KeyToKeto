@@ -1,3 +1,5 @@
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +25,7 @@ public class AccountController {
 		//username.setText("Login Clicked");
 		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
+			Parent newScene = FXMLLoader.load(getClass().getResource("fxml/TabFrame.fxml"));
 			stage.getScene().setRoot(newScene);
 		}
 		catch(Exception e)
@@ -37,7 +39,7 @@ public class AccountController {
 	{
 		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
+			Parent newScene = FXMLLoader.load(getClass().getResource("fxml/TabFrame.fxml"));
 			stage.getScene().setRoot(newScene);
 		}
 		catch(Exception e)
@@ -53,7 +55,7 @@ public class AccountController {
 		//username.setText("Login Clicked");
 		try {
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
+			Parent newScene = FXMLLoader.load(getClass().getResource("fxml/TabFrame.fxml"));
 			stage.getScene().setRoot(newScene);
 		}
 		catch(Exception e)

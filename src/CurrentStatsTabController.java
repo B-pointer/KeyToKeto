@@ -1,3 +1,4 @@
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,9 +21,9 @@ public class CurrentStatsTabController {
 	@FXML TextField heightField;
 	@FXML TextField weightField;
 	@FXML TextField genderField;
-	@FXML ComboBox genderBox;
+	@FXML ComboBox<String> genderBox;
 
-	
+	//TODO need to finish adding Constructors to all the classes so the same user object is shared
 	//public CurrentStatsTabController(User aUser)
 	//{
 	//	user = aUser;
@@ -41,24 +42,16 @@ public class CurrentStatsTabController {
 		 u.setAge(Integer.parseInt(ageField.getText()));
 		 u.setWeight(Integer.parseInt(weightField.getText()));
 		 u.setHeight(Integer.parseInt(heightField.getText()));
-		 //u.setGender(genderField.getText());
-		u.setGender(genderBox.getValue().toString());
+		 u.setGender(genderBox.getValue().toString());
 		
 		
 		try {
-			//Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			//Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-		//	stage.getScene().setRoot(newScene);
-			
-			//rc.calories.setText("1200");
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("results.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/results.fxml"));
 			loader.setController(new ResultsController(u));
 			Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			Parent newScene = loader.load();
 			stage.getScene().setRoot(newScene);	
 			stage.show();
-			
-		   
 		}
 		catch(Exception e1)
 		{
