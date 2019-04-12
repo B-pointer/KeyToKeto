@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import Calculations.CheckPassword;
+
 @RunWith(Parameterized.class)
 public class ParametricCheckPasswordTest{
 	private String password;

@@ -1,6 +1,4 @@
 package Models;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
 /** This class will collect the user info
  * 

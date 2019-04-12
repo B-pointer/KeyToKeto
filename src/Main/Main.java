@@ -1,8 +1,8 @@
+package Main;
 import Controllers.LoginPageController;
 import Models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,7 +25,7 @@ public class Main extends Application{
 		//Code below is new. Note that you dont have a fx:controller in the LoginPage.fxml file anymore
 		//because we are setting the controller manually for that page. this allows us to inject our dependencies 
 		//such as the user data object
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/LoginPage.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 		loader.setController(new LoginPageController(user));
 		Parent newScene = loader.load();
 		primaryStage.setScene(new Scene(newScene, 640, 400));
