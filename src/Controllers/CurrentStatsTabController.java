@@ -1,5 +1,6 @@
 package Controllers;
 
+import DataAccess.DataAccessible;
 import Models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,12 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class CurrentStatsTabController {
 	
@@ -25,17 +23,41 @@ public class CurrentStatsTabController {
 	@FXML TextField genderField;
 	@FXML ComboBox<String> genderBox;
 
+	
+	private User user;
+	private DataAccessible data;
+	
 	//TODO need to finish adding Constructors to all the classes so the same user object is shared
 	//public CurrentStatsTabController(User aUser)
 	//{
 	//	user = aUser;
 	//}
 
+	public CurrentStatsTabController(User user, DataAccessible data)
+	{
+		this.user = user;
+		this.data = data;
+	}
+	
+	
 	@FXML private void initialize()
 	{
 		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
 		genderBox.setItems(genders);
-		genderBox.getSelectionModel().selectFirst();	
+			
+		
+		ageField.setText(Integer.toString(user.getAge()));
+		heightField.setText(Integer.toString(user.getHeight()));
+		weightField.setText(Integer.toString(user.getWeight()));
+		if(user.getGender().equals("Male"))
+		{
+			genderBox.getSelectionModel().selectFirst();
+		}
+		else
+		{
+			genderBox.getSelectionModel().select(2);
+		}
+		
 	}
 		
 	@FXML private void saveClick(ActionEvent e)

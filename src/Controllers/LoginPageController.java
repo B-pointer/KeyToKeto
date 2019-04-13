@@ -18,6 +18,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import DataAccess.DataAccessible;
+import DataAccess.TemporaryDatabaseSimulator;
 import Models.User;
 
 public class LoginPageController {
@@ -27,49 +29,42 @@ public class LoginPageController {
 	@FXML private Button loginButton;
 	private boolean proceed;
 	private User user;
-	
+	private DataAccessible data;
 	
 	//gives us a reference to our user object, so we can create it when we first run the program
-	public LoginPageController(User aUser)
+	//public LoginPageController(User aUser)
+	//{
+	//	user = aUser;
+	//}
+	
+	
+	public LoginPageController()
 	{
-		user = aUser;
+		data = new TemporaryDatabaseSimulator();
 	}
 	
-	
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException
-	{		
-		
-		
-		//File file = new File("users");
-		//Scanner scan = new Scanner(file);
-        //while(scan.hasNext())
-        //{
-        //String usr = scan.next();
-        //String pwd = scan.next();
-        //if(username.getText().equals(usr) && password.getText().equals(pwd))
-        //{
-        	proceed = true;
-        //}
-        
+	{			
+		if(data.login(username.getText(), password.getText()))
+		{
+			proceed = true;
+			user = data.getUser(username.getText());
+		}
 		try {
 			if(proceed == true)
 			{
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				//Parent newScene = FXMLLoader.load(getClass().getResource("TabFrame.fxml"));
-				//stage.getScene().setRoot(newScene);
 				loadTabs(stage);
-			}
-			
-		}
-		
+			}	
+		}	
 		catch(Exception e)
 		{
 			System.out.println("Error changing scenes");
 			e.printStackTrace();
 		}
-        //}
-		
 	}
+	
+	
 	@FXML protected void createClick(ActionEvent event)
 	{
 		System.out.println("Create clicked");
@@ -84,16 +79,13 @@ public class LoginPageController {
 		catch(Exception e)
 		{
 			System.out.println("Error changing to Create New User");
-		}
-		
+		}	
 	}
+	
+	
 	@FXML protected void backClick(ActionEvent event)
 	{
 		try {
-			//Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			//Parent newScene = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-		//	stage.getScene().setRoot(newScene);
-			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 			loader.setController(this);
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -110,38 +102,27 @@ public class LoginPageController {
 	
 	private void loadTabs(Stage stage) throws Exception
 	{
-		//Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		Parent newScene = FXMLLoader.load(getClass().getResource("/fxml/TabFrame.fxml"));
-		stage.getScene().setRoot(newScene);
+		//Parent newScene = FXMLLoader.load(getClass().getResource("/fxml/TabFrame.fxml"));
+	//	stage.getScene().setRoot(newScene);
 		
-		/*
+		
 		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
 		    @Override
 		    public Object call(Class<?> type) {
-		        if(type == tab1Controller.class)
-		        {
-		        	return new tab1Controller(model);
+		        if(type == CurrentStatsTabController.class){
+		        	return new CurrentStatsTabController(user, data);
 		        }
-		        if(type == tab2Controller.class)
-		        {
-		        	return  new tab2Controller(model);
-		        }
+		       // if(type == tab2Controller.class){
+		        //	return  new tab2Controller(model);
+		       // }
 		        return null;
 		    }
 		};
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-		
-		loader.setControllerFactory(controllerFactory);
-
-		
-		Parent root = loader.load();
-		
-		stage.setScene(new Scene(root, 800, 800));
-		stage.show();
-		
-		*/
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabFrame.fxml"));
+		loader.setControllerFactory(controllerFactory);	
+		Parent root = loader.load();	
+		stage.setScene(new Scene(root, 640, 400));
+		stage.show();	
 		
 	}
-	
 }
