@@ -1,6 +1,8 @@
 package DataAccess;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import Models.FoodItem;
 import Models.User;
@@ -8,6 +10,13 @@ import Models.User;
 public class TemporaryDatabaseSimulator implements DataAccessible{
 	
 	//not at all the final implementation, just need some quick testing done
+	private List<FoodItem> foodList;
+	
+	
+	public TemporaryDatabaseSimulator()
+	{
+		generateFoodList();
+	}
 	
 	
 	@Override
@@ -54,5 +63,34 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
+	private void generateFoodList()
+	{
+		Random r = new Random();
+		
+		foodList = new ArrayList<FoodItem>();
+		for(int i = 10; i <=16; i++)
+		{
+			for(int j = 1; j <=10; j++)
+			{
+				int ID = r.nextInt(1200);
+				String name = "Food" + ID;
+				int calories = r.nextInt(500);
+				int protein = r.nextInt(calories/4);
+				int carbs = r.nextInt(calories - 4*(protein))/4;
+				int fat = (calories - (carbs * 4 + protein * 4))/9;
+				int servings = r.nextInt(5);
+				int uniqueID = r.nextInt(3000);
+				foodList.add(new FoodItem(name, ID, calories, carbs, protein, fat, (double)servings, uniqueID));
+			}
+		}
+		
+		for(FoodItem food : foodList)
+		{
+			System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getInsertionID());
+		}
+	}
+	
 	
 }

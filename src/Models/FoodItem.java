@@ -10,6 +10,7 @@ public class FoodItem {
 	private int protein;
 	private int fat;
 	private double servings;
+	private int insertionID;
 	
 	public FoodItem()
 	{
@@ -25,6 +26,19 @@ public class FoodItem {
 		this.protein = protein;
 		this.fat = fat;
 		this.servings = servings;
+		insertionID = -1;
+	}
+	
+	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings, int insertionID)
+	{
+		this.name = name;
+		this.ID = ID;
+		this.calories = calories;
+		this.carbs = carbs;
+		this.protein = protein;
+		this.fat = fat;
+		this.servings = servings;
+		this.insertionID = insertionID;
 	}
 	
 	public void setName(String name)
@@ -55,6 +69,10 @@ public class FoodItem {
 	{
 		this.servings = servings;
 	}
+	public void setInsertionID(int insertionID)
+	{
+		this.insertionID = insertionID;
+	}
 	
 	public String getName()
 	{
@@ -83,6 +101,10 @@ public class FoodItem {
 	public double getServings()
 	{
 		return servings;
+	}
+	public int getInsertionID()
+	{
+		return insertionID;
 	}
 	
 }

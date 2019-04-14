@@ -62,6 +62,7 @@ public class CurrentStatsTabController {
 		//System.out.println(checkFields());
 		if(checkFields())
 		{
+			
 			try {
 				//this is temporary code, gonna get rid of it as soon as I get the flow of the program switched up and the input validation working as intended
 				User u = new User();
@@ -76,6 +77,7 @@ public class CurrentStatsTabController {
 				Parent newScene = loader.load();
 				stage.getScene().setRoot(newScene);	
 				stage.show();
+				
 			}
 			catch(Exception e1)
 			{
@@ -100,7 +102,7 @@ public class CurrentStatsTabController {
 		showErrors();
 		return false;
 	}
-	
+	//shows a dialog box if a field is empty
 	private void showErrors()
 	{
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -109,7 +111,7 @@ public class CurrentStatsTabController {
 		alert.setHeaderText(null);
 		alert.showAndWait();
 	}
-		
+	//this sets the textFields up with a textFormatter that disallows non integers	
 	private void setFormatter()
 	{
 		UnaryOperator<Change> filter = change ->{
