@@ -62,7 +62,13 @@ public class CurrentStatsTabController {
 		//System.out.println(checkFields());
 		if(checkFields())
 		{
-			
+			user.setAge(Integer.parseInt(ageField.getText()));
+			user.setWeight(Integer.parseInt(weightField.getText()));
+			user.setHeight(Integer.parseInt(heightField.getText()));
+			user.setGender(genderBox.getValue().toString());
+			data.updateUser(user);
+			System.out.println("Save logic goes here");
+			/*
 			try {
 				//this is temporary code, gonna get rid of it as soon as I get the flow of the program switched up and the input validation working as intended
 				User u = new User();
@@ -84,10 +90,11 @@ public class CurrentStatsTabController {
 				System.out.println("Error changing scenes with save button");
 				e1.printStackTrace();
 			}
+			*/
 		}
 		
 		//Save current values to the database via API
-		System.out.println("Clicked save button on current stats tab");
+		
 		
 	}
 	

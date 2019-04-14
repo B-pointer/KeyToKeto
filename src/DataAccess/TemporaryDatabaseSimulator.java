@@ -77,9 +77,9 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 				int ID = r.nextInt(1200);
 				String name = "Food" + ID;
 				int calories = r.nextInt(500);
-				int protein = r.nextInt(calories/4);
-				int carbs = r.nextInt(calories - 4*(protein))/4;
-				int fat = (calories - (carbs * 4 + protein * 4))/9;
+				int protein = calories / 16; //protein is 1/4 of the calories 
+				int carbs = calories / 3 / 4; 
+				int fat = calories - (protein * 4 + carbs * 4) / 9;
 				int servings = r.nextInt(5);
 				int uniqueID = r.nextInt(3000);
 				foodList.add(new FoodItem(name, ID, calories, carbs, protein, fat, (double)servings, uniqueID));
