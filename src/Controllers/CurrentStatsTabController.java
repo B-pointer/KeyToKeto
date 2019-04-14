@@ -14,15 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.stage.Stage;
 
 public class CurrentStatsTabController {
-	
-	//private User user;
-	
+
 	@FXML TextField ageField;
 	@FXML TextField heightField;
 	@FXML TextField weightField;

@@ -19,7 +19,7 @@
             <TextField layoutX="246.0" layoutY="126.0" fx:id = "username"/>
             <TextField layoutX="246.0" layoutY="200.0" fx:id = "password"/>
             <Button layoutX="250.0" layoutY="280.0" mnemonicParsing="false" 
-            		text="New User" fx:id = "CreateAcctButton" onAction="#createClick"/>
+            		text="New User" fx:id = "CreateAcctButton" onAction="#createUserPageClick"/>
             <Button layoutX="350.0" layoutY="280.0" mnemonicParsing="false" 
             		text="Login" fx:id = "loginButton" onAction="#loginClick"/>
             <Label layoutX="196.0" layoutY="125.0" text="User">

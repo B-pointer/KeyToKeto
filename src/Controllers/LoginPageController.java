@@ -31,47 +31,42 @@ public class LoginPageController {
 	private User user;
 	private DataAccessible data;
 	
-	//gives us a reference to our user object, so we can create it when we first run the program
-	//public LoginPageController(User aUser)
+	//public LoginPageController()
 	//{
-	//	user = aUser;
+		//data = new TemporaryDatabaseSimulator();
 	//}
 	
-	
-	public LoginPageController()
+	public LoginPageController(DataAccessible data)
 	{
-		data = new TemporaryDatabaseSimulator();
+		this.data = data;
 	}
 	
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException
 	{			
-		if(data.login(username.getText(), password.getText()))
-		{
+		if(data.login(username.getText(), password.getText())){
 			proceed = true;
 			user = data.getUser(username.getText());
 		}
 		try {
-			if(proceed == true)
-			{
+			if(proceed == true){
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 				loadTabs(stage);
 			}	
 		}	
-		catch(Exception e)
-		{
+		catch(Exception e){
 			System.out.println("Error changing scenes");
 			e.printStackTrace();
 		}
 	}
 	
 	
-	@FXML protected void createClick(ActionEvent event)
+	@FXML protected void createUserPageClick(ActionEvent event)
 	{
 		System.out.println("Create clicked");
 		username.setText("Create Clicked");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewUser.fxml"));
-			loader.setController(this);
+			loader.setController(new CreateUserPageController(data));
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Parent newScene = loader.load();
 			stage.getScene().setRoot(newScene);
@@ -79,33 +74,13 @@ public class LoginPageController {
 		catch(Exception e)
 		{
 			System.out.println("Error changing to Create New User");
+			e.printStackTrace();
 		}	
 	}
 	
-	
-	@FXML protected void backClick(ActionEvent event)
-	{
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(this);
-			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = loader.load();
-			stage.getScene().setRoot(newScene);		
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error changing scenes withn back button");
-		}
-		
-	}
-	
-	
+
 	private void loadTabs(Stage stage) throws Exception
 	{
-		//Parent newScene = FXMLLoader.load(getClass().getResource("/fxml/TabFrame.fxml"));
-	//	stage.getScene().setRoot(newScene);
-		
-		
 		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
 		    @Override
 		    public Object call(Class<?> type) {
@@ -118,6 +93,7 @@ public class LoginPageController {
 		        return null;
 		    }
 		};
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabFrame.fxml"));
 		loader.setControllerFactory(controllerFactory);	
 		Parent root = loader.load();	

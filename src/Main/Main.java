@@ -1,5 +1,6 @@
 package Main;
 import Controllers.LoginPageController;
+import DataAccess.TemporaryDatabaseSimulator;
 import Models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class Main extends Application{
 		//such as the user data object
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 		//loader.setController(new LoginPageController(user));
-		loader.setController(new LoginPageController());
+		loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
 		Parent newScene = loader.load();
 		primaryStage.setScene(new Scene(newScene, 640, 400));
 		primaryStage.setResizable(false);

@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ComboBox?>
 
 <VBox prefHeight="400.0" 
 		prefWidth="640.0" 
@@ -79,34 +80,32 @@
 			</font>
 		</Label>
 
-		<TextField fx:id ="txtName" layoutX="84.0" layoutY="46.0" 
+		<TextField fx:id ="usernameField" layoutX="84.0" layoutY="46.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtEmail" layoutX="84.0" layoutY="76.0" 
+		<TextField fx:id ="emailField" layoutX="84.0" layoutY="76.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtPass" layoutX="410.0" layoutY="46.0" 
+		<TextField fx:id ="passwordField" layoutX="410.0" layoutY="46.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtRePass" layoutX="410.0" layoutY="76.0" 
+		<TextField fx:id ="passwordConfirmField" layoutX="410.0" layoutY="76.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtAge" layoutX="84.0" layoutY="160.0" 
+		<ComboBox layoutX="84" layoutY="160" prefWidth="200" fx:id = "genderBox"  />
+		<TextField fx:id ="ageField" layoutX="84.0" layoutY="190.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtGender" layoutX="84.0" layoutY="190.0" 
+		<TextField fx:id ="heightField" layoutX="410.0" layoutY="160.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
-		<TextField fx:id ="txtHeight" layoutX="410.0" layoutY="160.0" 
-				prefHeight="12" prefWidth="200">
-		</TextField>
-		<TextField fx:id ="txtWeight" layoutX="410.0" layoutY="190.0" 
+		<TextField fx:id ="weightField" layoutX="410.0" layoutY="190.0" 
 				prefHeight="12" prefWidth="200">
 		</TextField>
       
 		<Button fx:id ="create" layoutX="485.0" layoutY="225.0" 
 				mnemonicParsing="false" 
-				text="Create New Account"  onAction="#loginClick"/>
+				text="Create New Account"  onAction="#createClick"/>
 		<Button fx:id ="back" layoutX="84.0" layoutY="225.0" 
 				mnemonicParsing="false" 
 				text="Back" onAction="#backClick"/>
