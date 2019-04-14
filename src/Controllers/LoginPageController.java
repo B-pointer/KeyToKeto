@@ -78,7 +78,6 @@ public class LoginPageController {
 		}	
 	}
 	
-
 	private void loadTabs(Stage stage) throws Exception
 	{
 		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
