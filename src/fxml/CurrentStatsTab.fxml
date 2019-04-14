@@ -9,14 +9,16 @@
 
 <AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CurrentStatsTabController">
 	<children>
-		<TextField fx:id="ageField" layoutX="246.0" layoutY="136.0" />
-		<TextField fx:id="heightField" layoutX="246.0" layoutY="186.0" />
-		<TextField fx:id="weightField" layoutX="246.0" layoutY="86.0" />
+		<TextField fx:id="ageField" layoutX="246.0" layoutY="86.0" />
+		<TextField fx:id="heightField" layoutX="246.0" layoutY="136.0" />
+		<TextField fx:id="weightField" layoutX="246.0" layoutY="186.0" />
+		<ComboBox layoutX="245.0" layoutY="236.0" prefWidth="150.0" fx:id = "genderBox"  />
+		
 		<Label layoutX="207.0" layoutY="90.0" text="Age:" />
 		<Label layoutX="185" layoutY="140.0" text="Height:" />
 		<Label layoutX="185" layoutY="190.0" text="Weight:" />
 		<Label layoutX="185" layoutY="240.0" text="Gender:" />
 		<Button layoutX="294.0" layoutY="295.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
-      <ComboBox layoutX="245.0" layoutY="236.0" prefWidth="150.0" fx:id = "genderBox"  />
+      
 	</children>
 </AnchorPane>
