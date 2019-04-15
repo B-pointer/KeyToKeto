@@ -35,6 +35,13 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		return true;
 	}
 
+	public boolean createUser(User user)
+	{
+		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight());
+	}
+	
+	
+	
 	@Override
 	public User getUser(String username) {
 		return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, false);

@@ -29,6 +29,7 @@ public class CreateUserPageController {
 		
 	@FXML private TextField usernameField;
 	@FXML private TextField passwordField;
+	@FXML private TextField emailField;
 	@FXML private TextField passwordConfirmField;
 	@FXML private ComboBox genderBox;
 	@FXML private TextField ageField;
@@ -52,27 +53,37 @@ public class CreateUserPageController {
 	@FXML protected void createClick(ActionEvent event)
 	{
 		System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
-		System.out.println(checkFields());
-		
+		//System.out.println(checkFields());
+		if(checkFields())
+		{
+			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), Integer.parseInt(ageField.getText()), 
+									genderBox.getValue().toString(), Integer.parseInt(heightField.getText()), 
+									Integer.parseInt(weightField.getText()), false);
+			try {
+				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				loadTabs(stage);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Error creating account");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
-	
+	//Ideally this would be in a static class that is called here and in the login page controller, but time is short and I know this works
 	private void loadTabs(Stage stage) throws Exception
 	{
-		//Parent newScene = FXMLLoader.load(getClass().getResource("/fxml/TabFrame.fxml"));
-	//	stage.getScene().setRoot(newScene);
-		
-		
 		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
 		    @Override
 		    public Object call(Class<?> type) {
 		        if(type == CurrentStatsTabController.class){
 		        	return new CurrentStatsTabController(user, data);
 		        }
-		       // if(type == tab2Controller.class){
-		        //	return  new tab2Controller(model);
-		       // }
+		       if(type == ResultsController.class){
+		        	return  new ResultsController(user, data);
+		        }
 		        return null;
 		    }
 		};
@@ -81,7 +92,7 @@ public class CreateUserPageController {
 		loader.setControllerFactory(controllerFactory);	
 		Parent root = loader.load();	
 		stage.setScene(new Scene(root, 640, 400));
-		stage.show();	
+		stage.show();		
 	}
 	
 
@@ -117,7 +128,7 @@ public class CreateUserPageController {
 	
 	private boolean checkFields()
 	{
-		boolean emptyFields = usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmField.getText().isEmpty() || ageField.getText().isEmpty()
+		boolean emptyFields = usernameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmField.getText().isEmpty() || ageField.getText().isEmpty()
 				|| heightField.getText().isEmpty() || weightField.getText().isEmpty();
 		boolean mismatchedPasswords = !(passwordField.getText().equals(passwordConfirmField.getText()));
 		

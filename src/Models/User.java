@@ -26,9 +26,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String myName, String myEmail, String myPass, 
-				int myAge, String myGender, int myTall, 
-				int myWide, boolean myAdmin ) {
+	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
 		setPass(myPass);

@@ -11,6 +11,8 @@ public interface DataAccessible {
 	
 	public boolean createUser(String username, String email, String password, int age, String gender, int height, int weight);
 	
+	public boolean createUser(User user);
+	
 	public User getUser(String username);
 	
 	public ArrayList<FoodItem> getFoodByDate(String date, String username);
