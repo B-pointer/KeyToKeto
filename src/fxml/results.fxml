@@ -2,36 +2,33 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller = "Controllers.ResultsController">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ResultsController">
 	<children>
-		<AnchorPane layoutX="-2.0" layoutY="3.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="642.0">
+		<AnchorPane layoutX="-1.0" layoutY="1.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="375.0" prefWidth="642.0">
 			<children>
-				<Label layoutX="167.0" layoutY="100.0" text="Calories">
+				<Label layoutX="167.0" layoutY="99.0" text="Calories">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
 				</Label>
-				<Label layoutX="171.0" layoutY="162.0" text="Fats">
+				<Label layoutX="169.0" layoutY="174.0" text="Fats">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
 				</Label>
-				<Label layoutX="167.0" layoutY="219.0" text="Carbs">
+				<Label layoutX="164.0" layoutY="215.0" text="Carbs">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
 				</Label>
 
-				<TextField fx:id= "calories" layoutX="235.0" layoutY="95.0" />
-				<TextField fx:id = "carbs" layoutX="235.0" layoutY="156.0" />
-				<TextField fx:id = "fats" layoutX="235.0" layoutY="214.0" />
+				<TextField fx:id="calories" layoutX="235.0" layoutY="94.0" />
+				<TextField fx:id="carbs" layoutX="235.0" layoutY="171.0" />
+				<TextField fx:id="fats" layoutX="235.0" layoutY="211.0" />
 
 			
 				<Label layoutX="52.0" layoutY="30.0" text="Ketosis Calculations">
@@ -40,7 +37,13 @@
 					</font>
 				</Label>
 				<Button layoutX="484.0" layoutY="312.0" mnemonicParsing="false" text="Return Home" />
-            <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" text="See My Results" onAction="#newResults" />
+            <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" onAction="#newResults" text="See My Results" />
+            <TextField layoutX="235.0" layoutY="132.0" />
+            <Label layoutX="169.0" layoutY="135.0" text="Protein">
+               <font>
+                  <Font name="Bodoni MT Black Italic" size="12.0" />
+               </font>
+            </Label>
 			</children>
 		</AnchorPane>
 	</children>

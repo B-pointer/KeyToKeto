@@ -3,6 +3,7 @@ package Controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
 import Models.User;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class ResultsController {
  
 	@FXML public void newResults(ActionEvent e)
 	{
+		/*
 		double BMR;
 		
 		if(user.getGender().equalsIgnoreCase("MALE"))
@@ -39,5 +41,7 @@ public class ResultsController {
 			BMR = (9.247 * user.getWeight() * 0.453) + (3.098 * user.getHeight() * 2.54) - (4.330 * user.getAge()) + 447.593;
 		}
 		calories.setText(Integer.toString((int)BMR));
+		*/
+		calories.setText(Integer.toString(KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender())));
 	}
 }
