@@ -3,6 +3,7 @@ package Controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import DataAccess.DataAccessible;
 import Models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,16 +12,17 @@ import javafx.scene.control.TextField;
 public class ResultsController {
 	@FXML public TextField calories;
 	private User user;
- 
+	private DataAccessible data;
  
 	public ResultsController()
 	{
 	 
 	}
  
-	public ResultsController(User aUser)
+	public ResultsController(User aUser, DataAccessible aData)
 	{
 		user = aUser;
+		data = aData;
 	}
  
  

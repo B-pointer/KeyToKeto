@@ -86,9 +86,9 @@ public class LoginPageController {
 		        if(type == CurrentStatsTabController.class){
 		        	return new CurrentStatsTabController(user, data);
 		        }
-		       // if(type == tab2Controller.class){
-		        //	return  new tab2Controller(model);
-		       // }
+		       if(type == ResultsController.class){
+		        	return  new ResultsController(user, data);
+		        }
 		        return null;
 		    }
 		};
