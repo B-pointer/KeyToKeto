@@ -27,9 +27,9 @@
 				</Label>
 
 				<TextField fx:id="calories" layoutX="235.0" layoutY="94.0" />
-				<TextField fx:id="proteins" layoutX="235.0" layoutY="132.0" />
-				<TextField fx:id="fats" layoutX="235.0" layoutY="171.0" />
-				<TextField fx:id="carbs" layoutX="235.0" layoutY="211.0" />
+				<TextField fx:id="proteins" layoutX="235.0" layoutY="132.0" editable="false"/>
+				<TextField fx:id="fats" layoutX="235.0" layoutY="171.0" editable="false"/>
+				<TextField fx:id="carbs" layoutX="235.0" layoutY="211.0" editable="false"/>
 
 			
 				<Label layoutX="52.0" layoutY="30.0" text="Ketosis Calculations">
