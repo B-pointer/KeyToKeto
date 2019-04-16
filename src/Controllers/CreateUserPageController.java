@@ -26,7 +26,7 @@ public class CreateUserPageController {
 	
 	private User user;
 	private DataAccessible data;
-		
+	private HomePageController home;
 	@FXML private TextField usernameField;
 	@FXML private TextField passwordField;
 	@FXML private TextField emailField;

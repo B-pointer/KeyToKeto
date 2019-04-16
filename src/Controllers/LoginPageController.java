@@ -30,6 +30,7 @@ public class LoginPageController {
 	private boolean proceed;
 	private User user;
 	private DataAccessible data;
+	private HomePageController home;
 	
 	//public LoginPageController()
 	//{
@@ -89,6 +90,10 @@ public class LoginPageController {
 		       if(type == ResultsController.class){
 		        	return  new ResultsController(user, data);
 		        }
+		       if(type == FoodController.class)
+		       {
+		    	   return new FoodController();
+		       }
 		        return null;
 		    }
 		};

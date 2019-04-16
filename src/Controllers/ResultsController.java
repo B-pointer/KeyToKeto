@@ -12,9 +12,13 @@ import javafx.scene.control.TextField;
 
 public class ResultsController {
 	@FXML public TextField calories;
+	@FXML public TextField carbs;
+	@FXML public TextField fats;
+	@FXML public TextField proteins;
 	private User user;
 	private DataAccessible data;
- 
+	HomePageController home;
+
 	public ResultsController()
 	{
 	 
@@ -29,19 +33,9 @@ public class ResultsController {
  
 	@FXML public void newResults(ActionEvent e)
 	{
-		/*
-		double BMR;
-		
-		if(user.getGender().equalsIgnoreCase("MALE"))
-		{
-			BMR = (13.397 * user.getWeight() * 0.453) + (4.799 * user.getHeight() * 2.54) - (5.677 * user.getAge()) + 88.362;
-		}
-		else
-		{
-			BMR = (9.247 * user.getWeight() * 0.453) + (3.098 * user.getHeight() * 2.54) - (4.330 * user.getAge()) + 447.593;
-		}
-		calories.setText(Integer.toString((int)BMR));
-		*/
 		calories.setText(Integer.toString(KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender())));
+		carbs.setText(Integer.toString(KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
+		fats.setText(Integer.toString(KetoCalculations.calculateFat(Integer.parseInt(calories.getText()))));
+		proteins.setText(Integer.toString(KetoCalculations.calculateProtein(Integer.parseInt(calories.getText()))));
 	}
 }

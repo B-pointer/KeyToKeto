@@ -38,7 +38,7 @@
 				</Label>
 				<Button layoutX="484.0" layoutY="312.0" mnemonicParsing="false" text="Return Home" />
             <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" onAction="#newResults" text="See My Results" />
-            <TextField layoutX="235.0" layoutY="132.0" />
+            <TextField fx:id="proteins" layoutX="235.0" layoutY="132.0" />
             <Label layoutX="169.0" layoutY="135.0" text="Protein">
                <font>
                   <Font name="Bodoni MT Black Italic" size="12.0" />
