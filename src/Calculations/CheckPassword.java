@@ -1,3 +1,4 @@
+package Calculations;
 /** This class check password validity.
  * 
  * @version 1.0

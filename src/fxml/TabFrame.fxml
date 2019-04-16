@@ -14,11 +14,16 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-	      <TabPane prefHeight="400.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+	      <TabPane prefHeight="450.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
 	        <tabs>
 	          <Tab text="Home">
 	            <content>
 	              <fx:include fx:id="homeTab" source = "HomeTab.fxml"/>
+	            </content>
+	          </Tab>
+	          <Tab text="Food Diary">
+	            <content>
+	              <fx:include fx:id="foodTab" source = "FoodTab.fxml"/>
 	            </content>
 	          </Tab>
 	          <Tab text="Current Stats">
@@ -26,11 +31,11 @@
 	               <fx:include fx:id="currentStatsTab" source = "CurrentStatsTab.fxml"/>
 	            </content>
 	          </Tab>
-	<!--                <Tab text="Account">
+	 	      <Tab text="Current Goals">
 	            <content>
-	               <fx:include fx:id="acctTab" source = "AccountTab.fxml"/>
+	               <fx:include fx:id="goalsTab" source = "results.fxml"/>
 	            </content>
-	          </Tab>			 --> 
+	          </Tab>			 
 	        </tabs>
 	      </TabPane>
       </children>

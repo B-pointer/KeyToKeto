@@ -1,5 +1,4 @@
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+package Models;
 
 /** This class will collect the user info
  * 
@@ -19,6 +18,7 @@ public class User {
 	private int height;
 	private int weight;
 	private boolean admin;
+	private int calories;
 	
 	/**
 	 * 
@@ -26,10 +26,8 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public User(String myName, String myEmail, String myPass, 
-				int myAge, String myGender, int myTall, 
-				int myWide, boolean myAdmin ) {
+	//this constructor does not have calories in it, need to be set later, used in account creation
+	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
 		setPass(myPass);
@@ -38,6 +36,19 @@ public class User {
 		setHeight(myTall);
 		setWeight(myWide);
 		setAdmin(myAdmin);
+		//setCalories(calories);
+	}
+	//this contructor has caloruies in it, used in account retrieval
+	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, int myCalories,  boolean myAdmin ) {
+		setName(myName);
+		setEmail(myEmail);
+		setPass(myPass);
+		setAge(myAge);
+		setGender(myGender);
+		setHeight(myTall);
+		setWeight(myWide);
+		setAdmin(myAdmin);
+		setCalories(myCalories);
 	}
 
 	/**
@@ -96,6 +107,11 @@ public class User {
 		this.admin = admin;
 	}
 	
+	public void setCalories(int calories)
+	{
+		this.calories = calories;
+	}
+	
 	/**
 	 * @return the name
 	 */
@@ -150,6 +166,11 @@ public class User {
 	 */
 	public boolean isAdmin() {
 		return admin;
+	}
+	
+	public int getCalories()
+	{
+		return calories;
 	}
 
 }
