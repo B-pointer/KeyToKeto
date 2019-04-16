@@ -10,8 +10,7 @@ import Models.User;
 public class TemporaryDatabaseSimulator implements DataAccessible{
 	
 	//not at all the final implementation, just need some quick testing done
-	private List<FoodItem> foodList;
-	
+	private List<FoodItem> foodList; 
 	
 	public TemporaryDatabaseSimulator()
 	{
@@ -44,7 +43,7 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	
 	@Override
 	public User getUser(String username) {
-		return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, false);
+		return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, 1752,  false);
 	}
 
 	@Override

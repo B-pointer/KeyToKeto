@@ -27,8 +27,9 @@
 				</Label>
 
 				<TextField fx:id="calories" layoutX="235.0" layoutY="94.0" />
-				<TextField fx:id="carbs" layoutX="235.0" layoutY="171.0" />
-				<TextField fx:id="fats" layoutX="235.0" layoutY="211.0" />
+				<TextField fx:id="proteins" layoutX="235.0" layoutY="132.0" />
+				<TextField fx:id="fats" layoutX="235.0" layoutY="171.0" />
+				<TextField fx:id="carbs" layoutX="235.0" layoutY="211.0" />
 
 			
 				<Label layoutX="52.0" layoutY="30.0" text="Ketosis Calculations">
@@ -36,14 +37,15 @@
 						<Font name="Leelawadee UI Bold" size="18.0" />
 					</font>
 				</Label>
-				<Button layoutX="484.0" layoutY="312.0" mnemonicParsing="false" text="Return Home" />
-            <Button layoutX="262.0" layoutY="312.0" mnemonicParsing="false" onAction="#newResults" text="See My Results" />
-            <TextField fx:id="proteins" layoutX="235.0" layoutY="132.0" />
+			<Button layoutX="140.0" layoutY="276.0" mnemonicParsing="false" text="Reset to Saved" onAction="#resetClick"/>
+           	<Button layoutX="269.0" layoutY="276.0" mnemonicParsing="false" onAction="#newResults" prefHeight="25.0" prefWidth="95.0" text="Recalculate" />
+            <Button layoutX="408.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Save" onAction= "#saveClick"/>
             <Label layoutX="169.0" layoutY="135.0" text="Protein">
                <font>
                   <Font name="Bodoni MT Black Italic" size="12.0" />
                </font>
             </Label>
+            
 			</children>
 		</AnchorPane>
 	</children>

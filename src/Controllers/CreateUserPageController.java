@@ -2,6 +2,7 @@ package Controllers;
 
 import java.util.function.UnaryOperator;
 
+import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
 import Models.User;
 import javafx.collections.FXCollections;
@@ -59,6 +60,7 @@ public class CreateUserPageController {
 			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), Integer.parseInt(ageField.getText()), 
 									genderBox.getValue().toString(), Integer.parseInt(heightField.getText()), 
 									Integer.parseInt(weightField.getText()), false);
+			user.setCalories(KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender()));
 			try {
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 				loadTabs(stage);
