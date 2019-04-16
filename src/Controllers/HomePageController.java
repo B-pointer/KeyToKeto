@@ -6,12 +6,18 @@ import javafx.scene.control.TextField;
 
 public class HomePageController {
 	@FXML public Label cals;
-    void setCals(String calss)
+    public HomePageController(String newCals)
     {
-    	cals.setText(calss);
+    	String val1 = newCals;
+    }
+	void setCals(String calss)
+    {
+    	System.out.println("Worked");
     }
     
-	
+	public void myValString (String val) {
+		System.out.println("String val: " + val);
+	}
 		
 	
 	//@FXML public TextField calories;

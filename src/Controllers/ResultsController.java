@@ -17,7 +17,7 @@ public class ResultsController {
 	@FXML public TextField proteins;
 	private User user;
 	private DataAccessible data;
-	HomePageController home;
+	HomePageController home = new HomePageController(null);
 
 	public ResultsController()
 	{
@@ -37,5 +37,11 @@ public class ResultsController {
 		carbs.setText(Integer.toString(KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
 		fats.setText(Integer.toString(KetoCalculations.calculateFat(Integer.parseInt(calories.getText()))));
 		proteins.setText(Integer.toString(KetoCalculations.calculateProtein(Integer.parseInt(calories.getText()))));
+		// home.setCals(calories.toString());
+		System.out.println(calories.toString());
+		String homeCarbs = String.valueOf((KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
+		home.setCals(homeCarbs);
+		
+		
 	}
 }
