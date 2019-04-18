@@ -1,6 +1,9 @@
 package Controllers;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
@@ -23,7 +26,7 @@ public class ResultsController {
 	private User user;
 	private DataAccessible data;
 	HomePageController home = new HomePageController(null);
-
+	
 	public ResultsController()
 	{
 	 
@@ -47,6 +50,9 @@ public class ResultsController {
 				fillFields(Integer.parseInt(newText));
 			}
 		});
+		//System.out.println(System.);
+		
+		
 	}
  
 	@FXML public void newResults(ActionEvent e)

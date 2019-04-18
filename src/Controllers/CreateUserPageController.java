@@ -86,6 +86,10 @@ public class CreateUserPageController {
 		       if(type == ResultsController.class){
 		        	return  new ResultsController(user, data);
 		        }
+		       if(type == FoodController.class)
+		       {
+		    	   return new FoodController(user, data);
+		       }
 		        return null;
 		    }
 		};

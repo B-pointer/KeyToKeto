@@ -92,7 +92,7 @@ public class LoginPageController {
 		        }
 		       if(type == FoodController.class)
 		       {
-		    	   return new FoodController();
+		    	   return new FoodController(user, data);
 		       }
 		        return null;
 		    }

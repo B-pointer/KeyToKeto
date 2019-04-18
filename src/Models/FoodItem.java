@@ -11,12 +11,13 @@ public class FoodItem {
 	private int fat;
 	private double servings;
 	private int insertionID;
+	private String date;
 	
 	public FoodItem()
 	{
 		
 	}
-	
+	//without date, without insertionID. Each only has a valid value when both of them do. ID, it either has both or neither
 	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings)
 	{
 		this.name = name;
@@ -27,9 +28,10 @@ public class FoodItem {
 		this.fat = fat;
 		this.servings = servings;
 		insertionID = -1;
+		this.date = "NA";
 	}
-	
-	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings, int insertionID)
+	//with date, with insertionID
+	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings, int insertionID, String date)
 	{
 		this.name = name;
 		this.ID = ID;
@@ -39,6 +41,8 @@ public class FoodItem {
 		this.fat = fat;
 		this.servings = servings;
 		this.insertionID = insertionID;
+		this.date = date;
+		
 	}
 	
 	public void setName(String name)
@@ -73,7 +77,10 @@ public class FoodItem {
 	{
 		this.insertionID = insertionID;
 	}
-	
+	public void setDate(String date)
+	{
+		this.date = date;
+	}
 	public String getName()
 	{
 		return name;
@@ -105,6 +112,10 @@ public class FoodItem {
 	public int getInsertionID()
 	{
 		return insertionID;
+	}
+	public String getDate()
+	{
+		return date;
 	}
 	
 }

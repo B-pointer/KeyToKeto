@@ -48,8 +48,19 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 
 	@Override
 	public ArrayList<FoodItem> getFoodByDate(String date, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		//// TODO Auto-generated method stub
+		//return null;
+		ArrayList<FoodItem> datedFoodList = new ArrayList<FoodItem>();
+		for(FoodItem f : foodList)
+		{
+			if(f.getDate().equals(date))
+			{
+				datedFoodList.add(f);
+			}
+		}
+		return datedFoodList;
+		
+		
 	}
 
 	@Override
@@ -76,7 +87,7 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		Random r = new Random();
 		
 		foodList = new ArrayList<FoodItem>();
-		for(int i = 10; i <=16; i++)
+		for(int i = 12; i <=22; i++)
 		{
 			for(int j = 1; j <=10; j++)
 			{
@@ -88,13 +99,15 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 				int fat = calories - (protein * 4 + carbs * 4) / 9;
 				int servings = r.nextInt(5);
 				int uniqueID = r.nextInt(3000);
-				foodList.add(new FoodItem(name, ID, calories, carbs, protein, fat, (double)servings, uniqueID));
+				String day = String.format("%02d", i);
+				String date = "2019-04-"+day ;
+				foodList.add(new FoodItem(name, ID, calories, carbs, protein, fat, (double)servings, uniqueID, date));
 			}
 		}
 		
 		for(FoodItem food : foodList)
 		{
-			System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getInsertionID());
+			System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getInsertionID() + " " + food.getDate());
 		}
 	}
 	
