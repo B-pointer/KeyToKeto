@@ -11,12 +11,17 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import DataAccess.DataAccessible;
+import DataAccess.TemporaryDatabaseSimulator;
 import Models.FoodItem;
 import Models.User;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -25,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class FoodController {
@@ -104,6 +110,23 @@ public class FoodController {
 		    
 		}
 		in.close();
+	}
+	
+	@FXML private void logoutClick(ActionEvent e)
+	{
+		try {
+			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
+			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
+			Parent newScene = loader.load();
+			primaryStage.setScene(new Scene(newScene, 640, 400));
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		}
+		catch(Exception ex)
+		{
+			
+		}
 	}
 	
 	

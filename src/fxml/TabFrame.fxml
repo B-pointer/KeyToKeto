@@ -16,11 +16,13 @@
       <children>
 	      <TabPane prefHeight="450.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
 	        <tabs>
+	          <!--  
 	          <Tab text="Home">
 	            <content>
 	              <fx:include fx:id="homeTab" source = "HomeTab.fxml"/>
 	            </content>
 	          </Tab>
+	          -->
 	          <Tab text="Food Diary">
 	            <content>
 	              <fx:include fx:id="foodTab" source = "FoodTab.fxml"/>

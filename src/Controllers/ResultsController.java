@@ -9,14 +9,20 @@ import java.util.function.UnaryOperator;
 
 import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
+import DataAccess.TemporaryDatabaseSimulator;
 import Models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.stage.Stage;
 
 public class ResultsController {
 	@FXML public TextField calories;
@@ -71,6 +77,24 @@ public class ResultsController {
 		home.setCals(homeCarbs);	
 		*/
 	}
+	
+	@FXML private void logoutClick(ActionEvent e)
+	{
+		try {
+			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
+			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
+			Parent newScene = loader.load();
+			primaryStage.setScene(new Scene(newScene, 640, 400));
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		}
+		catch(Exception ex)
+		{
+			
+		}
+	}
+	
 	@FXML private void saveClick(ActionEvent e)
 	{
 		

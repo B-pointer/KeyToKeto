@@ -3,6 +3,7 @@ package Controllers;
 import java.util.function.UnaryOperator;
 
 import DataAccess.DataAccessible;
+import DataAccess.TemporaryDatabaseSimulator;
 import Models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
@@ -133,6 +135,23 @@ public class CurrentStatsTabController {
 		ageField.setTextFormatter(new TextFormatter<String>(filter));
 		heightField.setTextFormatter(new TextFormatter<String>(filter));
 		weightField.setTextFormatter(new TextFormatter<String>(filter));
+	}
+	
+	@FXML private void logoutClick(ActionEvent e)
+	{
+		try {
+			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
+			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
+			Parent newScene = loader.load();
+			primaryStage.setScene(new Scene(newScene, 640, 400));
+			primaryStage.setResizable(false);
+			primaryStage.show();
+		}
+		catch(Exception ex)
+		{
+			
+		}
 	}
 	
 }

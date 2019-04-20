@@ -6,26 +6,26 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
    <children>
       <ListView fx:id="FoodListView" layoutX="14.0" layoutY="46.0" prefHeight="284.0" prefWidth="276.0" />
       <Button layoutX="127.0" layoutY="334.0" mnemonicParsing="false" text="Delete" />
-      <TextField fx:id="searcher" layoutX="340.0" layoutY="22.0" prefHeight="25.0" prefWidth="215.0" />
-      <Button layoutX="550.0" layoutY="21.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
-      <ListView layoutX="340.0" layoutY="44.0" prefHeight="185.0" prefWidth="276.0" />
-      <TextField fx:id="food" layoutX="340.0" layoutY="254.0" prefHeight="25.0" prefWidth="276.0" />
-      <TextField fx:id="cals" layoutX="340.0" layoutY="300.0" prefHeight="25.0" prefWidth="50.0" />
-      <TextField fx:id="prots" layoutX="415.0" layoutY="300.0" prefHeight="25.0" prefWidth="50.0" />
-      <TextField fx:id="fats" layoutX="490.0" layoutY="300.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="340.0" layoutY="237.0" text="Food" />
-      <Label layoutX="344.0" layoutY="282.0" text="Calories" />
-      <TextField fx:id="carbs" layoutX="565.0" layoutY="300.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="421.0" layoutY="283.0" text="Protein" />
-      <Label layoutX="504.0" layoutY="281.0" text="Fat" />
-      <Label layoutX="574.0" layoutY="281.0" text="Carbs" />
-      <Button layoutX="458.0" layoutY="334.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
-      <DatePicker layoutX="74.0" layoutY="21.0" prefHeight="25.0" prefWidth="156.0" onAction = "#dateChange" fx:id = "datePicker"/>
+      <TextField fx:id="searcher" layoutX="340.0" layoutY="45.0" prefHeight="25.0" prefWidth="215.0" />
+      <Button layoutX="554.0" layoutY="44.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
+      <ListView layoutX="340.0" layoutY="69.0" prefHeight="185.0" prefWidth="276.0" />
+      <TextField fx:id="food" layoutX="340.0" layoutY="270.0" prefHeight="25.0" prefWidth="276.0" />
+      <TextField fx:id="cals" layoutX="340.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="prots" layoutX="415.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="fats" layoutX="488.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="340.0" layoutY="253.0" text="Food" />
+      <Label layoutX="344.0" layoutY="295.0" text="Calories" />
+      <TextField fx:id="carbs" layoutX="564.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="421.0" layoutY="295.0" text="Protein" />
+      <Label layoutX="504.0" layoutY="295.0" text="Fat" />
+      <Label layoutX="574.0" layoutY="294.0" text="Carbs" />
+      <Button layoutX="458.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
+      <DatePicker fx:id="datePicker" layoutX="135.0" layoutY="21.0" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
+      <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" text="Logout" onAction = "#logoutClick"/>
    </children>
 </AnchorPane>
