@@ -85,7 +85,7 @@ public class ResultsController {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
 			Parent newScene = loader.load();
-			primaryStage.setScene(new Scene(newScene, 640, 400));
+			primaryStage.setScene(new Scene(newScene, 900, 560));
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		}

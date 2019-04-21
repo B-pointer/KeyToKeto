@@ -1,5 +1,8 @@
 package Models;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /** This class will collect the user info
  * 
  */
@@ -19,6 +22,7 @@ public class User {
 	private int weight;
 	private boolean admin;
 	private int calories;
+	private final IntegerProperty calorieProperty = new SimpleIntegerProperty();
 	
 	/**
 	 * 
@@ -26,7 +30,7 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	//this constructor does not have calories in it, need to be set later, used in account creation
+	//this constructor does not have calories in it,not currently used 
 	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
@@ -38,7 +42,7 @@ public class User {
 		setAdmin(myAdmin);
 		//setCalories(calories);
 	}
-	//this contructor has caloruies in it, used in account retrieval
+	//this contructor has calories in it, used in account retrieval
 	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, int myCalories,  boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
@@ -49,8 +53,19 @@ public class User {
 		setWeight(myWide);
 		setAdmin(myAdmin);
 		setCalories(myCalories);
+		
+		
+		//test code for now
+		calorieProperty.set(myCalories);
+		
 	}
 
+	
+	
+	public IntegerProperty CalorieProperty()
+	{
+		return calorieProperty;
+	}
 	/**
 	 * @param name the name to set
 	 */
@@ -109,7 +124,9 @@ public class User {
 	
 	public void setCalories(int calories)
 	{
+		
 		this.calories = calories;
+		calorieProperty.set(calories);
 	}
 	
 	/**

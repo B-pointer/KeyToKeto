@@ -101,7 +101,7 @@ public class LoginPageController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabFrame.fxml"));
 		loader.setControllerFactory(controllerFactory);	
 		Parent root = loader.load();	
-		stage.setScene(new Scene(root, 640, 400));
+		stage.setScene(new Scene(root, 900, 560));
 		stage.show();	
 		
 	}

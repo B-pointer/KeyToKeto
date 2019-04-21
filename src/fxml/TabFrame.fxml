@@ -10,11 +10,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="560" prefWidth="900" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="560" prefWidth="900" VBox.vgrow="ALWAYS">
       <children>
-	      <TabPane prefHeight="450.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+	      <TabPane prefHeight="560" prefWidth="900" tabClosingPolicy="UNAVAILABLE">
 	        <tabs>
 	          <!--  
 	          <Tab text="Home">

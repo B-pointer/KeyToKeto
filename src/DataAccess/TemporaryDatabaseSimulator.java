@@ -97,7 +97,7 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 				int protein = calories / 16; //protein is 1/4 of the calories 
 				int carbs = calories / 3 / 4; 
 				int fat = calories - (protein * 4 + carbs * 4) / 9;
-				int servings = r.nextInt(5);
+				int servings = r.nextInt(4) + 1;
 				int uniqueID = r.nextInt(3000);
 				String day = String.format("%02d", i);
 				String date = "2019-04-"+day ;

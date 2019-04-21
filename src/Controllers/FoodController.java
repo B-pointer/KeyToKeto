@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.converter.NumberStringConverter;
 
 public class FoodController {
 	@FXML private TextField prots;
@@ -42,6 +43,7 @@ public class FoodController {
 	@FXML private TextField searcher;
 	@FXML private ListView<FoodItem> FoodListView;
 	@FXML private DatePicker datePicker;
+	@FXML private Label calorieGoalLabel;
 	
 	private LocalDate date;
 	
@@ -58,7 +60,7 @@ public class FoodController {
 	
 	@FXML private void initialize()
 	{
-
+		calorieGoalLabel.textProperty().bind(user.CalorieProperty().asString());
 		date = LocalDate.now();
 		datePicker.setValue(LocalDate.now());
 		getFoodList();
@@ -119,7 +121,7 @@ public class FoodController {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
 			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
 			Parent newScene = loader.load();
-			primaryStage.setScene(new Scene(newScene, 640, 400));
+			primaryStage.setScene(new Scene(newScene, 900, 560));
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		}
@@ -140,6 +142,7 @@ public class FoodController {
 		private Text carbs;
 		private Text calories;
 		private Text fat;
+		private Text servings;
 		
 		public CustomFoodCell()
 		{
@@ -149,7 +152,8 @@ public class FoodController {
 			carbs = new Text();
 			calories = new Text();
 			fat = new Text();
-			macros = new HBox(calories, protein, carbs, fat);
+			servings = new Text();
+			macros = new HBox(servings, calories, protein, carbs, fat);
 			macros.setSpacing(10);
 			content = new VBox(name, macros);
 		}
@@ -160,11 +164,13 @@ public class FoodController {
 			super.updateItem(item,  empty);
 			if(item != null && !empty)
 			{
+				double totalServings = item.getServings();
 				name.setText(item.getName());
-				calories.setText("Cal: " + item.getCalories());
-				protein.setText("Protein: " + item.getProtein());
-				carbs.setText("Carbs: " + item.getCarbs());
-				fat.setText("Fat: " + item.getFat());
+				servings.setText("Serving: " + totalServings);
+				calories.setText("Cal: " + totalServings * item.getCalories());
+				protein.setText("Protein: " + totalServings * item.getProtein());
+				carbs.setText("Carbs: " + totalServings * item.getCarbs());
+				fat.setText("Fat: " + totalServings * item.getFat());
 				setGraphic(content);
 			}
 			else

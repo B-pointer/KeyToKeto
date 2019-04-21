@@ -4,28 +4,33 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
    <children>
-      <ListView fx:id="FoodListView" layoutX="14.0" layoutY="46.0" prefHeight="284.0" prefWidth="276.0" />
-      <Button layoutX="127.0" layoutY="334.0" mnemonicParsing="false" text="Delete" />
-      <TextField fx:id="searcher" layoutX="340.0" layoutY="45.0" prefHeight="25.0" prefWidth="215.0" />
-      <Button layoutX="554.0" layoutY="44.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
-      <ListView layoutX="340.0" layoutY="69.0" prefHeight="185.0" prefWidth="276.0" />
-      <TextField fx:id="food" layoutX="340.0" layoutY="270.0" prefHeight="25.0" prefWidth="276.0" />
-      <TextField fx:id="cals" layoutX="340.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
-      <TextField fx:id="prots" layoutX="415.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
-      <TextField fx:id="fats" layoutX="488.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="340.0" layoutY="253.0" text="Food" />
-      <Label layoutX="344.0" layoutY="295.0" text="Calories" />
-      <TextField fx:id="carbs" layoutX="564.0" layoutY="312.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="421.0" layoutY="295.0" text="Protein" />
-      <Label layoutX="504.0" layoutY="295.0" text="Fat" />
-      <Label layoutX="574.0" layoutY="294.0" text="Carbs" />
-      <Button layoutX="458.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
-      <DatePicker fx:id="datePicker" layoutX="135.0" layoutY="21.0" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
-      <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" text="Logout" onAction = "#logoutClick"/>
+      <ListView fx:id="FoodListView" layoutX="60.0" layoutY="68.0" prefHeight="339.0" prefWidth="383.0" />
+      <Button layoutX="226.0" layoutY="485.0" mnemonicParsing="false" text="Delete" />
+      <TextField fx:id="searcher" layoutX="518.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" />
+      <Button layoutX="769.0" layoutY="44.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
+      <ListView layoutX="519.0" layoutY="69.0" prefHeight="306.0" prefWidth="319.0" />
+      <TextField fx:id="food" layoutX="516.0" layoutY="398.0" prefHeight="25.0" prefWidth="319.0" />
+      <TextField fx:id="cals" layoutX="603.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="prots" layoutX="664.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="fats" layoutX="725.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="561.0" layoutY="380.0" text="Food" />
+      <Label layoutX="607.0" layoutY="430.0" text="Calories" />
+      <TextField fx:id="carbs" layoutX="784.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="672.0" layoutY="430.0" text="Protein" />
+      <Label layoutX="744.0" layoutY="430.0" text="Fat" />
+      <Label layoutX="793.0" layoutY="430.0" text="Carbs" />
+      <Button layoutX="652.0" layoutY="485.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
+      <DatePicker fx:id="datePicker" layoutX="288.0" layoutY="44.0" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
+      <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
+      <Spinner layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" />
+      <Label layoutX="527.0" layoutY="430.0" text="Servings" />
+      <Label layoutX="61.0" layoutY="430.0" text="Calories:" />
+      <Label layoutX="114.0" layoutY="430.0" fx:id = "calorieGoalLabel" />
    </children>
 </AnchorPane>

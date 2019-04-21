@@ -5,20 +5,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import Controllers.CurrentStatsTabController?>
 
-<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CurrentStatsTabController">
+<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CurrentStatsTabController">
 	<children>
-		<TextField fx:id="ageField" layoutX="246.0" layoutY="86.0" />
-		<TextField fx:id="heightField" layoutX="246.0" layoutY="136.0" />
-		<TextField fx:id="weightField" layoutX="246.0" layoutY="186.0" />
-		<ComboBox layoutX="245.0" layoutY="236.0" prefWidth="150.0" fx:id = "genderBox"  />
+		<TextField fx:id="ageField" layoutX="376.0" layoutY="128.0" />
+		<TextField fx:id="heightField" layoutX="376.0" layoutY="178.0" />
+		<TextField fx:id="weightField" layoutX="376.0" layoutY="228.0" />
+		<ComboBox fx:id="genderBox" layoutX="376.0" layoutY="289.0" prefWidth="150.0" />
 		
-		<Label layoutX="207.0" layoutY="90.0" text="Age:" />
-		<Label layoutX="185" layoutY="140.0" text="Height:" />
-		<Label layoutX="185" layoutY="190.0" text="Weight:" />
-		<Label layoutX="185" layoutY="240.0" text="Gender:" />
-		<Button layoutX="294.0" layoutY="295.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
-        <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Logout" onAction = "#logoutClick"/>
+		<Label layoutX="332.0" layoutY="132.0" text="Age:" />
+		<Label layoutX="325.0" layoutY="182.0" text="Height:" />
+		<Label layoutX="324.0" layoutY="232.0" text="Weight:" />
+		<Label layoutX="323.0" layoutY="293.0" text="Gender:" />
+		<Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
+        <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
 	</children>
 </AnchorPane>
