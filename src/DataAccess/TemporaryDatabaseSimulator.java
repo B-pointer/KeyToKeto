@@ -70,9 +70,11 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	}
 
 	@Override
-	public boolean addMeal(FoodItem meal) {
+	public int addMeal(FoodItem meal) {
 		// TODO Auto-generated method stub
-		return false;
+		//needs to insert into db and return the mealID 
+		
+		return -1;
 	}
 
 	@Override

@@ -28,7 +28,7 @@
       <Button layoutX="652.0" layoutY="485.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
       <DatePicker fx:id="datePicker" layoutX="288.0" layoutY="44.0" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
       <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
-      <Spinner layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" />
+      <Spinner layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" fx:id="servingSpinner"/>
       <Label layoutX="527.0" layoutY="430.0" text="Servings" />
       <Label layoutX="61.0" layoutY="430.0" text="Calories:" />
       <Label layoutX="114.0" layoutY="430.0" fx:id = "calorieGoalLabel" />

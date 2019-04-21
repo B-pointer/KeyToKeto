@@ -19,7 +19,7 @@ public interface DataAccessible {
 	
 	public boolean deleteMeal(int uniqueID); //unique ID here refers to the uniquely generated ID for the food in the meal table, not the food ID
 											 //this is to be used to delete food that a user has added to their meals
-	public boolean addMeal(FoodItem meal);
+	public int addMeal(FoodItem meal);
 	
 	public boolean updateUser(User user);
 }

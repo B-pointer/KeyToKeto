@@ -26,6 +26,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -44,6 +46,7 @@ public class FoodController {
 	@FXML private ListView<FoodItem> FoodListView;
 	@FXML private DatePicker datePicker;
 	@FXML private Label calorieGoalLabel;
+	@FXML private Spinner servingSpinner;
 	
 	private LocalDate date;
 	
@@ -60,9 +63,13 @@ public class FoodController {
 	
 	@FXML private void initialize()
 	{
+		SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10.0, 1.0, 0.1);
+		servingSpinner.setValueFactory(valueFactory);
+		
 		calorieGoalLabel.textProperty().bind(user.CalorieProperty().asString());
 		date = LocalDate.now();
 		datePicker.setValue(LocalDate.now());
+		
 		getFoodList();
 	}
 	
