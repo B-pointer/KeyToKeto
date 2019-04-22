@@ -1,5 +1,7 @@
 package Controllers;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.function.UnaryOperator;
 
 import Calculations.KetoCalculations;
@@ -15,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
@@ -32,8 +35,8 @@ public class CreateUserPageController {
 	@FXML private TextField passwordField;
 	@FXML private TextField emailField;
 	@FXML private TextField passwordConfirmField;
-	@FXML private ComboBox genderBox;
-	@FXML private TextField ageField;
+	@FXML private ComboBox<String> genderBox;
+	@FXML private DatePicker birthDatePicker;
 	@FXML private TextField heightField;
 	@FXML private TextField weightField;
 	
@@ -45,22 +48,27 @@ public class CreateUserPageController {
 	
 	@FXML private void initialize()
 	{
+		birthDatePicker.setValue(LocalDate.now());
+		birthDatePicker.setEditable(false);
 		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
 		genderBox.setItems(genders);
 		genderBox.getSelectionModel().selectFirst();
 		setFormatter();
 	}
-	
 	@FXML protected void createClick(ActionEvent event)
 	{
 		System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
-		//System.out.println(checkFields());
 		if(checkFields())
 		{
-			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), Integer.parseInt(ageField.getText()), 
-									genderBox.getValue().toString(), Integer.parseInt(heightField.getText()), 
-									Integer.parseInt(weightField.getText()), false);
-			user.setCalories(KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender()));
+			int height = Integer.parseInt(heightField.getText());
+			int weight = Integer.parseInt(weightField.getText());
+			int age = (int)ChronoUnit.YEARS.between(birthDatePicker.getValue(), LocalDate.now()); 
+			String gender = genderBox.getValue().toString();
+			int calories = KetoCalculations.calculateCalories(age, height, weight, gender);
+			
+			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), birthDatePicker.getValue(), gender, height, weight, calories);
+			
+			
 			try {
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 				loadTabs(stage);
@@ -127,14 +135,13 @@ public class CreateUserPageController {
 			}
 			return null;
 		};
-		ageField.setTextFormatter(new TextFormatter<String>(filter));
 		heightField.setTextFormatter(new TextFormatter<String>(filter));
 		weightField.setTextFormatter(new TextFormatter<String>(filter));
 	}
 	
 	private boolean checkFields()
 	{
-		boolean emptyFields = usernameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmField.getText().isEmpty() || ageField.getText().isEmpty()
+		boolean emptyFields = usernameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmField.getText().isEmpty() 
 				|| heightField.getText().isEmpty() || weightField.getText().isEmpty();
 		boolean mismatchedPasswords = !(passwordField.getText().equals(passwordConfirmField.getText()));
 		

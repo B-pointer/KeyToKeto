@@ -1,5 +1,8 @@
 package Models;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -13,6 +16,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public class User {
 
+	private LocalDate birthdate;
 	private String name;
 	private String email;
 	private String pass;
@@ -30,7 +34,8 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	//this constructor does not have calories in it,not currently used 
+	/*
+	//this constructor does not have calories in it,not currently used at all
 	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
@@ -42,7 +47,7 @@ public class User {
 		setAdmin(myAdmin);
 		//setCalories(calories);
 	}
-	//this contructor has calories in it, used in account retrieval
+	//this constructor has calories in it, used in account retrieval
 	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, int myCalories,  boolean myAdmin ) {
 		setName(myName);
 		setEmail(myEmail);
@@ -58,6 +63,25 @@ public class User {
 		//test code for now
 		calorieProperty.set(myCalories);
 		
+	}
+	*/
+	public User(String myName, String myEmail, String myPass, LocalDate birthdate, String myGender, int myTall, int myWide, int myCalories)
+	{
+		setName(myName);
+		setEmail(myEmail);
+		setPass(myPass);
+		//setAge(Temporal);
+		setAge((int)ChronoUnit.YEARS.between(birthdate, LocalDate.now()));
+		setGender(myGender);
+		setHeight(myTall);
+		setWeight(myWide);
+		setAdmin(false);
+		setCalories(myCalories);
+		
+		this.birthdate = birthdate;
+		
+		//test code for now
+		calorieProperty.set(myCalories);
 	}
 
 	

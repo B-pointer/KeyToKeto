@@ -1,5 +1,7 @@
 package DataAccess;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,7 +45,8 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	
 	@Override
 	public User getUser(String username) {
-		return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, 1752,  false);
+		//return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, 1752,  false);
+		return new User("bkp5", "mailaccount@gmail.com", "password123", LocalDate.parse("1996-09-02", DateTimeFormatter.ofPattern("yyyy-MM-dd")), "Male", 67, 160, 1752);
 	}
 
 	@Override
