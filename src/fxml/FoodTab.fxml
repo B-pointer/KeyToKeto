@@ -30,7 +30,19 @@
       <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
       <Spinner layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" fx:id="servingSpinner"/>
       <Label layoutX="527.0" layoutY="430.0" text="Servings" />
-      <Label layoutX="61.0" layoutY="430.0" text="Calories:" />
-      <Label layoutX="114.0" layoutY="430.0" fx:id = "calorieGoalLabel" />
+      
+      
+      
+      <Label layoutX="61.0" layoutY="430.0" text="Goal:" />
+      
+      <Label layoutX="135.0" layoutY="412.0" text="Calories:" />
+      <Label layoutX="205.0" layoutY="412.0" text="Protein:" />
+      <Label layoutX="278.0" layoutY="412.0" text="Carbs:" />
+      <Label layoutX="350.0" layoutY="412.0" text="Fat:" />
+      
+      <Label layoutX="150.0" layoutY="430.0" fx:id = "calorieGoalLabel" />
+      <Label layoutX="220.0" layoutY="430.0" fx:id = "proteinGoalLabel" />
+      <Label layoutX="290.0" layoutY="430.0" fx:id = "carbGoalLabel" />
+      <Label layoutX="350.0" layoutY="430.0" fx:id = "fatGoalLabel" />
    </children>
 </AnchorPane>

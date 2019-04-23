@@ -11,11 +11,14 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.UnaryOperator;
 
+import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
 import DataAccess.TemporaryDatabaseSimulator;
 import Models.FoodItem;
 import Models.User;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,8 +53,13 @@ public class FoodController {
 	@FXML private TextField searcher;
 	@FXML private ListView<FoodItem> FoodListView;
 	@FXML private DatePicker datePicker;
-	@FXML private Label calorieGoalLabel;
 	@FXML private Spinner<Double> servingSpinner;
+	
+	
+	@FXML private Label calorieGoalLabel;
+	@FXML private Label proteinGoalLabel;
+	@FXML private Label carbGoalLabel;
+	@FXML private Label fatGoalLabel;
 	
 	private LocalDate date;
 	
@@ -71,20 +79,17 @@ public class FoodController {
 		SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10.0, 1.0, 0.1);
 		servingSpinner.setValueFactory(valueFactory);
 		
-		calorieGoalLabel.textProperty().bind(user.CalorieProperty().asString());
+		getBindings();
 		date = LocalDate.now();
 		datePicker.setValue(LocalDate.now());
 		
 		getFoodList();
 	}
 	
-	//store an instance of the list somewhere so that it can be edited and you dont have to recall the back end to get all foods for a day any time it is altered
+	
 	private void getFoodList()
 	{
 		FoodListView.setItems(FXCollections.observableArrayList(data.getFoodByDate(date, user.getName())));
-		//FoodListView.setCellFactory(Callback<ListView<FoodItem, ListCell<FoodItem>>() {
-		//			@Override public ListCell
-		//		});
 		FoodListView.setCellFactory(new Callback<ListView<FoodItem>, ListCell<FoodItem>>() {
             @Override
             public ListCell<FoodItem> call(ListView<FoodItem> FoodListView) {
@@ -220,6 +225,32 @@ public class FoodController {
 	}
 	
 	
+	private void getBindings()
+	{
+		IntegerProperty in = user.CalorieProperty();
+		calorieGoalLabel.textProperty().bind(user.CalorieProperty().asString());
+		proteinGoalLabel.textProperty().bind(user.ProteinProperty().asString());
+		fatGoalLabel.textProperty().bind(user.FatProperty().asString());
+		carbGoalLabel.textProperty().bind(user.CarbsProperty().asString());
+		
+		
+		
+		
+		
+		/*cooler but at this point I dont care
+		proteinGoalLabel.textProperty().bind(Bindings.createIntegerBinding(
+				()->KetoCalculations.calculateProtein(in.get()), 
+				in
+				).asString());
+		*/
+		
+	}
+	
+	
+	private void sumFields()
+	{
+		
+	}
 	
 	
 	private class CustomFoodCell extends ListCell<FoodItem>

@@ -1,5 +1,6 @@
 package Controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,10 @@ public class LoginPageController {
 	public LoginPageController(DataAccessible data)
 	{
 		this.data = data;
+	}
+	
+	@FXML private void initialize()
+	{
 	}
 	
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException
