@@ -19,6 +19,7 @@ import Models.User;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,6 +62,17 @@ public class FoodController {
 	@FXML private Label carbGoalLabel;
 	@FXML private Label fatGoalLabel;
 	
+	@FXML private Label calorieActualLabel;
+	@FXML private Label proteinActualLabel;
+	@FXML private Label carbActualLabel;
+	@FXML private Label fatActualLabel;
+	
+	
+	private IntegerProperty calorieSum = new SimpleIntegerProperty();
+	private IntegerProperty proteinSum = new SimpleIntegerProperty();;
+	private IntegerProperty carbSum = new SimpleIntegerProperty();;
+	private IntegerProperty fatSum = new SimpleIntegerProperty();;
+	
 	private LocalDate date;
 	
 	User user;
@@ -96,6 +108,8 @@ public class FoodController {
                 return new CustomFoodCell();
             }
         });
+		
+		sumFields();
 	}
 	
 	
@@ -124,6 +138,7 @@ public class FoodController {
 			FoodListView.getItems().add(f);
 			//getFoodList();
 			clearFields();
+			sumFields();
 		}
 	}
 	
@@ -233,23 +248,31 @@ public class FoodController {
 		fatGoalLabel.textProperty().bind(user.FatProperty().asString());
 		carbGoalLabel.textProperty().bind(user.CarbsProperty().asString());
 		
-		
-		
-		
-		
-		/*cooler but at this point I dont care
-		proteinGoalLabel.textProperty().bind(Bindings.createIntegerBinding(
-				()->KetoCalculations.calculateProtein(in.get()), 
-				in
-				).asString());
-		*/
-		
+		calorieActualLabel.textProperty().bind(calorieSum.asString());
+		proteinActualLabel.textProperty().bind(proteinSum.asString());
+		carbActualLabel.textProperty().bind(carbSum.asString());
+		fatActualLabel.textProperty().bind(fatSum.asString());
 	}
 	
 	
 	private void sumFields()
 	{
+		int calSum = 0;
+		int protSum = 0;
+		int carSum = 0;
+		int fSum = 0;
+		for(FoodItem a :FoodListView.getItems())
+		{
+			calSum += (int)(a.getServings()* a.getCalories());
+			protSum += (int)(a.getServings()* a.getProtein());
+			carSum += (int)(a.getServings()* a.getCarbs());
+			fSum += (int)(a.getServings()* a.getFat());
+		}
 		
+		calorieSum.set(calSum);
+		proteinSum.set(protSum);
+		carbSum.set(carSum);
+		fatSum.set(fSum);
 	}
 	
 	
