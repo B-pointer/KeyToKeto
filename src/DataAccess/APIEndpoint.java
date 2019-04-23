@@ -60,13 +60,15 @@ public class APIEndpoint implements DataAccessible{
 
 	@Override
 	public boolean createUser(String username, String email, String password, int age, String gender, int height,
-			int weight) {
+			int weight, LocalDate birthDate) {
 		try {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String dateString = birthDate.format(dtf);
 			HttpResponse<JsonNode> response = Unirest.post(APIURL + "/register")
 					  .header("Content-Type", "application/x-www-form-urlencoded")
 					  .header("cache-control", "no-cache")
 					  .header("Postman-Token", "535f3255-6849-45e2-b465-1d0abb1dbf24")
-					  .body("username==" + username + "&password==" + password + "&birthdate=1990-01-01&weight==" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender)//TODO add birthdate to method signature
+					  .body("username==" + username + "&password==" + password + "&birthdate=" +dateString + "&weight==" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender)//TODO add birthdate to method signature
 					  .asJson();
 			JSONObject body = response.getBody().getObject();
 			if (response.getStatus() == 200 && body.getBoolean("success")) {
@@ -83,7 +85,7 @@ public class APIEndpoint implements DataAccessible{
 
 	public boolean createUser(User user)
 	{
-		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight());
+		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth());
 	}
 	
 	

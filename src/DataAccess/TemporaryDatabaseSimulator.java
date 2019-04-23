@@ -32,14 +32,14 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 
 	@Override
 	public boolean createUser(String username, String email, String password, int age, String gender, int height,
-			int weight) {
+			int weight, LocalDate birthDate) {
 		
 		return true;
 	}
 
 	public boolean createUser(User user)
 	{
-		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight());
+		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth());
 	}
 	
 	

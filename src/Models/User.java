@@ -144,6 +144,12 @@ public class User {
 		setProperties();
 	}
 	
+	
+	public LocalDate getBirth()
+	{
+		return birthdate;
+	}
+	
 	/**
 	 * @return the name
 	 */
