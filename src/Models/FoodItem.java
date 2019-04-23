@@ -74,7 +74,7 @@ public class FoodItem {
 	{
 		this.servings = servings;
 	}
-	public void setInsertionID(int insertionID)
+	public void setMealID(int insertionID)
 	{
 		this.mealID = insertionID;
 	}
@@ -110,7 +110,7 @@ public class FoodItem {
 	{
 		return servings;
 	}
-	public int getInsertionID()
+	public int getMealID()
 	{
 		return mealID;
 	}

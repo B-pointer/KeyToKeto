@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.function.UnaryOperator;
 
 import DataAccess.DataAccessible;
 import DataAccess.TemporaryDatabaseSimulator;
@@ -22,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -29,6 +31,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -46,7 +51,7 @@ public class FoodController {
 	@FXML private ListView<FoodItem> FoodListView;
 	@FXML private DatePicker datePicker;
 	@FXML private Label calorieGoalLabel;
-	@FXML private Spinner servingSpinner;
+	@FXML private Spinner<Double> servingSpinner;
 	
 	private LocalDate date;
 	
@@ -73,7 +78,7 @@ public class FoodController {
 		getFoodList();
 	}
 	
-	
+	//store an instance of the list somewhere so that it can be edited and you dont have to recall the back end to get all foods for a day any time it is altered
 	private void getFoodList()
 	{
 		FoodListView.setItems(FXCollections.observableArrayList(data.getFoodByDate(date, user.getName())));
@@ -91,7 +96,30 @@ public class FoodController {
 	
 	@FXML private void saveClick(ActionEvent e)
 	{
-		
+		if(checkFields())
+		{
+			//creating a food item from the fields
+			String name = food.getText();
+			int ID = -10000; //testing obviously
+			int foodcalories = Integer.parseInt(cals.getText());
+			int foodcarbs = Integer.parseInt(carbs.getText());
+			int foodfat = Integer.parseInt(fats.getText());
+			int foodprotein = Integer.parseInt(prots.getText());
+			LocalDate foodDate = datePicker.getValue();
+			double servings = servingSpinner.getValue();
+			//String name, int ID, int calories, int carbs, int protein, int fat, double servings
+			FoodItem f = new FoodItem(name, ID, foodcalories, foodcarbs, foodprotein, foodfat, servings );
+			f.setDate(foodDate);
+			
+			//actually calling data access layer
+			int mealID = data.addMeal(f);
+			f.setMealID(mealID);
+			
+			//adding to diary listview
+			FoodListView.getItems().add(f);
+			//getFoodList();
+			clearFields();
+		}
 	}
 	
 	@FXML private void dateChange(ActionEvent e)
@@ -101,6 +129,8 @@ public class FoodController {
 		getFoodList();
 	}
 
+	
+	
 	@FXML void searchFood(ActionEvent e) throws FileNotFoundException
 	{
 		System.out.println("Clicked");
@@ -115,11 +145,12 @@ public class FoodController {
 				carbs.setText(in.next());
 				prots.setText(in.next());
 				fats.setText(in.next());	
-			}
-		    
+			}  
 		}
 		in.close();
 	}
+	
+	
 	
 	@FXML private void logoutClick(ActionEvent e)
 	{
@@ -137,6 +168,58 @@ public class FoodController {
 			
 		}
 	}
+	
+	//makes it so that only numbers can be added to the macr nutrient and calorie fields. may not be used depending on API
+	private void setFormatter()
+	{
+		UnaryOperator<Change> filter = change ->{
+			String text = change.getText();
+			if(text.matches("[0-9]*"))
+			{
+				return change;
+			}
+			return null;
+		};
+		prots.setTextFormatter(new TextFormatter<String>(filter));
+		carbs.setTextFormatter(new TextFormatter<String>(filter));
+		fats.setTextFormatter(new TextFormatter<String>(filter));
+		cals.setTextFormatter(new TextFormatter<String>(filter));
+	}
+	
+	private boolean checkFields()
+	{
+		if(cals.getText().isEmpty() || carbs.getText().isEmpty()  || prots.getText().isEmpty() || fats.getText().isEmpty() || food.getText().isEmpty())
+		{
+			showErrors();
+			return false;
+		}
+		return true;
+	}
+	
+
+	private void showErrors()
+	{
+		String message = "No fields may be left empty\n";
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Invalid Entry");
+		alert.setContentText(message);
+		alert.setHeaderText(null);
+		alert.showAndWait();
+	}
+	
+	
+	
+	private void clearFields()
+	{
+		food.clear();
+		cals.clear();
+		carbs.clear();
+		fats.clear();
+		prots.clear();
+		servingSpinner.getValueFactory().setValue(1.0);
+	}
+	
+	
 	
 	
 	private class CustomFoodCell extends ListCell<FoodItem>
@@ -173,11 +256,11 @@ public class FoodController {
 			{
 				double totalServings = item.getServings();
 				name.setText(item.getName());
-				servings.setText("Serving: " + totalServings);
-				calories.setText("Cal: " + totalServings * item.getCalories());
-				protein.setText("Protein: " + totalServings * item.getProtein());
-				carbs.setText("Carbs: " + totalServings * item.getCarbs());
-				fat.setText("Fat: " + totalServings * item.getFat());
+				servings.setText(String.format("%-13s", "Svgs: " + totalServings));
+				calories.setText(String.format("%-13s", "Cal: " + (int)(totalServings * item.getCalories())));
+				protein.setText(String.format("%-13s","Prot: " + (int)(totalServings * item.getProtein())));
+				carbs.setText(String.format("%-13s","Carbs: " + (int)(totalServings * item.getCarbs())));
+				fat.setText(String.format("%-13s","Fat: " + (int)(totalServings * item.getFat())));
 				setGraphic(content);
 			}
 			else

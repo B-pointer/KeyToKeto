@@ -78,7 +78,11 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		// TODO Auto-generated method stub
 		//needs to insert into db and return the mealID 
 		
-		return -1;
+		foodList.add(meal);
+		
+		Random r = new Random();
+		return r.nextInt(10000);
+		//return -1;
 	}
 
 	@Override
@@ -115,7 +119,7 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		
 		for(FoodItem food : foodList)
 		{
-			System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getInsertionID() + " " + food.getDate());
+			System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getMealID() + " " + food.getDate());
 		}
 	}
 	
