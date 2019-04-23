@@ -3,6 +3,7 @@ package Models;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import Calculations.KetoCalculations;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -26,7 +27,12 @@ public class User {
 	private int weight;
 	private boolean admin;
 	private int calories;
+	
+	//these properties are used for bindings so that any time the calories/macros are modified, the GUI is updated
 	private final IntegerProperty calorieProperty = new SimpleIntegerProperty();
+	private final IntegerProperty carbsProperty = new SimpleIntegerProperty();
+	private final IntegerProperty proteinProperty = new SimpleIntegerProperty();
+	private final IntegerProperty fatProperty = new SimpleIntegerProperty();
 	
 	/**
 	 * 
@@ -34,43 +40,13 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	/*
-	//this constructor does not have calories in it,not currently used at all
-	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, boolean myAdmin ) {
-		setName(myName);
-		setEmail(myEmail);
-		setPass(myPass);
-		setAge(myAge);
-		setGender(myGender);
-		setHeight(myTall);
-		setWeight(myWide);
-		setAdmin(myAdmin);
-		//setCalories(calories);
-	}
-	//this constructor has calories in it, used in account retrieval
-	public User(String myName, String myEmail, String myPass, int myAge, String myGender, int myTall, int myWide, int myCalories,  boolean myAdmin ) {
-		setName(myName);
-		setEmail(myEmail);
-		setPass(myPass);
-		setAge(myAge);
-		setGender(myGender);
-		setHeight(myTall);
-		setWeight(myWide);
-		setAdmin(myAdmin);
-		setCalories(myCalories);
-		
-		
-		//test code for now
-		calorieProperty.set(myCalories);
-		
-	}
-	*/
+	
+	
 	public User(String myName, String myEmail, String myPass, LocalDate birthdate, String myGender, int myTall, int myWide, int myCalories)
 	{
 		setName(myName);
 		setEmail(myEmail);
 		setPass(myPass);
-		//setAge(Temporal);
 		setAge((int)ChronoUnit.YEARS.between(birthdate, LocalDate.now()));
 		setGender(myGender);
 		setHeight(myTall);
@@ -80,15 +56,29 @@ public class User {
 		
 		this.birthdate = birthdate;
 		
-		//test code for now
-		calorieProperty.set(myCalories);
+		setProperties();
 	}
 
-	
+	//getters for observable properties that are used for bindings. not stored in database, but the int representation of calories is stored. 
 	
 	public IntegerProperty CalorieProperty()
 	{
 		return calorieProperty;
+	}
+	
+	public IntegerProperty CarbsProperty()
+	{
+		return carbsProperty;
+	}
+	
+	public IntegerProperty FatProperty()
+	{
+		return fatProperty;
+	}
+	
+	public IntegerProperty ProteinProperty()
+	{
+		return proteinProperty;
 	}
 	/**
 	 * @param name the name to set
@@ -150,7 +140,8 @@ public class User {
 	{
 		
 		this.calories = calories;
-		calorieProperty.set(calories);
+		//calorieProperty.set(calories);
+		setProperties();
 	}
 	
 	/**
@@ -212,6 +203,15 @@ public class User {
 	public int getCalories()
 	{
 		return calories;
+	}
+	
+	
+	public void setProperties()
+	{
+		calorieProperty.set(calories);
+		carbsProperty.set(KetoCalculations.calculateCarbs(calories));
+		fatProperty.set(KetoCalculations.calculateFat(calories));
+		proteinProperty.set(KetoCalculations.calculateProtein(calories));
 	}
 
 }
