@@ -76,7 +76,7 @@ public class FoodController {
 	
 	private void getFoodList()
 	{
-		FoodListView.setItems(FXCollections.observableArrayList(data.getFoodByDate(date.toString(), user.getName())));
+		FoodListView.setItems(FXCollections.observableArrayList(data.getFoodByDate(date, user.getName())));
 		//FoodListView.setCellFactory(Callback<ListView<FoodItem, ListCell<FoodItem>>() {
 		//			@Override public ListCell
 		//		});

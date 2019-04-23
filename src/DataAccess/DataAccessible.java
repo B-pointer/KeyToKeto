@@ -1,5 +1,6 @@
 package DataAccess;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Models.FoodItem;
@@ -15,7 +16,7 @@ public interface DataAccessible {
 	
 	public User getUser(String username);
 	
-	public ArrayList<FoodItem> getFoodByDate(String date, String username);
+	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username);
 	
 	public boolean deleteMeal(int uniqueID); //unique ID here refers to the uniquely generated ID for the food in the meal table, not the food ID
 											 //this is to be used to delete food that a user has added to their meals

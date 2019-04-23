@@ -1,5 +1,6 @@
 package Models;
 
+import java.time.LocalDate;
 
 public class FoodItem {
 	
@@ -10,8 +11,8 @@ public class FoodItem {
 	private int protein;
 	private int fat;
 	private double servings;
-	private int insertionID;
-	private String date;
+	private int mealID;
+	private LocalDate date;
 	
 	public FoodItem()
 	{
@@ -27,11 +28,11 @@ public class FoodItem {
 		this.protein = protein;
 		this.fat = fat;
 		this.servings = servings;
-		insertionID = -1;
-		this.date = "NA";
+		mealID = -1;
+		this.date = null; //null because this constructor should only be used for items that have not been added to diary
 	}
 	//with date, with insertionID
-	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings, int insertionID, String date)
+	public FoodItem(String name, int ID, int calories, int carbs, int protein, int fat, double servings, int insertionID, LocalDate date)
 	{
 		this.name = name;
 		this.ID = ID;
@@ -40,7 +41,7 @@ public class FoodItem {
 		this.protein = protein;
 		this.fat = fat;
 		this.servings = servings;
-		this.insertionID = insertionID;
+		this.mealID = insertionID;
 		this.date = date;
 		
 	}
@@ -75,9 +76,9 @@ public class FoodItem {
 	}
 	public void setInsertionID(int insertionID)
 	{
-		this.insertionID = insertionID;
+		this.mealID = insertionID;
 	}
-	public void setDate(String date)
+	public void setDate(LocalDate date)
 	{
 		this.date = date;
 	}
@@ -111,9 +112,9 @@ public class FoodItem {
 	}
 	public int getInsertionID()
 	{
-		return insertionID;
+		return mealID;
 	}
-	public String getDate()
+	public LocalDate getDate()
 	{
 		return date;
 	}

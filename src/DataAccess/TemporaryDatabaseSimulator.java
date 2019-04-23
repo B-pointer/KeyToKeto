@@ -1,5 +1,6 @@
 package DataAccess;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,20 +51,20 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	}
 
 	@Override
-	public ArrayList<FoodItem> getFoodByDate(String date, String username) {
-		//// TODO Auto-generated method stub
-		//return null;
+	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username) {
+
 		ArrayList<FoodItem> datedFoodList = new ArrayList<FoodItem>();
+		
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+		
 		for(FoodItem f : foodList)
 		{
-			if(f.getDate().equals(date))
+			if(f.getDate().isEqual(date))
 			{
 				datedFoodList.add(f);
 			}
 		}
-		return datedFoodList;
-		
-		
+		return datedFoodList;	
 	}
 
 	@Override
@@ -86,13 +87,15 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 		return false;
 	}
 	
-	
+	//this is test code for just demonstrating
 	private void generateFoodList()
 	{
 		Random r = new Random();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
 		
 		foodList = new ArrayList<FoodItem>();
-		for(int i = 12; i <=22; i++)
+		for(int i = 15; i <=29; i++)
 		{
 			for(int j = 1; j <=10; j++)
 			{
@@ -100,12 +103,12 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 				String name = "Food" + ID;
 				int calories = r.nextInt(500);
 				int protein = calories / 16; //protein is 1/4 of the calories 
-				int carbs = calories / 3 / 4; 
+				int carbs = (int)(calories / 3.0 / 4.0); 
 				int fat = calories - (protein * 4 + carbs * 4) / 9;
 				int servings = r.nextInt(4) + 1;
 				int uniqueID = r.nextInt(3000);
-				String day = String.format("%02d", i);
-				String date = "2019-04-"+day ;
+				String day = Integer.toString(i);			//String.format("%02d", i);
+				LocalDate date = LocalDate.parse("2019-04-" + day, dtf);
 				foodList.add(new FoodItem(name, ID, calories, carbs, protein, fat, (double)servings, uniqueID, date));
 			}
 		}
