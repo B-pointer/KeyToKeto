@@ -68,7 +68,7 @@ public class APIEndpoint implements DataAccessible{
 					  .header("Content-Type", "application/x-www-form-urlencoded")
 					  .header("cache-control", "no-cache")
 					  .header("Postman-Token", "535f3255-6849-45e2-b465-1d0abb1dbf24")
-					  .body("username==" + username + "&password==" + password + "&birthdate=" +dateString + "&weight==" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender +"&calorie_goal=" + calories)//TODO add calories to method signature
+					  .body("username=" + username + "&password=" + password + "&birthdate=" +dateString + "&weight=" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender +"&calorie_goal=" + calories)//TODO add calories to method signature
 					  .asJson();
 			JSONObject body = response.getBody().getObject();
 			if (response.getStatus() == 200 && body.getBoolean("success")) {
