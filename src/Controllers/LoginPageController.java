@@ -45,6 +45,9 @@ public class LoginPageController {
 	
 	@FXML private void initialize()
 	{
+		Platform.runLater(()-> {
+			loginButton.requestFocus();
+		});
 	}
 	
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException

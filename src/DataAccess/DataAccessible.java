@@ -10,7 +10,7 @@ public interface DataAccessible {
 	
 	public boolean login(String username, String password);
 	
-	public boolean createUser(String username, String email, String password, int age, String gender, int height, int weight, LocalDate birthDate);
+	public boolean createUser(String username, String email, String password, int age, String gender, int height, int weight, LocalDate birthDate, int calories);
 	
 	public boolean createUser(User user);
 	

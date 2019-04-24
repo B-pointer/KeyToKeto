@@ -55,6 +55,9 @@ public class CreateUserPageController {
 		genderBox.getSelectionModel().selectFirst();
 		setFormatter();
 	}
+	
+	
+	
 	@FXML protected void createClick(ActionEvent event)
 	{
 		System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
@@ -68,15 +71,21 @@ public class CreateUserPageController {
 			
 			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), birthDatePicker.getValue(), gender, height, weight, calories);
 			
-			
-			try {
-				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				loadTabs(stage);
-			}
-			catch(Exception e)
+			if(data.createUser(user))
 			{
-				System.out.println("Error creating account");
-				e.printStackTrace();
+				try {
+					Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					loadTabs(stage);
+				}
+				catch(Exception e)
+				{
+					System.out.println("Error creating account");
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				System.out.println("Error creating account. handle this better elsewhere");
 			}
 		}
 	}
@@ -110,6 +119,8 @@ public class CreateUserPageController {
 	}
 	
 
+	
+	
 	@FXML private void backClick(ActionEvent event)
 	{
 		try {
@@ -125,6 +136,8 @@ public class CreateUserPageController {
 		}
 	}
 	
+	
+	
 	private void setFormatter()
 	{
 		UnaryOperator<Change> filter = change ->{
@@ -138,6 +151,8 @@ public class CreateUserPageController {
 		heightField.setTextFormatter(new TextFormatter<String>(filter));
 		weightField.setTextFormatter(new TextFormatter<String>(filter));
 	}
+	
+	
 	
 	private boolean checkFields()
 	{
@@ -153,6 +168,8 @@ public class CreateUserPageController {
 		
 		return true;
 	}
+	
+	
 	
 	private void showErrors(boolean emptyFields, boolean mismatchedPasswords)
 	{
