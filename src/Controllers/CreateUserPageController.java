@@ -7,6 +7,7 @@ import java.util.function.UnaryOperator;
 import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
 import Models.User;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -39,7 +41,7 @@ public class CreateUserPageController {
 	@FXML private DatePicker birthDatePicker;
 	@FXML private TextField heightField;
 	@FXML private TextField weightField;
-	
+	@FXML private Button backButton;
 	
 	public CreateUserPageController(DataAccessible data)
 	{
@@ -54,6 +56,10 @@ public class CreateUserPageController {
 		genderBox.setItems(genders);
 		genderBox.getSelectionModel().selectFirst();
 		setFormatter();
+		
+		Platform.runLater(()-> {
+			backButton.requestFocus();
+		});
 	}
 	
 	
