@@ -20,7 +20,9 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,11 +36,14 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Control;
 import javafx.scene.control.TextFormatter.Change;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -53,10 +58,18 @@ public class FoodController {
 	@FXML private TextField fats;
 	@FXML private TextField food;
 	@FXML private TextField searcher;
-	@FXML private ListView<FoodItem> FoodListView;
 	@FXML private DatePicker datePicker;
 	@FXML private Spinner<Double> servingSpinner;
 	
+	
+	
+	@FXML private TableView<FoodItem> MealTable;
+	@FXML private TableColumn titleColumn;
+	@FXML private TableColumn<FoodItem, String> calorieColumn;
+	@FXML private TableColumn<FoodItem, String> proteinColumn;
+	@FXML private TableColumn<FoodItem, String> fatColumn;
+	@FXML private TableColumn<FoodItem, String> carbsColumn;
+	@FXML private TableColumn servingColumn;
 	
 	@FXML private Label calorieGoalLabel;
 	@FXML private Label proteinGoalLabel;
@@ -96,22 +109,39 @@ public class FoodController {
 		date = LocalDate.now();
 		datePicker.setValue(LocalDate.now());
 		
+		setupTable();
+		
 		getFoodList();
 	}
 	
 	
 	private void getFoodList()
 	{
-		FoodListView.setItems(FXCollections.observableArrayList(data.getFoodByDate(date, user.getName())));
-		FoodListView.setCellFactory(new Callback<ListView<FoodItem>, ListCell<FoodItem>>() {
-            @Override
-            public ListCell<FoodItem> call(ListView<FoodItem> FoodListView) {
-                return new CustomFoodCell();
-            }
-        });
 		
+		ObservableList<FoodItem> food = FXCollections.observableArrayList(data.getFoodByDate(date, user.getName()));
+		MealTable.setItems(food);
+		for(FoodItem a :  food)
+		{
+			System.out.println(a.getName() + " " + a.getCalories() + " " + a.getFat() );
+		}
 		sumFields();
+		
 	}
+	
+	private void setupTable()
+	{
+		MealTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		titleColumn.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("name"));
+	
+		calorieColumn.setCellValueFactory(c-> new SimpleStringProperty(Integer.toString((int)((c.getValue().getCalories()) * c.getValue().getServings()))));
+		proteinColumn.setCellValueFactory(c-> new SimpleStringProperty(Integer.toString((int)((c.getValue().getProtein()) * c.getValue().getServings()))));
+		fatColumn.setCellValueFactory(c-> new SimpleStringProperty(Integer.toString((int)((c.getValue().getFat()) * c.getValue().getServings()))));
+		carbsColumn.setCellValueFactory(c-> new SimpleStringProperty(Integer.toString((int)((c.getValue().getCarbs()) * c.getValue().getServings()))));
+		servingColumn.setCellValueFactory(new PropertyValueFactory<FoodItem, Double>("servings"));
+		
+	}
+	
 	
 	
 	@FXML private void saveClick(ActionEvent e)
@@ -131,13 +161,12 @@ public class FoodController {
 			FoodItem f = new FoodItem(name, ID, foodcalories, foodcarbs, foodprotein, foodfat, servings );
 			f.setDate(foodDate);
 			
-			//actually calling data access layer
+			//actually calling data access layer, prolly need some error checking here
 			int mealID = data.addMeal(f);
 			f.setMealID(mealID);
+					
+			MealTable.getItems().add(f);
 			
-			//adding to diary listview
-			FoodListView.getItems().add(f);
-			//getFoodList();
 			clearFields();
 			sumFields();
 		}
@@ -258,11 +287,12 @@ public class FoodController {
 	
 	private void sumFields()
 	{
+		
 		int calSum = 0;
 		int protSum = 0;
 		int carSum = 0;
 		int fSum = 0;
-		for(FoodItem a :FoodListView.getItems())
+		for(FoodItem a :MealTable.getItems())
 		{
 			calSum += (int)(a.getServings()* a.getCalories());
 			protSum += (int)(a.getServings()* a.getProtein());
@@ -274,62 +304,6 @@ public class FoodController {
 		proteinSum.set(protSum);
 		carbSum.set(carSum);
 		fatSum.set(fSum);
+		
 	}
-	
-	
-	private class CustomFoodCell extends ListCell<FoodItem>
-	{
-		private VBox content;
-		//private HBox macros; 
-		
-		
-		private Text macroText;
-		
-		
-		private Text name;
-		//private Text protein;
-		//private Text carbs;
-		//private Text calories;
-		//private Text fat;
-		//private Text servings;
-		
-		public CustomFoodCell()
-		{
-			
-			super();
-			
-			//prefWidthProperty().bind(FoodListView.widthProperty().subtract(2));
-            //setMaxWidth(Control.USE_PREF_SIZE);
-			setPrefWidth(0);
-            name = new Text();
-            macroText = new Text();
-            content = new VBox(name, macroText);
-		}
-		
-		@Override
-		protected void updateItem(FoodItem item, boolean empty)
-		{
-			super.updateItem(item,  empty);
-			if(item != null && !empty)
-			{
-				double totalServings = item.getServings();
-				name.setText(item.getName());
-				String cal = String.format("%-20s", "Cal: " + (int)(totalServings * item.getCalories()));
-				String pro = String.format("%-20s","Prot: " + (int)(totalServings * item.getProtein()));
-				String carbs = String.format("%-20s","Carbs: " + (int)(totalServings * item.getCarbs()));
-				String fat = String.format("%-20s","Fat: " + (int)(totalServings * item.getFat()));
-				
-				String out = cal + pro + carbs + fat;
-				
-				System.out.println(out);
-				macroText.setText(out);
-				setGraphic(content);
-			}
-			else
-			{
-				setGraphic(null);
-			}
-		}
-	}
-	
 }

@@ -5,14 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.FoodController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
    <children>
-      <DatePicker fx:id="datePicker" layoutX="288.0" layoutY="40.0" onAction="#dateChange" prefHeight="25.0" maxHeight = "25" prefWidth="156.0" />
-      <ListView fx:id="FoodListView" layoutX="60.0" layoutY="75.0" prefHeight="330.0" prefWidth="383.0" />
-      <Button layoutX="226.0" layoutY="485.0" mnemonicParsing="false" text="Delete" />
       <TextField fx:id="searcher" layoutX="518.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" />
       <Button layoutX="769.0" layoutY="44.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
       <ListView layoutX="519.0" layoutY="69.0" prefHeight="306.0" prefWidth="319.0" />
@@ -29,29 +29,36 @@
       <Button layoutX="652.0" layoutY="485.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
       
       <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
-      <Spinner layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" fx:id="servingSpinner"/>
+      <Spinner fx:id="servingSpinner" layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" />
       <Label layoutX="527.0" layoutY="430.0" text="Servings" />
       
+      <Label fx:id="calorieGoalLabel" layoutX="150.0" layoutY="430.0" />
+      <Label fx:id="proteinGoalLabel" layoutX="220.0" layoutY="430.0" />
+      <Label fx:id="carbGoalLabel" layoutX="290.0" layoutY="430.0" />
+      <Label fx:id="fatGoalLabel" layoutX="350.0" layoutY="430.0" />
       
       
-      <Label layoutX="61.0" layoutY="430.0" text="Goal:" />
-      <Label layoutX="61.0" layoutY="448.0" text="Actual:" />
-      
-      <Label layoutX="135.0" layoutY="412.0" text="Calories:" />
-      <Label layoutX="205.0" layoutY="412.0" text="Protein:" />
-      <Label layoutX="278.0" layoutY="412.0" text="Carbs:" />
-      <Label layoutX="350.0" layoutY="412.0" text="Fat:" />
-      
-      <Label layoutX="150.0" layoutY="430.0" fx:id = "calorieGoalLabel" />
-      <Label layoutX="220.0" layoutY="430.0" fx:id = "proteinGoalLabel" />
-      <Label layoutX="290.0" layoutY="430.0" fx:id = "carbGoalLabel" />
-      <Label layoutX="350.0" layoutY="430.0" fx:id = "fatGoalLabel" />
-      
-      
-      <Label layoutX="150.0" layoutY="448.0" fx:id = "calorieActualLabel" />
-      <Label layoutX="220.0" layoutY="448.0" fx:id = "proteinActualLabel" />
-      <Label layoutX="290.0" layoutY="448.0" fx:id = "carbActualLabel" />
-      <Label layoutX="350.0" layoutY="448.0" fx:id = "fatActualLabel" />
+      <Label fx:id="calorieActualLabel" layoutX="150.0" layoutY="448.0" />
+      <Label fx:id="proteinActualLabel" layoutX="220.0" layoutY="448.0" />
+      <Label fx:id="carbActualLabel" layoutX="290.0" layoutY="448.0" />
+      <Label fx:id="fatActualLabel" layoutX="350.0" layoutY="448.0" />
+      <VBox alignment="TOP_CENTER" layoutX="29.0" layoutY="51.0" prefHeight="478.0" prefWidth="455.0" spacing="15.0">
+         <children>
+            <DatePicker fx:id="datePicker" maxHeight="25" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
+            <TableView fx:id="MealTable"   prefHeight="275.0" prefWidth="455.0">
+              <columns>
+                <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Food" />
+                <TableColumn fx:id="calorieColumn" prefWidth="50.0" text="Calories" />
+                <TableColumn fx:id="proteinColumn" prefWidth="50.0" text="Protein" />
+                <TableColumn fx:id="fatColumn" prefWidth="50.0" text="Fat" />
+                <TableColumn fx:id="carbsColumn" prefWidth="50.0" text="Carbs" />
+                <TableColumn fx:id="servingColumn" prefWidth="75.0" text="Servings" />
+                
+              </columns>
+            </TableView>
+            <Button mnemonicParsing="false" text="Delete" />
+         </children>
+      </VBox>
       
       
    </children>
