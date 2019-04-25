@@ -280,14 +280,18 @@ public class FoodController {
 	private class CustomFoodCell extends ListCell<FoodItem>
 	{
 		private VBox content;
-		private HBox macros; 
+		//private HBox macros; 
+		
+		
+		private Text macroText;
+		
 		
 		private Text name;
-		private Text protein;
-		private Text carbs;
-		private Text calories;
-		private Text fat;
-		private Text servings;
+		//private Text protein;
+		//private Text carbs;
+		//private Text calories;
+		//private Text fat;
+		//private Text servings;
 		
 		public CustomFoodCell()
 		{
@@ -298,14 +302,8 @@ public class FoodController {
             //setMaxWidth(Control.USE_PREF_SIZE);
 			setPrefWidth(0);
             name = new Text();
-			protein = new Text();
-			carbs = new Text();
-			calories = new Text();
-			fat = new Text();
-			servings = new Text();
-			macros = new HBox(servings, calories, protein, carbs, fat);
-			macros.setSpacing(5);
-			content = new VBox(name, macros);
+            macroText = new Text();
+            content = new VBox(name, macroText);
 		}
 		
 		@Override
@@ -316,11 +314,15 @@ public class FoodController {
 			{
 				double totalServings = item.getServings();
 				name.setText(item.getName());
-				servings.setText(String.format("%-10s", "Svgs: " + totalServings));
-				calories.setText(String.format("%-10s", "Cal: " + (int)(totalServings * item.getCalories())));
-				protein.setText(String.format("%-10s","Prot: " + (int)(totalServings * item.getProtein())));
-				carbs.setText(String.format("%-10s","Carbs: " + (int)(totalServings * item.getCarbs())));
-				fat.setText(String.format("%-10s","Fat: " + (int)(totalServings * item.getFat())));
+				String cal = String.format("%-20s", "Cal: " + (int)(totalServings * item.getCalories()));
+				String pro = String.format("%-20s","Prot: " + (int)(totalServings * item.getProtein()));
+				String carbs = String.format("%-20s","Carbs: " + (int)(totalServings * item.getCarbs()));
+				String fat = String.format("%-20s","Fat: " + (int)(totalServings * item.getFat()));
+				
+				String out = cal + pro + carbs + fat;
+				
+				System.out.println(out);
+				macroText.setText(out);
 				setGraphic(content);
 			}
 			else
