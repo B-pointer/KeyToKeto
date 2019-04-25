@@ -11,8 +11,8 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" 
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller = "Controllers.HomePageController">
+<AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx" 
+            xmlns:fx="http://javafx.com/fxml" fx:controller = "Controllers.HomePageController">
 	<children>
 		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8c325" height="34.0" stroke="TRANSPARENT" strokeType="INSIDE" width="640.0" />
 		<Label layoutX="14.0" layoutY="9.0" text="Daily Progress">

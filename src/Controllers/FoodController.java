@@ -37,6 +37,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Control;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -290,15 +291,20 @@ public class FoodController {
 		
 		public CustomFoodCell()
 		{
+			
 			super();
-			name = new Text();
+			
+			//prefWidthProperty().bind(FoodListView.widthProperty().subtract(2));
+            //setMaxWidth(Control.USE_PREF_SIZE);
+			setPrefWidth(0);
+            name = new Text();
 			protein = new Text();
 			carbs = new Text();
 			calories = new Text();
 			fat = new Text();
 			servings = new Text();
 			macros = new HBox(servings, calories, protein, carbs, fat);
-			macros.setSpacing(10);
+			macros.setSpacing(5);
 			content = new VBox(name, macros);
 		}
 		
@@ -310,11 +316,11 @@ public class FoodController {
 			{
 				double totalServings = item.getServings();
 				name.setText(item.getName());
-				servings.setText(String.format("%-13s", "Svgs: " + totalServings));
-				calories.setText(String.format("%-13s", "Cal: " + (int)(totalServings * item.getCalories())));
-				protein.setText(String.format("%-13s","Prot: " + (int)(totalServings * item.getProtein())));
-				carbs.setText(String.format("%-13s","Carbs: " + (int)(totalServings * item.getCarbs())));
-				fat.setText(String.format("%-13s","Fat: " + (int)(totalServings * item.getFat())));
+				servings.setText(String.format("%-10s", "Svgs: " + totalServings));
+				calories.setText(String.format("%-10s", "Cal: " + (int)(totalServings * item.getCalories())));
+				protein.setText(String.format("%-10s","Prot: " + (int)(totalServings * item.getProtein())));
+				carbs.setText(String.format("%-10s","Carbs: " + (int)(totalServings * item.getCarbs())));
+				fat.setText(String.format("%-10s","Fat: " + (int)(totalServings * item.getFat())));
 				setGraphic(content);
 			}
 			else
