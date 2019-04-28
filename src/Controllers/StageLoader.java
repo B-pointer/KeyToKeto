@@ -31,7 +31,7 @@ public class StageLoader {
 		FXMLLoader loader = new FXMLLoader(StageLoader.class.getResource("/fxml/TabFrame.fxml"));
 		loader.setControllerFactory(controllerFactory);	
 		Parent root = loader.load();	
-		stage.setScene(new Scene(root, 900, 560));
+		stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
 		stage.show();	
 	}
 	
@@ -40,6 +40,7 @@ public class StageLoader {
 		FXMLLoader loader = new FXMLLoader(StageLoader.class.getResource("/fxml/LoginPage.fxml"));
 		loader.setController(new LoginPageController(data));
 		Parent newScene = loader.load();
-		stage.setScene(new Scene(newScene, 900, 560));
+		
+		stage.setScene(new Scene(newScene, stage.getWidth(), stage.getHeight()));
 	}
 }
