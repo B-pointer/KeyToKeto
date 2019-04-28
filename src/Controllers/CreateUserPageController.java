@@ -76,22 +76,29 @@ public class CreateUserPageController {
 			int calories = KetoCalculations.calculateCalories(age, height, weight, gender);
 			
 			user = new User(usernameField.getText(), emailField.getText(), passwordField.getText(), birthDatePicker.getValue(), gender, height, weight, calories);
-			
-			if(data.createUser(user))
+
+			if(data.isUsernameAvailable(user.getName()))
 			{
-				try {
-					Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-					loadTabs(stage);
-				}
-				catch(Exception e)
+				if( data.createUser(user))
 				{
-					System.out.println("Error creating account");
-					e.printStackTrace();
+					try {
+						Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+						loadTabs(stage);
+					}
+					catch(Exception e)
+					{
+						System.out.println("Error creating account");
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					System.out.println("Error creating account. handle this better elsewhere");
 				}
 			}
 			else
 			{
-				System.out.println("Error creating account. handle this better elsewhere");
+				showExistingUserName();
 			}
 		}
 	}
@@ -184,6 +191,17 @@ public class CreateUserPageController {
 			message += "No fields may be left empty\n";
 		if(mismatchedPasswords)
 			message += "The entered passwords do not match";
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Invalid Entry");
+		alert.setContentText(message);
+		alert.setHeaderText(null);
+		alert.showAndWait();
+	}
+	
+	private void showExistingUserName()
+	{
+		String message = "A user with that name already exists";
 		
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Invalid Entry");

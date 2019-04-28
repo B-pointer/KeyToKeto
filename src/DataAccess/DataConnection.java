@@ -111,6 +111,7 @@ public class DataConnection implements DataAccessible{
 			ps.setInt(7, weight);
 			ps.setInt(8,  calories);
 			ps.execute();
+			return true;
 		}
 		catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -125,8 +126,7 @@ public class DataConnection implements DataAccessible{
 	
 	public boolean createUser(User user)
 	{
-		createUser(user.getName(), user.getEmail(), user.getPass(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
-		return false;
+		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
 	}
 	
 	
@@ -267,6 +267,7 @@ public class DataConnection implements DataAccessible{
 			{
 				stmt.execute("CREATE TABLE " + TABLE_NAME + " ("
 					+ "name varchar(255), "
+					+ " username varchar(50)"
 					+ " calories integer, "
 					+ "carbs integer, "
 					+ "protein integer, "
