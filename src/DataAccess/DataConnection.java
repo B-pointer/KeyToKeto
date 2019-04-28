@@ -133,10 +133,37 @@ public class DataConnection implements DataAccessible{
 	
 	
 	
-	//FIXME add actual calls to database. only call after Login is called, which checks if the user is actual in existence
+	//Do not call this if login has not confirmed that there is a user account with the username, otherwise unexpected behaviour will occur. 
+	//currently returns null user if error occurs, meaning if there is no user for a given username among other things 
 	public User getUser(String username)
 	{
-		return new User();
+		String user, password, email, gender, dateIn;
+		int height, weight, calories;
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try {
+			String query = "SELECT * FROM ACCOUNT WHERE USERNAME = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				user = rs.getString("username");
+				password = rs.getString("password");
+				email = rs.getString("email");
+				gender = rs.getString("gender");
+				dateIn = rs.getString("birthdate");
+				height = rs.getInt("height");
+				weight = rs.getInt("weight");
+				calories = rs.getInt("calories");
+				LocalDate date = LocalDate.parse(dateIn, dtf);
+				return new User(user, email, password, date, gender, height, weight, calories);
+						//String myName, String myEmail, String myPass, LocalDate birthdate, String myGender, int myTall, int myWide, int myCalories
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		return new User("no user", "nomail", "nopass", LocalDate.now(), "nogender", -1, -1, -1);
 	}
 	
 	

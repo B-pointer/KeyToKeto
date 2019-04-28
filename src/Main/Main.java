@@ -13,7 +13,6 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception
 	{
 		//User user = new User();
-		
 		//Code below is new. Note that you dont have a fx:controller in the LoginPage.fxml file anymore
 		//because we are setting the controller manually for that page. this allows us to inject our dependencies 
 		//such as the user data object
