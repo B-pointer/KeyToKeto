@@ -267,7 +267,7 @@ public class DataConnection implements DataAccessible{
 			{
 				stmt.execute("CREATE TABLE " + TABLE_NAME + " ("
 					+ "name varchar(255), "
-					+ " username varchar(50)"
+					+ " username varchar(50),"
 					+ " calories integer, "
 					+ "carbs integer, "
 					+ "protein integer, "

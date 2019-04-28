@@ -9,6 +9,7 @@ import java.util.function.UnaryOperator;
 
 import Calculations.KetoCalculations;
 import DataAccess.DataAccessible;
+import DataAccess.DataConnection;
 import DataAccess.TemporaryDatabaseSimulator;
 import Models.User;
 import javafx.event.ActionEvent;
@@ -83,7 +84,7 @@ public class ResultsController {
 		try {
 			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(new LoginPageController(new TemporaryDatabaseSimulator()));
+			loader.setController(new LoginPageController(new DataConnection()));
 			Parent newScene = loader.load();
 			primaryStage.setScene(new Scene(newScene, 900, 560));
 			primaryStage.setResizable(false);

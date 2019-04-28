@@ -87,7 +87,7 @@ public class CreateUserPageController {
 					}
 					catch(Exception e)
 					{
-						System.out.println("Error creating account");
+						System.out.println("Error switching scenes");
 						e.printStackTrace();
 					}
 				}
