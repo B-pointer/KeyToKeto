@@ -59,7 +59,7 @@ public class APIEndpoint implements DataAccessible{
 	}
 
 	@Override
-	public boolean createUser(String username, String email, String password, int age, String gender, int height,
+	public boolean createUser(String username, String email, String password, String gender, int height,
 			int weight, LocalDate birthDate, int calories) {
 		try {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -85,7 +85,7 @@ public class APIEndpoint implements DataAccessible{
 
 	public boolean createUser(User user)
 	{
-		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getAge(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
+		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
 	}
 	
 	
@@ -120,7 +120,7 @@ public class APIEndpoint implements DataAccessible{
 	}
 
 	@Override
-	public int addMeal(FoodItem meal) {
+	public int addMeal(FoodItem meal, String username) {
 		// TODO Auto-generated method stub
 		//needs to insert into db and return the mealID 
 		
@@ -167,6 +167,13 @@ public class APIEndpoint implements DataAccessible{
 	//	{
 			//System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getMealID() + " " + food.getDate());
 		//}
+	}
+
+
+	@Override
+	public boolean isUsernameAvailable(String username) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
