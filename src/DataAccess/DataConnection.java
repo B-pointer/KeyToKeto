@@ -50,9 +50,9 @@ public class DataConnection implements DataAccessible{
 			if(results.next()){
 				int numberOfRows = results.getInt(1);
 				if(numberOfRows > 0){
-					return false;
+					return true;
 				}
-				else return true;
+				else return false;
 			}	
 		}
 		catch(SQLException e){

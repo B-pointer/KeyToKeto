@@ -33,10 +33,6 @@ public class LoginPageController {
 	private DataAccessible data;
 	private HomePageController home;
 	
-	//public LoginPageController()
-	//{
-		//data = new TemporaryDatabaseSimulator();
-	//}
 	
 	public LoginPageController(DataAccessible data)
 	{
@@ -55,6 +51,7 @@ public class LoginPageController {
 		if(data.login(username.getText(), password.getText())){
 			proceed = true;
 			user = data.getUser(username.getText());
+			
 		}
 		try {
 			if(proceed == true){
@@ -71,8 +68,8 @@ public class LoginPageController {
 	
 	@FXML protected void createUserPageClick(ActionEvent event)
 	{
-		System.out.println("Create clicked");
-		username.setText("Create Clicked");
+		//System.out.println("Create clicked");
+		//username.setText("Create Clicked");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewUser.fxml"));
 			loader.setController(new CreateUserPageController(data));
