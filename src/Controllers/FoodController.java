@@ -162,7 +162,7 @@ public class FoodController {
 			f.setDate(foodDate);
 			
 			//actually calling data access layer, prolly need some error checking here
-			int mealID = data.addMeal(f);
+			int mealID = data.addMeal(f, "a random name");
 			f.setMealID(mealID);
 					
 			MealTable.getItems().add(f);

@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-nio-4.4.10.jar"/>
 	<classpathentry kind="lib" path="lib/java-json.jar"/>
+	<classpathentry kind="lib" path="lib/derby.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
