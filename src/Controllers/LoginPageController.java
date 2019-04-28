@@ -46,6 +46,7 @@ public class LoginPageController {
 		});
 	}
 	
+	
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException
 	{			
 		if(data.login(username.getText(), password.getText())){
@@ -56,7 +57,7 @@ public class LoginPageController {
 		try {
 			if(proceed == true){
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				loadTabs(stage);
+				StageLoader.loadTabs(stage, user, data);
 			}	
 		}	
 		catch(Exception e){
@@ -64,6 +65,7 @@ public class LoginPageController {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	
 	@FXML protected void createUserPageClick(ActionEvent event)
@@ -84,30 +86,4 @@ public class LoginPageController {
 		}	
 	}
 	
-	private void loadTabs(Stage stage) throws Exception
-	{
-		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
-		    @Override
-		    public Object call(Class<?> type) {
-		        if(type == CurrentStatsTabController.class){
-		        	return new CurrentStatsTabController(user, data);
-		        }
-		       if(type == ResultsController.class){
-		        	return  new ResultsController(user, data);
-		        }
-		       if(type == FoodController.class)
-		       {
-		    	   return new FoodController(user, data);
-		       }
-		        return null;
-		    }
-		};
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabFrame.fxml"));
-		loader.setControllerFactory(controllerFactory);	
-		Parent root = loader.load();	
-		stage.setScene(new Scene(root, 900, 560));
-		stage.show();	
-		
-	}
 }

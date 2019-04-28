@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import Controllers.LoginPageController;
+import Controllers.StageLoader;
 import DataAccess.APIEndpoint;
 import DataAccess.DataConnection;
 import Models.User;
@@ -16,27 +17,21 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		//User user = new User();
-		//Code below is new. Note that you dont have a fx:controller in the LoginPage.fxml file anymore
-		//because we are setting the controller manually for that page. this allows us to inject our dependencies 
-		//such as the user data object
 		
-		
-		
-		
-		
+		/*
+		DataConnection data = new DataConnection();
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-		//loader.setController(new LoginPageController(user));
-		//loader.setController(new LoginPageController(new APIEndpoint()));
-		loader.setController(new LoginPageController(new DataConnection()));
+		loader.setController(new LoginPageController(data));
 		Parent newScene = loader.load();
 		primaryStage.setScene(new Scene(newScene, 900, 560));
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		*/
 		
-		
-		
+		DataConnection data = new DataConnection();
+		StageLoader.loadLogin(primaryStage, data);
+		primaryStage.show();
 		
 		
 		//DATABASE TEST CODE HERE *******************************************************************************************************************************************************************************

@@ -61,7 +61,6 @@ public class CurrentStatsTabController {
 		
 	@FXML private void saveClick(ActionEvent e)
 	{	 
-		//System.out.println(checkFields());
 		if(checkFields())
 		{
 			user.setAge(Integer.parseInt(ageField.getText()));
@@ -70,31 +69,8 @@ public class CurrentStatsTabController {
 			user.setGender(genderBox.getValue().toString());
 			data.updateUser(user);
 			System.out.println("Save logic goes here");
-			/*
-			try {
-				//this is temporary code, gonna get rid of it as soon as I get the flow of the program switched up and the input validation working as intended
-				User u = new User();
-				u.setAge(Integer.parseInt(ageField.getText()));
-				u.setWeight(Integer.parseInt(weightField.getText()));
-				u.setHeight(Integer.parseInt(heightField.getText()));
-				u.setGender(genderBox.getValue().toString());
-	
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/results.fxml"));
-				loader.setController(new ResultsController(u));
-				Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-				Parent newScene = loader.load();
-				stage.getScene().setRoot(newScene);	
-				stage.show();
-				
-			}
-			catch(Exception e1)
-			{
-				System.out.println("Error changing scenes with save button");
-				e1.printStackTrace();
-			}
-			*/
 		}
-		
+		System.out.println("TODO implement updateUser in data accessible");
 		//Save current values to the database via API
 		
 		
@@ -138,20 +114,15 @@ public class CurrentStatsTabController {
 		weightField.setTextFormatter(new TextFormatter<String>(filter));
 	}
 	
-	@FXML private void logoutClick(ActionEvent e)
+	
+	@FXML private void logoutClick(ActionEvent event)
 	{
-		try {
-			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(new LoginPageController(new DataConnection()));
-			Parent newScene = loader.load();
-			primaryStage.setScene(new Scene(newScene, 900, 560));
-			primaryStage.setResizable(false);
-			primaryStage.show();
+		try {	
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			StageLoader.loadLogin(stage, data);	
 		}
-		catch(Exception ex)
-		{
-			
+		catch(Exception e){
+			System.out.println("Error changing scenes withn back button");
 		}
 	}
 	

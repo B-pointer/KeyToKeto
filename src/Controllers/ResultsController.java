@@ -56,43 +56,23 @@ public class ResultsController {
 			if(newText.length() > 2){
 				fillFields(Integer.parseInt(newText));
 			}
-		});
-		//System.out.println(System.);
-		
-		
+		});	
 	}
  
 	@FXML public void newResults(ActionEvent e)
 	{
 		int totalCalories = KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender());
 		fillFields(totalCalories);
-		/*
-		int totalCalories = KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender());
-		calories.setText(Integer.toString(totalCalories));
-		carbs.setText(Integer.toString(KetoCalculations.calculateCarbs(totalCalories)));
-		fats.setText(Integer.toString(KetoCalculations.calculateFat(totalCalories)));
-		proteins.setText(Integer.toString(KetoCalculations.calculateProtein(totalCalories)));
-		// home.setCals(calories.toString());
-		System.out.println(calories.toString());
-		String homeCarbs = String.valueOf((KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
-		home.setCals(homeCarbs);	
-		*/
 	}
 	
-	@FXML private void logoutClick(ActionEvent e)
+	@FXML private void logoutClick(ActionEvent event)
 	{
-		try {
-			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(new LoginPageController(new DataConnection()));
-			Parent newScene = loader.load();
-			primaryStage.setScene(new Scene(newScene, 900, 560));
-			primaryStage.setResizable(false);
-			primaryStage.show();
+		try {	
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			StageLoader.loadLogin(stage, data);	
 		}
-		catch(Exception ex)
-		{
-			
+		catch(Exception e){
+			System.out.println("Error changing scenes withn back button");
 		}
 	}
 	
@@ -108,7 +88,6 @@ public class ResultsController {
 	
 	@FXML private void resetClick(ActionEvent e)
 	{
-		//fillFields(true);
 		fillFields(user.getCalories());
 	}
 	//if from save is true, then it uses the calories stored in the User object. if it is false, it will recalculate the calories and the other

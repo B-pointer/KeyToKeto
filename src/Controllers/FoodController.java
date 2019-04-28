@@ -202,23 +202,18 @@ public class FoodController {
 	}
 	
 	
-	
-	@FXML private void logoutClick(ActionEvent e)
+	@FXML private void logoutClick(ActionEvent event)
 	{
-		try {
-			Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(new LoginPageController(new DataConnection()));
-			Parent newScene = loader.load();
-			primaryStage.setScene(new Scene(newScene, 900, 560));
-			primaryStage.setResizable(false);
-			primaryStage.show();
+		try {	
+			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			StageLoader.loadLogin(stage, data);	
 		}
-		catch(Exception ex)
-		{
-			
+		catch(Exception e){
+			System.out.println("Error changing scenes withn back button");
 		}
 	}
+	
+	
 	
 	//makes it so that only numbers can be added to the macr nutrient and calorie fields. may not be used depending on API
 	private void setFormatter()

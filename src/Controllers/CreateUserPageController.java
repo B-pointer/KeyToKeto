@@ -83,7 +83,7 @@ public class CreateUserPageController {
 				{
 					try {
 						Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-						loadTabs(stage);
+						StageLoader.loadTabs(stage, user, data);
 					}
 					catch(Exception e)
 					{
@@ -104,47 +104,14 @@ public class CreateUserPageController {
 	}
 	
 	
-	//Ideally this would be in a static class that is called here and in the login page controller, but time is short and I know this works
-	private void loadTabs(Stage stage) throws Exception
-	{
-		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
-		    @Override
-		    public Object call(Class<?> type) {
-		        if(type == CurrentStatsTabController.class){
-		        	return new CurrentStatsTabController(user, data);
-		        }
-		       if(type == ResultsController.class){
-		        	return  new ResultsController(user, data);
-		        }
-		       if(type == FoodController.class)
-		       {
-		    	   return new FoodController(user, data);
-		       }
-		        return null;
-		    }
-		};
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TabFrame.fxml"));
-		loader.setControllerFactory(controllerFactory);	
-		Parent root = loader.load();	
-		stage.setScene(new Scene(root, 900, 560));
-		stage.show();		
-	}
-	
-
-	
 	
 	@FXML private void backClick(ActionEvent event)
 	{
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginPage.fxml"));
-			loader.setController(new LoginPageController(data));
+		try {	
 			Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			Parent newScene = loader.load();
-			stage.getScene().setRoot(newScene);		
+			StageLoader.loadLogin(stage, data);	
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			System.out.println("Error changing scenes withn back button");
 		}
 	}
