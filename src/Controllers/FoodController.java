@@ -19,6 +19,8 @@ import Models.FoodItem;
 import Models.User;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -53,17 +55,18 @@ import javafx.util.Callback;
 import javafx.util.converter.NumberStringConverter;
 
 public class FoodController {
+	
+	//these are all for the search box on the right and the food entry fields underneath it
 	@FXML private TextField prots;
 	@FXML private TextField carbs;
 	@FXML private TextField cals;
 	@FXML private TextField fats;
 	@FXML private TextField food;
 	@FXML private TextField searcher;
-	@FXML private DatePicker datePicker;
 	@FXML private Spinner<Double> servingSpinner;
 	
-	
-	
+	//these are for the Diary box and related fields on the left
+	@FXML private DatePicker datePicker;
 	@FXML private TableView<FoodItem> MealTable;
 	@FXML private TableColumn titleColumn;
 	@FXML private TableColumn<FoodItem, String> calorieColumn;
@@ -72,21 +75,32 @@ public class FoodController {
 	@FXML private TableColumn<FoodItem, String> carbsColumn;
 	@FXML private TableColumn servingColumn;
 	
+	//labels for the goal row of the summation grid
 	@FXML private Label calorieGoalLabel;
 	@FXML private Label proteinGoalLabel;
 	@FXML private Label carbGoalLabel;
 	@FXML private Label fatGoalLabel;
-	
+	//labels for the actual total row of the summation grid
 	@FXML private Label calorieActualLabel;
 	@FXML private Label proteinActualLabel;
 	@FXML private Label carbActualLabel;
 	@FXML private Label fatActualLabel;
+	//labels for the remaining row of the summation grid
+	@FXML private Label calorieRemainingLabel;
+	@FXML private Label proteinRemainingLabel;
+	@FXML private Label carbRemainingLabel;
+	@FXML private Label fatRemainingLabel;
 	
-	
+	//bindings for the labels listed above
 	private IntegerProperty calorieSum = new SimpleIntegerProperty();
-	private IntegerProperty proteinSum = new SimpleIntegerProperty();;
-	private IntegerProperty carbSum = new SimpleIntegerProperty();;
-	private IntegerProperty fatSum = new SimpleIntegerProperty();;
+	private IntegerProperty proteinSum = new SimpleIntegerProperty();
+	private IntegerProperty carbSum = new SimpleIntegerProperty();
+	private IntegerProperty fatSum = new SimpleIntegerProperty();
+	//the binding s for the remaing row of the summation grid
+	private IntegerProperty remainingCalories = new SimpleIntegerProperty();
+	private IntegerProperty remainingProtein = new SimpleIntegerProperty();
+	private IntegerProperty remainingFat = new SimpleIntegerProperty();
+	private IntegerProperty remainingCarbs = new SimpleIntegerProperty();
 	
 	private LocalDate date;
 	
@@ -111,7 +125,7 @@ public class FoodController {
 		datePicker.setValue(LocalDate.now());
 		
 		setupTable();
-		
+		setFormatter();
 		getFoodList();
 	}
 	
@@ -131,6 +145,8 @@ public class FoodController {
 	
 	private void setupTable()
 	{
+
+		
 		MealTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 		titleColumn.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("name"));
@@ -158,12 +174,11 @@ public class FoodController {
 			int foodprotein = Integer.parseInt(prots.getText());
 			LocalDate foodDate = datePicker.getValue();
 			double servings = servingSpinner.getValue();
-			//String name, int ID, int calories, int carbs, int protein, int fat, double servings
 			FoodItem f = new FoodItem(name, ID, foodcalories, foodcarbs, foodprotein, foodfat, servings );
 			f.setDate(foodDate);
 			
 			//actually calling data access layer, prolly need some error checking here
-			int mealID = data.addMeal(f, "a random name");
+			int mealID = data.addMeal(f, user.getName());
 			f.setMealID(mealID);
 					
 			MealTable.getItems().add(f);
@@ -172,6 +187,22 @@ public class FoodController {
 			sumFields();
 		}
 	}
+	
+	
+	
+	@FXML private void deleteClick(ActionEvent e)
+	{
+		if(!MealTable.getSelectionModel().isEmpty())
+		{
+			FoodItem food = MealTable.getSelectionModel().getSelectedItem();
+			data.deleteMeal(food.getMealID());
+			MealTable.getItems().remove(food);
+			MealTable.getSelectionModel().clearSelection();
+		}
+	}
+	
+	
+	
 	
 	@FXML private void dateChange(ActionEvent e)
 	{
@@ -278,6 +309,19 @@ public class FoodController {
 		proteinActualLabel.textProperty().bind(proteinSum.asString());
 		carbActualLabel.textProperty().bind(carbSum.asString());
 		fatActualLabel.textProperty().bind(fatSum.asString());
+		
+		
+		//calorieRemaining.textProperty().bind(fatSum.add(calorieSum).asString());
+		calorieRemainingLabel.textProperty().bind(user.CalorieProperty().subtract(calorieSum).asString());
+		proteinRemainingLabel.textProperty().bind(user.ProteinProperty().subtract(proteinSum).asString());
+		carbRemainingLabel.textProperty().bind(user.CarbsProperty().subtract(carbSum).asString());
+		fatRemainingLabel.textProperty().bind(user.FatProperty().subtract(fatSum).asString());
+		//remainingCalories.bind(user.CalorieProperty().subtract(calorieSum).asString());
+		//calorieRemaining.textProperty().bind(Bindings.createIntegerBinding(user.CalorieProperty() - calorieSum ));
+		//StringBinding sum = user.CalorieProperty().subtract(calorieSum);
+		//calorieRemaining.textProperty().bind(sum);
+		//remainingCalories.textProperty().bind(Bindings.createStringBinding(() - >)))
+		
 	}
 	
 	

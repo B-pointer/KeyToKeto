@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ResultsController">
 	<children>
-		<AnchorPane layoutX="-1.0" layoutY="1.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560" prefWidth="900" style="-fx-background-color: Navy;">
+		<AnchorPane layoutX="-1.0" layoutY="1.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560" prefWidth="900" style="-fx-background-color: #17376b;">
 			<children>
 				<Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
 				<Label layoutX="313.0" layoutY="112.0" text="Calories" textFill="#e5ff00">

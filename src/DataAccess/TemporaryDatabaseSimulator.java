@@ -128,5 +128,12 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	public boolean isUsernameAvailable(String username) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public void closeConnection() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

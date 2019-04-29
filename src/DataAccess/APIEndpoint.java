@@ -175,6 +175,13 @@ public class APIEndpoint implements DataAccessible{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+	@Override
+	public void closeConnection() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

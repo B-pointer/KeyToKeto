@@ -26,4 +26,6 @@ public interface DataAccessible {
 	public int addMeal(FoodItem meal, String username);
 	
 	public boolean updateUser(User user);
+	
+	public void closeConnection();
 }

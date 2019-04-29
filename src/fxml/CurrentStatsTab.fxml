@@ -6,17 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.CurrentStatsTabController">
+<AnchorPane fx:id="currentStatsTab" minHeight="0.0" minWidth="0.0" prefHeight="560.0" prefWidth="900.0" style="-fx-background-color: #17376b;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CurrentStatsTabController">
 	<children>
-		<TextField fx:id="ageField" layoutX="376.0" layoutY="128.0" visible="false"/>
+		<TextField fx:id="ageField" layoutX="376.0" layoutY="128.0" visible="false" />
 		<TextField fx:id="heightField" layoutX="376.0" layoutY="178.0" />
 		<TextField fx:id="weightField" layoutX="376.0" layoutY="228.0" />
 		<ComboBox fx:id="genderBox" layoutX="376.0" layoutY="289.0" prefWidth="150.0" />
 		
-		<Label layoutX="332.0" layoutY="132.0" text="Age:" visible="false"/>
-		<Label layoutX="325.0" layoutY="182.0" text="Height:" />
-		<Label layoutX="324.0" layoutY="232.0" text="Weight:" />
-		<Label layoutX="323.0" layoutY="293.0" text="Gender:" />
+		<Label layoutX="332.0" layoutY="132.0" text="Age:" visible="false" />
+		<Label layoutX="325.0" layoutY="182.0" text="Height:" textFill="WHITE" />
+		<Label layoutX="324.0" layoutY="232.0" text="Weight:" textFill="WHITE" />
+		<Label layoutX="323.0" layoutY="293.0" text="Gender:" textFill="WHITE" />
 		<Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
         <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
 	</children>

@@ -19,9 +19,9 @@ public class DataConnection implements DataAccessible{
 	
 	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	private static final String JDBC_URL = "jdbc:derby:DerbyTest;create=true";
+	private static final String SHUTDOWN_URL = "jdbc:derby:DerbyTest;shutdown=true";
 	private static Connection conn = null;
 	private static Statement stmt = null;
-	int newMealID;
 
 	//constructor 
 	public DataConnection()
@@ -31,14 +31,34 @@ public class DataConnection implements DataAccessible{
 		setupMealTable();
 	}
 	
+
+	public void utility()
+	{
+		try {
+			String query = "SELECT * FROM MEAL";
+			PreparedStatement ps = conn.prepareStatement(query);
+			//ps.setString(1, "bkp5");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				int mealID = rs.getInt("mealID");
+				String name = rs.getString("name");
+				double servings = rs.getDouble("servings");
+				int protein = rs.getInt("protein");
+				String username = rs.getString("username");
+				String date = rs.getString("date");
+				System.out.println(mealID + ":" + name + ":" + servings + ":" + protein+ ":" + username + ":" + date);
+					
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
 	
 	
 	
-	
-	
-	
-	
-	
+
 	
 	public boolean login(String username, String password)
 	{	
@@ -62,11 +82,6 @@ public class DataConnection implements DataAccessible{
 		return false;
 		
 	}
-	
-	
-	
-	
-	
 	
 	
 	
@@ -122,9 +137,6 @@ public class DataConnection implements DataAccessible{
 	
 	
 	
-	
-	
-	
 	public boolean createUser(User user)
 	{
 		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
@@ -169,14 +181,42 @@ public class DataConnection implements DataAccessible{
 	
 	
 	
-	//FIXME add actual calls to database.returns an empty list if no food is available for the given date and user
+
 	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username)
 	{
+		ArrayList<FoodItem> theList = new ArrayList<FoodItem>();
 		
-		return new ArrayList<FoodItem>();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try {
+			String query = "SELECT * FROM MEAL WHERE USERNAME = ? AND date = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, username);
+			ps.setString(2, date.format(dtf));
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				
+				String name = rs.getString("name");
+				int calories = rs.getInt("calories");
+				int carbs = rs.getInt("carbs");
+				int protein = rs.getInt("protein");
+				int fat = rs.getInt("fat");
+				double servings = rs.getDouble("servings");
+				int mealID = rs.getInt("mealID");
+				LocalDate mealDate = LocalDate.parse(rs.getString("date"), dtf);
+				
+				FoodItem food = new FoodItem(name, 1111, calories, carbs, protein, fat, servings, mealID, mealDate);
+				theList.add(food);
+			}
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}		
+		return theList;
 	}
 	
-	//FIXME add actual calls to database. should just delete from meal table by mealID
+	
+	
 	public boolean deleteMeal(int mealID)
 	{
 		
@@ -197,9 +237,9 @@ public class DataConnection implements DataAccessible{
 	public int addMeal(FoodItem meal, String username)
 	{
 
+		int newMealID = -1;
 		try {
 			String query = "INSERT INTO MEAL (name, username, calories, carbs, protein, fat, servings, date) VALUES ("+ "'" + meal.getName() + "'" + ", "+"'" + username + "'" + ", " + meal.getCalories() + ", " + meal.getCarbs() + ", " + meal.getProtein() +", " + meal.getFat() +", "+ meal.getServings() + ", " +"'"+ meal.getDate() + "'"+")";
-			System.out.println(query);
 			PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.execute();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -208,13 +248,10 @@ public class DataConnection implements DataAccessible{
 			newMealID = rs.getInt(1);
 			}
 			 
-			System.out.println("Added Meal!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 		return newMealID;
 	}
 	
@@ -224,6 +261,7 @@ public class DataConnection implements DataAccessible{
 		try {
 			String query = "UPDATE ACCOUNT SET weight = " + u.getWeight() + ", calories = " + u.getCalories() +", height = " + u.getHeight() + ", " +" WHERE username = " + "'"+ u.getName()+"'" ;
 			PreparedStatement ps = conn.prepareStatement(query);
+			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -231,8 +269,6 @@ public class DataConnection implements DataAccessible{
 		return false;
 	}
 	
-	
-
 	//setting initial connection to the database, called by constructor
 	void createConnection()
 	{
@@ -246,6 +282,23 @@ public class DataConnection implements DataAccessible{
 	}
 	
 	
+	public void closeConnection()
+	{
+		try {
+			Class.forName(DRIVER).newInstance();
+			conn = DriverManager.getConnection(SHUTDOWN_URL);
+		}
+		catch(SQLException e){
+			if(e.getErrorCode() != 45000)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
 	
 	
 	
