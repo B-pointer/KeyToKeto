@@ -10,8 +10,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="900.0" style="-fx-background-color: Navy;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FoodController">
    <children>
       <TextField fx:id="searcher" layoutX="518.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" />
       <Button layoutX="769.0" layoutY="44.0" mnemonicParsing="false" onAction="#searchFood" prefHeight="25.0" prefWidth="67.0" text="Search" />
@@ -20,17 +21,17 @@
       <TextField fx:id="cals" layoutX="603.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="prots" layoutX="664.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="fats" layoutX="725.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="561.0" layoutY="380.0" text="Food" />
-      <Label layoutX="607.0" layoutY="430.0" text="Calories" />
+      <Label layoutX="561.0" layoutY="380.0" text="Food" textFill="#d4ff00" />
+      <Label layoutX="607.0" layoutY="430.0" text="Calories" textFill="#f1f500" />
       <TextField fx:id="carbs" layoutX="784.0" layoutY="447.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="672.0" layoutY="430.0" text="Protein" />
-      <Label layoutX="744.0" layoutY="430.0" text="Fat" />
+      <Label layoutX="672.0" layoutY="430.0" text="Protein" textFill="#ebe300" />
+      <Label layoutX="744.0" layoutY="430.0" text="Fat" textFill="#eeea00" />
       <Label layoutX="793.0" layoutY="430.0" text="Carbs" />
       <Button layoutX="652.0" layoutY="485.0" mnemonicParsing="false" onAction="#saveClick" text="Save" />
       
       <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
       <Spinner fx:id="servingSpinner" layoutX="518.0" layoutY="447.0" prefHeight="25.0" prefWidth="73.0" />
-      <Label layoutX="527.0" layoutY="430.0" text="Servings" />
+      <Label layoutX="527.0" layoutY="430.0" text="Servings" textFill="#f2ff04" />
       
       <Label fx:id="calorieGoalLabel" layoutX="150.0" layoutY="430.0" />
       <Label fx:id="proteinGoalLabel" layoutX="220.0" layoutY="430.0" />
@@ -42,10 +43,10 @@
       <Label fx:id="proteinActualLabel" layoutX="220.0" layoutY="448.0" />
       <Label fx:id="carbActualLabel" layoutX="290.0" layoutY="448.0" />
       <Label fx:id="fatActualLabel" layoutX="350.0" layoutY="448.0" />
-      <VBox alignment="TOP_CENTER" layoutX="29.0" layoutY="51.0" prefHeight="478.0" prefWidth="455.0" spacing="15.0">
+      <VBox alignment="TOP_CENTER" layoutX="31.0" layoutY="57.0" prefHeight="478.0" prefWidth="455.0" spacing="15.0" style="-fx-background-color: Navy;">
          <children>
             <DatePicker fx:id="datePicker" maxHeight="25" onAction="#dateChange" prefHeight="25.0" prefWidth="156.0" />
-            <TableView fx:id="MealTable"   prefHeight="275.0" prefWidth="455.0">
+            <TableView fx:id="MealTable" prefHeight="275.0" prefWidth="455.0">
               <columns>
                 <TableColumn fx:id="titleColumn" prefWidth="150.0" text="Food" />
                 <TableColumn fx:id="calorieColumn" prefWidth="50.0" text="Calories" />
@@ -59,6 +60,11 @@
             <Button mnemonicParsing="false" text="Delete" />
          </children>
       </VBox>
+      <Label layoutX="31.0" layoutY="525.0" text="Key To Keto" textFill="#f8ec00">
+         <font>
+            <Font name="Cooper Black" size="30.0" />
+         </font>
+      </Label>
       
       
    </children>

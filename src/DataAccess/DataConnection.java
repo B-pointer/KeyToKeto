@@ -21,6 +21,7 @@ public class DataConnection implements DataAccessible{
 	private static final String JDBC_URL = "jdbc:derby:DerbyTest;create=true";
 	private static Connection conn = null;
 	private static Statement stmt = null;
+	int newMealID;
 
 	//constructor 
 	public DataConnection()
@@ -171,24 +172,62 @@ public class DataConnection implements DataAccessible{
 	//FIXME add actual calls to database.returns an empty list if no food is available for the given date and user
 	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username)
 	{
+		
 		return new ArrayList<FoodItem>();
 	}
 	
 	//FIXME add actual calls to database. should just delete from meal table by mealID
 	public boolean deleteMeal(int mealID)
 	{
+		
+		PreparedStatement ps;
+		try {
+			String query = "DELETE FROM MEAL WHERE mealID = " + mealID;
+			ps = conn.prepareStatement(query);
+			ps.execute();
+			System.out.println("Deleted Meal");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 	
 	//FIXME add actual calls to database. returns the mealID of the meal added to the database
 	public int addMeal(FoodItem meal, String username)
 	{
-		return -1;
+
+		try {
+			String query = "INSERT INTO MEAL (name, username, calories, carbs, protein, fat, servings, date) VALUES ("+ "'" + meal.getName() + "'" + ", "+"'" + username + "'" + ", " + meal.getCalories() + ", " + meal.getCarbs() + ", " + meal.getProtein() +", " + meal.getFat() +", "+ meal.getServings() + ", " +"'"+ meal.getDate() + "'"+")";
+			System.out.println(query);
+			PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			ps.execute();
+			ResultSet rs = ps.getGeneratedKeys();
+			if(rs.next())
+			{
+			newMealID = rs.getInt(1);
+			}
+			 
+			System.out.println("Added Meal!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		return newMealID;
 	}
 	
 	//FIXME add actual calls to database. needs to basically update all fields of a given user
 	public boolean updateUser(User u)
 	{
+		try {
+			String query = "UPDATE ACCOUNT SET weight = " + u.getWeight() + ", calories = " + u.getCalories() +", height = " + u.getHeight() + ", " +" WHERE username = " + "'"+ u.getName()+"'" ;
+			PreparedStatement ps = conn.prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 	

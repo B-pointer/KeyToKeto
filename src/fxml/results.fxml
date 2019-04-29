@@ -6,22 +6,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.ResultsController">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ResultsController">
 	<children>
-		<AnchorPane layoutX="-1.0" layoutY="1.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560" prefWidth="900">
+		<AnchorPane layoutX="-1.0" layoutY="1.0" maxHeight="-1.0" maxWidth="-1.0" prefHeight="560" prefWidth="900" style="-fx-background-color: Navy;">
 			<children>
 				<Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#logoutClick" text="Logout" />
-				<Label layoutX="313.0" layoutY="112.0" text="Calories">
+				<Label layoutX="313.0" layoutY="112.0" text="Calories" textFill="#e5ff00">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
 				</Label>
-				<Label layoutX="331.0" layoutY="216.0" text="Fats">
+				<Label layoutX="331.0" layoutY="216.0" text="Fats" textFill="#f2ff00">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
 				</Label>
-				<Label layoutX="327.0" layoutY="261.0" text="Carbs">
+				<Label layoutX="327.0" layoutY="261.0" text="Carbs" textFill="#eeff00">
 					<font>
 						<Font name="Bodoni MT Black Italic" size="12.0" />
 					</font>
@@ -33,7 +33,7 @@
 				<TextField fx:id="carbs" editable="false" layoutX="376.0" layoutY="255.0" />
 
 			
-				<Label layoutX="367.0" layoutY="62.0" text="Ketosis Calculations">
+				<Label layoutX="367.0" layoutY="62.0" text="Ketosis Calculations" textFill="#e3eb04">
 					<font>
 						<Font name="Leelawadee UI Bold" size="18.0" />
 					</font>
@@ -41,9 +41,14 @@
 			<Button layoutX="250.0" layoutY="347.0" mnemonicParsing="false" onAction="#resetClick" text="Reset to Saved" />
            	<Button layoutX="403.0" layoutY="347.0" mnemonicParsing="false" onAction="#newResults" prefHeight="25.0" prefWidth="95.0" text="Recalculate" />
             <Button layoutX="571.0" layoutY="347.0" mnemonicParsing="false" onAction="#saveClick" prefHeight="25.0" prefWidth="95.0" text="Save" />
-            <Label layoutX="315.0" layoutY="165.0" text="Protein">
+            <Label layoutX="315.0" layoutY="165.0" text="Protein" textFill="#e8f800">
                <font>
                   <Font name="Bodoni MT Black Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="466.0" text="Key To Keto" textFill="#ecf801">
+               <font>
+                  <Font name="Cooper Black" size="37.0" />
                </font>
             </Label>
             
