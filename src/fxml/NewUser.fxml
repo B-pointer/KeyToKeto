@@ -5,20 +5,20 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane style="-fx-background-color: #17376b;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
+<StackPane style="-fx-background-color: #17376b;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
       <HBox alignment="CENTER" prefHeight="450.0" prefWidth="750.0" spacing="75.0">
          <children>
             <VBox alignment="CENTER" prefHeight="295.0" prefWidth="275.0" spacing="15.0">
                <children>
       
-                         <TextField fx:id="usernameField" prefHeight="45.0" prefWidth="275.0" promptText="Username">
+                                     <TextField fx:id="usernameField" prefHeight="45.0" prefWidth="275.0" promptText="Username">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -70,7 +70,7 @@
                      </font>
                   </TextField>
             
-                        <Button fx:id="create" mnemonicParsing="false" onAction="#createClick" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #022d72; -fx-border-color: #ffffff; -fx-border-width: 3; -fx-border-radius: 5; -fx-font-family: arial;" text="Create Account" textFill="#fffefe">
+                                    <Button fx:id="create" mnemonicParsing="false" onAction="#createClick" prefHeight="40.0" prefWidth="125.0" style="-fx-background-color: #022d72; -fx-border-color: #ffffff; -fx-border-width: 3; -fx-border-radius: 5; -fx-font-family: arial;" text="Create Account" textFill="#fffefe">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
@@ -82,5 +82,5 @@
             </VBox>
          </children>
       </HBox>
-   </center>
-</BorderPane>
+   </children>
+</StackPane>
