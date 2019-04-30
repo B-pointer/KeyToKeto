@@ -28,4 +28,6 @@ public interface DataAccessible {
 	public boolean updateUser(User user);
 	
 	public void closeConnection();
+	
+	public ArrayList<FoodItem> searchForFood(String keyword);
 }

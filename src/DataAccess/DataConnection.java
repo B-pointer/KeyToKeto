@@ -11,6 +11,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+
 import Models.User;
 import Models.FoodItem;
 
@@ -374,5 +381,41 @@ public class DataConnection implements DataAccessible{
 		{
 			System.out.println(e.getMessage());
 		}
+	}
+
+
+	@Override
+	public ArrayList<FoodItem> searchForFood(String keyword) 
+	{
+		ArrayList<FoodItem> foodList = new ArrayList<>();
+		try {
+			Unirest.setTimeouts(5000, 10000);
+			HttpResponse<JsonNode> request = Unirest.get(" http://142.93.57.49/foods/{search}")
+			        .routeParam("search", keyword)
+					.header("accept", "application/json")
+			        .header("Content-Type", "application/json")
+			        .asJson();;
+			JSONObject responsejson = request.getBody().getObject();
+			JSONArray results= responsejson.getJSONArray("response");
+			for(int i=0; i < results.length(); i++)
+			{
+				JSONObject value = results.getJSONObject(i);
+				//System.out.println(value.get("protein"));
+				String name = value.getString("foodName");
+				int calories = value.getInt("calories");
+				int carbs = value.getInt("carbohydrates");
+				int protein = value.getInt("protein");
+				int fat = value.getInt("fat");
+				String servingSize = value.getString("servingSize");
+				FoodItem f = new FoodItem(name + " " + servingSize, -1, calories, carbs, protein, fat, -1.0, -1, null);
+				foodList.add(f);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getStackTrace());
+		}
+		
+		return foodList;
 	}
 }

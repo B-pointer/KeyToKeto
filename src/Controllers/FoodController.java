@@ -24,6 +24,8 @@ import javafx.beans.binding.StringBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,6 +67,14 @@ public class FoodController {
 	@FXML private TextField searcher;
 	@FXML private Spinner<Double> servingSpinner;
 	
+	//for the search table on the right
+	@FXML private TableView<FoodItem> SearchTable;
+	@FXML private TableColumn searchTitle;
+	@FXML private TableColumn<FoodItem, String> searchCalorie;
+	@FXML private TableColumn<FoodItem, String> searchProtein;
+	@FXML private TableColumn<FoodItem, String> searchFat;
+	@FXML private TableColumn<FoodItem, String> searchCarbs;
+
 	//these are for the Diary box and related fields on the left
 	@FXML private DatePicker datePicker;
 	@FXML private TableView<FoodItem> MealTable;
@@ -96,11 +106,6 @@ public class FoodController {
 	private IntegerProperty proteinSum = new SimpleIntegerProperty();
 	private IntegerProperty carbSum = new SimpleIntegerProperty();
 	private IntegerProperty fatSum = new SimpleIntegerProperty();
-	//the binding s for the remaing row of the summation grid
-	private IntegerProperty remainingCalories = new SimpleIntegerProperty();
-	private IntegerProperty remainingProtein = new SimpleIntegerProperty();
-	private IntegerProperty remainingFat = new SimpleIntegerProperty();
-	private IntegerProperty remainingCarbs = new SimpleIntegerProperty();
 	
 	private LocalDate date;
 	
@@ -157,6 +162,28 @@ public class FoodController {
 		carbsColumn.setCellValueFactory(c-> new SimpleStringProperty(Integer.toString((int)((c.getValue().getCarbs()) * c.getValue().getServings()))));
 		servingColumn.setCellValueFactory(new PropertyValueFactory<FoodItem, Double>("servings"));
 		
+		
+		
+		SearchTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		searchTitle.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("name"));
+		searchCalorie.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("calories"));
+		searchProtein.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("protein"));
+		searchFat.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("fat"));
+		searchCarbs.setCellValueFactory(new PropertyValueFactory<FoodItem, String>("calories"));	
+		
+		
+		SearchTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FoodItem>(){
+
+					@Override
+					public void changed(ObservableValue<? extends FoodItem> observable, FoodItem oldVal, FoodItem newVal) {
+						food.setText(newVal.getName());
+						cals.setText(Integer.toString(newVal.getCalories()));
+						prots.setText(Integer.toString(newVal.getProtein()));
+						carbs.setText(Integer.toString(newVal.getCarbs()));
+						fats.setText(Integer.toString(newVal.getFat()));
+					}
+		});
 	}
 	
 	
@@ -198,6 +225,7 @@ public class FoodController {
 			data.deleteMeal(food.getMealID());
 			MealTable.getItems().remove(food);
 			MealTable.getSelectionModel().clearSelection();
+			sumFields();
 		}
 	}
 	
@@ -213,23 +241,16 @@ public class FoodController {
 
 	
 	
-	@FXML void searchFood(ActionEvent e) throws FileNotFoundException
+	@FXML void searchFood(ActionEvent e)
 	{
-		System.out.println("Clicked");
-		String foodSearch = searcher.getText();
-		Scanner in = new Scanner(new FileReader("foodtext"));
-		StringBuilder sb = new StringBuilder();
-		while(in.hasNext()) {
-			if(foodSearch.equals(in.next()))
-			{
-				food.setText(foodSearch);
-				cals.setText(in.next());
-				carbs.setText(in.next());
-				prots.setText(in.next());
-				fats.setText(in.next());	
-			}  
+
+		if(!searcher.getText().isEmpty())
+		{
+			System.out.println("search clicked");
+			String foodSearch = searcher.getText();
+			ObservableList<FoodItem> searchList = FXCollections.observableArrayList(data.searchForFood(foodSearch));
+			SearchTable.setItems(searchList);
 		}
-		in.close();
 	}
 	
 	
@@ -311,16 +332,11 @@ public class FoodController {
 		fatActualLabel.textProperty().bind(fatSum.asString());
 		
 		
-		//calorieRemaining.textProperty().bind(fatSum.add(calorieSum).asString());
 		calorieRemainingLabel.textProperty().bind(user.CalorieProperty().subtract(calorieSum).asString());
 		proteinRemainingLabel.textProperty().bind(user.ProteinProperty().subtract(proteinSum).asString());
 		carbRemainingLabel.textProperty().bind(user.CarbsProperty().subtract(carbSum).asString());
 		fatRemainingLabel.textProperty().bind(user.FatProperty().subtract(fatSum).asString());
-		//remainingCalories.bind(user.CalorieProperty().subtract(calorieSum).asString());
-		//calorieRemaining.textProperty().bind(Bindings.createIntegerBinding(user.CalorieProperty() - calorieSum ));
-		//StringBinding sum = user.CalorieProperty().subtract(calorieSum);
-		//calorieRemaining.textProperty().bind(sum);
-		//remainingCalories.textProperty().bind(Bindings.createStringBinding(() - >)))
+
 		
 	}
 	

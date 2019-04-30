@@ -135,5 +135,12 @@ public class TemporaryDatabaseSimulator implements DataAccessible{
 	public void closeConnection() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public ArrayList<FoodItem> searchForFood(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
