@@ -177,11 +177,14 @@ public class FoodController {
 
 					@Override
 					public void changed(ObservableValue<? extends FoodItem> observable, FoodItem oldVal, FoodItem newVal) {
-						food.setText(newVal.getName());
-						cals.setText(Integer.toString(newVal.getCalories()));
-						prots.setText(Integer.toString(newVal.getProtein()));
-						carbs.setText(Integer.toString(newVal.getCarbs()));
-						fats.setText(Integer.toString(newVal.getFat()));
+						if(newVal != null)
+						{
+							food.setText(newVal.getName());
+							cals.setText(Integer.toString(newVal.getCalories()));
+							prots.setText(Integer.toString(newVal.getProtein()));
+							carbs.setText(Integer.toString(newVal.getCarbs()));
+							fats.setText(Integer.toString(newVal.getFat()));
+						}
 					}
 		});
 	}
@@ -246,6 +249,7 @@ public class FoodController {
 
 		if(!searcher.getText().isEmpty())
 		{
+			SearchTable.getSelectionModel().clearSelection();
 			System.out.println("search clicked");
 			String foodSearch = searcher.getText();
 			ObservableList<FoodItem> searchList = FXCollections.observableArrayList(data.searchForFood(foodSearch));

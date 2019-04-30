@@ -30,7 +30,7 @@ public class Main extends Application{
 		StageLoader.loadLogin(primaryStage, data);
 		primaryStage.show();
 		
-		data.utility();
+		//data.utility();
 	}
 	
 	@Override
