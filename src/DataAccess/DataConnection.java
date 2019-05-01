@@ -226,38 +226,50 @@ public class DataConnection implements DataAccessible{
 	
 	public boolean deleteMeal(int mealID)
 	{
-		
-		PreparedStatement ps;
 		try {
-			String query = "DELETE FROM MEAL WHERE mealID = " + mealID;
-			ps = conn.prepareStatement(query);
+			String query = "DELETE from MEAL WHERE mealID = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1,  mealID);
 			ps.execute();
-			System.out.println("Deleted Meal");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return true;
 		}
-		return true;
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		return false;
 	}
 	
-	//FIXME add actual calls to database. returns the mealID of the meal added to the database
+
 	public int addMeal(FoodItem meal, String username)
 	{
 
 		int newMealID = -1;
 		try {
-			String query = "INSERT INTO MEAL (name, username, calories, carbs, protein, fat, servings, date) VALUES ("+ "'" + meal.getName() + "'" + ", "+"'" + username + "'" + ", " + meal.getCalories() + ", " + meal.getCarbs() + ", " + meal.getProtein() +", " + meal.getFat() +", "+ meal.getServings() + ", " +"'"+ meal.getDate() + "'"+")";
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			String dateString = meal.getDate().format(dtf);
+			
+			String query = "INSERT INTO MEAL (name, username, calories, carbs, protein, fat, servings, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			ps.execute();
-			ResultSet rs = ps.getGeneratedKeys();
-			if(rs.next())
+			ps.setString(1,  meal.getName());
+			ps.setString(2,  username);
+			ps.setInt(3, meal.getCalories());
+			ps.setInt(4, meal.getCarbs());
+			ps.setInt(5,  meal.getProtein());
+			ps.setInt(6,  meal.getFat());
+			ps.setDouble(7, meal.getServings());
+			ps.setString(8,  dateString);
+			ps.executeUpdate();
+			
+			ResultSet result = ps.getGeneratedKeys();
+			if(result.next())
 			{
-			newMealID = rs.getInt(1);
+				newMealID = result.getInt(1);
 			}
-			 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//System.out.println(result);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
 		}
 		return newMealID;
 	}
@@ -265,13 +277,20 @@ public class DataConnection implements DataAccessible{
 	//FIXME add actual calls to database. needs to basically update all fields of a given user
 	public boolean updateUser(User u)
 	{
+
 		try {
-			String query = "UPDATE ACCOUNT SET weight = " + u.getWeight() + ", calories = " + u.getCalories() +", height = " + u.getHeight() + ", " +" WHERE username = " + "'"+ u.getName()+"'" ;
+			String query = "UPDATE ACCOUNT SET calories  = ?, height = ?, weight = ?, gender = ? where USERNAME = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, u.getCalories());
+			ps.setInt(2, u.getHeight());
+			ps.setInt(3, u.getWeight());
+			ps.setString(4, u.getGender());
+			ps.setString(5, u.getName());
 			ps.execute();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
 		}
 		return false;
 	}

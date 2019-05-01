@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<StackPane style="-fx-background-color: #17376b;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane style="-fx-background-color: #17376b;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <children>
       <HBox alignment="CENTER" prefHeight="450.0" prefWidth="750.0" spacing="75.0">
          <children>
