@@ -12,7 +12,7 @@ public class HomePageController {
     }
 	void setCals(String calss)
     {
-    	System.out.println("Worked");
+    	//System.out.println("Worked");
     }
     
 	public void myValString (String val) {

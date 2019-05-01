@@ -68,18 +68,12 @@ public class CurrentStatsTabController {
 			user.setHeight(Integer.parseInt(heightField.getText()));
 			user.setGender(genderBox.getValue().toString());
 			data.updateUser(user);
-			System.out.println("Save logic goes here");
-		}
-		System.out.println("TODO implement updateUser in data accessible");
-		//Save current values to the database via API
-		
-		
+		}		
 	}
 	
 	//returns true if field have values, false if any are empty
 	private boolean checkFields()
 	{
-		//return !ageField.getText().isEmpty() && !weightField.getText().isEmpty() && !heightField.getText().isEmpty(); 
 		if(!ageField.getText().isEmpty() && !weightField.getText().isEmpty() && !heightField.getText().isEmpty())
 		{
 			return true;

@@ -70,8 +70,6 @@ public class LoginPageController {
 	
 	@FXML protected void createUserPageClick(ActionEvent event)
 	{
-		//System.out.println("Create clicked");
-		//username.setText("Create Clicked");
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NewUser.fxml"));
 			loader.setController(new CreateUserPageController(data));

@@ -49,7 +49,6 @@ public class ResultsController {
 	@FXML private void initialize()
 	{
 		setFormatter();
-		//fillFields(true);
 		fillFields(user.getCalories());
 		calories.textProperty().addListener((obs, oldText, newText)-> 
 		{
@@ -98,7 +97,6 @@ public class ResultsController {
 		carbs.setText(Integer.toString(KetoCalculations.calculateCarbs(totalCalories)));
 		fats.setText(Integer.toString(KetoCalculations.calculateFat(totalCalories)));
 		proteins.setText(Integer.toString(KetoCalculations.calculateProtein(totalCalories)));
-		System.out.println(calories.toString());
 		String homeCarbs = String.valueOf((KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
 		home.setCals(homeCarbs);
 	}

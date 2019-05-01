@@ -140,10 +140,6 @@ public class FoodController {
 		
 		ObservableList<FoodItem> food = FXCollections.observableArrayList(data.getFoodByDate(date, user.getName()));
 		MealTable.setItems(food);
-		for(FoodItem a :  food)
-		{
-			System.out.println(a.getName() + " " + a.getCalories() + " " + a.getFat() );
-		}
 		sumFields();
 		
 	}
@@ -250,7 +246,6 @@ public class FoodController {
 		if(!searcher.getText().isEmpty())
 		{
 			SearchTable.getSelectionModel().clearSelection();
-			System.out.println("search clicked");
 			String foodSearch = searcher.getText();
 			ObservableList<FoodItem> searchList = FXCollections.observableArrayList(data.searchForFood(foodSearch));
 			SearchTable.setItems(searchList);
