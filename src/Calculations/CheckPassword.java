@@ -82,7 +82,7 @@ public class CheckPassword {
         return true;        
     }
     
-    static String getReason() {
+    public static String getReason() {
     	return reason;
     }
 }
