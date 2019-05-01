@@ -66,7 +66,7 @@ public class CreateUserPageController {
 	
 	@FXML protected void createClick(ActionEvent event)
 	{
-		System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
+		//System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
 		if(checkFields())
 		{
 			int height = Integer.parseInt(heightField.getText());

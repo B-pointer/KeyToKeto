@@ -72,7 +72,7 @@ public class ResultsController {
 			StageLoader.loadLogin(stage, data);	
 		}
 		catch(Exception e){
-			System.out.println("Error changing scenes withn back button");
+			System.out.println("Error changing scenes with back button");
 		}
 	}
 	
@@ -81,8 +81,8 @@ public class ResultsController {
 		
 		if(checkFields())
 		{
-			System.out.println("need to save to db here and also need to check to be sure field is not empty");
 			user.setCalories(Integer.parseInt(calories.getText()));
+			data.updateUser(user);
 		}
 	}
 	

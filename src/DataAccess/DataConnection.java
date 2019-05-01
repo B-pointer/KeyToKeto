@@ -177,7 +177,6 @@ public class DataConnection implements DataAccessible{
 				calories = rs.getInt("calories");
 				LocalDate date = LocalDate.parse(dateIn, dtf);
 				return new User(user, email, password, date, gender, height, weight, calories);
-						//String myName, String myEmail, String myPass, LocalDate birthdate, String myGender, int myTall, int myWide, int myCalories
 			}
 		}
 		catch(SQLException e){
@@ -274,7 +273,7 @@ public class DataConnection implements DataAccessible{
 		return newMealID;
 	}
 	
-	//FIXME add actual calls to database. needs to basically update all fields of a given user
+	
 	public boolean updateUser(User u)
 	{
 
@@ -342,7 +341,7 @@ public class DataConnection implements DataAccessible{
 			ResultSet tables = dbm.getTables(null, null, TABLE_NAME.toUpperCase(), null);
 			if(tables.next())
 			{
-				System.out.println("Table " + TABLE_NAME + " Already exists");
+				//System.out.println("Table " + TABLE_NAME + " Already exists");
 			}
 			else
 			{
@@ -379,7 +378,7 @@ public class DataConnection implements DataAccessible{
 			ResultSet tables = dbm.getTables(null, null, TABLE_NAME.toUpperCase(), null);
 			if(tables.next())
 			{
-				System.out.println("Table " + TABLE_NAME + " Already exists");
+				//System.out.println("Table " + TABLE_NAME + " Already exists");
 			}
 			else
 			{
