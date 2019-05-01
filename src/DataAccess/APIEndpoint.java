@@ -58,6 +58,30 @@ public class APIEndpoint implements DataAccessible{
 		Unirest.clearDefaultHeaders();
 	}
 
+	
+	public boolean isUsernameAvailable(String username)
+	{
+		try {
+			HttpResponse<JsonNode> response = Unirest.get(APIURL + "/checkUsername/{search}")
+			        .routeParam("search", username)
+					.header("accept", "application/json")
+			        .header("Content-Type", "application/json")
+			        .asJson();
+			JSONObject body = response.getBody().getObject();
+			if (response.getStatus() == 200 && body.getBoolean("exists") == false) {
+				return true;
+			} else {
+				return false;
+			//}
+			} 
+		}
+		catch (UnirestException | JSONException e) {
+			e.printStackTrace();
+		}
+		return false;	
+	}
+	
+	
 	@Override
 	public boolean createUser(String username, String email, String password, String gender, int height,
 			int weight, LocalDate birthDate, int calories) {
@@ -83,18 +107,50 @@ public class APIEndpoint implements DataAccessible{
 		return false;
 	}
 
+	
 	public boolean createUser(User user)
 	{
 		return createUser(user.getName(), user.getEmail(), user.getPass(), user.getGender(), user.getHeight(), user.getWeight(), user.getBirth(), user.getCalories());
 	}
 	
 	
-	
-	@Override
-	public User getUser(String username) {
-		//return new User("bkp5", "mailaccount@mail.com", "password123", 22, "Male", 67, 160, 1752,  false);
-		return new User("bkp5", "mailaccount@gmail.com", "password123", LocalDate.parse("1996-09-02", DateTimeFormatter.ofPattern("yyyy-MM-dd")), "Male", 67, 160, 1752);
+	public User getUser(String username)
+	{
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try {
+			
+			HttpResponse<JsonNode> response = Unirest.get(APIURL + "/profile")
+					.header("Content-Type", "application/x-www-form-urlencoded")
+					.header("cache-control", "no-cache")
+					.header("Postman-Token", "171b0435-9d3f-40c9-a573-ffcc66f343cd")
+					.asJson();
+			JSONObject body = response.getBody().getObject();
+			System.out.println(body);
+			if (response.getStatus() == 200 && body.getBoolean("success")) 
+			{
+				body = body.getJSONObject("profile");
+				String name = body.getString("username");
+				String email = body.getString("email");
+				String dateString = body.getString("birthdate");
+				dateString = dateString.substring(0, 10);
+				LocalDate date = LocalDate.parse(dateString, dtf);
+				String gender = body.getString("gender");
+				int height = body.getInt("height");
+				int weight = body.getInt("weight");
+				int calories = body.getInt("calorie_goal");
+				User u = new User(name, email, "nopass", date, gender, height, weight, calories);
+				return u;
+			} else {
+				System.out.println(body.getString("message"));//TODO show this in a popup message
+			}	
+		} 
+		catch (UnirestException  | JSONException e) {
+			e.printStackTrace();
+		}
+		return new User();
 	}
+
+	
 
 	@Override
 	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username) {
@@ -131,10 +187,31 @@ public class APIEndpoint implements DataAccessible{
 		//return -1;
 	}
 
-	@Override
-	public boolean updateUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateUser(User user)
+	{	
+		try {
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String dateString = user.getBirth().format(dtf);
+				HttpResponse<JsonNode> response = Unirest.post(APIURL + "/profile")
+						  .header("Content-Type", "application/x-www-form-urlencoded")
+						  .header("cache-control", "no-cache")
+						  .header("Postman-Token", "535f3255-6849-45e2-b465-1d0abb1dbf24")
+						  .body(  "weight=" + user.getWeight() 
+								  + "&height=" + user.getHeight()  
+								  + "&gender=" + user.getGender()
+								  +"&calorie_goal=" + user.getCalories())
+						  .asJson();
+				JSONObject body = response.getBody().getObject();
+				if (response.getStatus() == 200 && body.getBoolean("success")) {
+					return true;
+				} else {
+					System.out.println(body.getString("message"));//TODO show this in a popup message
+				}
+			} catch (UnirestException | JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
 	}
 	
 	//this is test code for just demonstrating
@@ -170,11 +247,7 @@ public class APIEndpoint implements DataAccessible{
 	}
 
 
-	@Override
-	public boolean isUsernameAvailable(String username) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 
 	@Override
