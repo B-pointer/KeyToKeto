@@ -1,6 +1,7 @@
 package Models;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +51,21 @@ public class FoodItem {
 	}
 	
 	public FoodItem(JSONObject food) throws JSONException {
-		this(food.getString("name") + " " + food.getString("servingsize"), food.getInt("fid"), food.getInt("calories"), food.getInt("carbohydrates"), food.getInt("proteins"), food.getInt("fats"), -1.0);
+		this(food.getString("name") + " " + food.optString("servingsize", ""), food.optInt("mid", -1), food.getInt("calories"), food.getInt("carbohydrates"), food.getInt("proteins"), food.getInt("fats"), 0);
+	}
+	
+	public FoodItem(JSONObject food, boolean meal) throws JSONException {
+		this(
+			food.getString("name"),
+			food.optInt("mid", -1),
+			food.getInt("calories"),
+			food.getInt("carbohydrates"),
+			food.getInt("proteins"),
+			food.getInt("fats"),
+			food.optDouble("servings", 1.0),
+			food.optInt("mid", -1),
+			LocalDate.parse(food.getString("consumed_at"), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX"))
+		);
 	}
 	
 	public void setName(String name)

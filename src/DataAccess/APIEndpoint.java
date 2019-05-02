@@ -26,7 +26,8 @@ public class APIEndpoint implements DataAccessible{
 	
 	public APIEndpoint()
 	{
-		generateFoodList();
+		//generateFoodList();
+		foodList = new ArrayList<FoodItem>();
 	}
 	
 	
@@ -126,7 +127,6 @@ public class APIEndpoint implements DataAccessible{
 					.header("Postman-Token", "171b0435-9d3f-40c9-a573-ffcc66f343cd")
 					.asJson();
 			JSONObject body = response.getBody().getObject();
-			System.out.println(body);
 			if (response.getStatus() == 200 && body.getBoolean("success")) 
 			{
 				body = body.getJSONObject("profile");
@@ -143,7 +143,7 @@ public class APIEndpoint implements DataAccessible{
 				return u;
 			} else {
 				System.out.println(body.getString("message"));//TODO show this in a popup message
-			}	
+			}
 		} 
 		catch (UnirestException  | JSONException e) {
 			e.printStackTrace();
@@ -155,10 +155,8 @@ public class APIEndpoint implements DataAccessible{
 
 	@Override
 	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username) {
-
+		updateFoods();
 		ArrayList<FoodItem> datedFoodList = new ArrayList<FoodItem>();
-		
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 		
 		for(FoodItem f : foodList)
 		{
@@ -169,23 +167,86 @@ public class APIEndpoint implements DataAccessible{
 		}
 		return datedFoodList;	
 	}
+	
+	private void updateFoods() {
+		try {
+			HttpResponse<JsonNode> response = Unirest.get(APIURL + "/meal")
+				.header("accept", "application/json")
+		        .header("Content-Type", "application/json")
+		        .asJson();
+			JSONObject body = response.getBody().getObject();
+			
+			
+			if (response.getStatus() == 200 && body.has("results")) {
+				JSONArray foods = body.getJSONArray("results");
+				int size = foods.length();
+				foodList.clear();
+				for (int i=0; i<size; i++)
+					foodList.add(new FoodItem(foods.getJSONObject(i), true));
+			}
+		}
+		catch (UnirestException | JSONException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public boolean deleteMeal(int uniqueID) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Unirest.post(APIURL + "/meal/{mid}")
+				.routeParam("mid", Integer.toString(uniqueID))
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.header("cache-control", "no-cache")
+				.header("Postman-Token", "171b0435-9d3f-40c9-a573-ffcc66f343cd")
+				.body("remove=1")
+				.asJson();
+			updateFoods();
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override
 	public int addMeal(FoodItem meal, String username) {
 		// TODO Auto-generated method stub
-		//needs to insert into db and return the mealID 
+		//needs to insert into db and return the mealID
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00");
+		HttpResponse<JsonNode> response;
+		try {
+			response = Unirest.post(APIURL + "/meal")
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.header("cache-control", "no-cache")
+				.header("Postman-Token", "171b0435-9d3f-40c9-a573-ffcc66f343cd")
+				.body(
+					"name=" + meal.getName() +
+					"&servings=" + meal.getServings() +
+					"&calories=" + meal.getCalories() +
+					"&fats=" + meal.getFat() +
+					"&carbohydrates=" + meal.getCarbs() +
+					"&proteins=" + meal.getProtein() +
+					"&consumed_at=" + meal.getDate().format(dtf)
+				)
+				.asJson();
+			JSONObject body = response.getBody().getObject();
+			if (response.getStatus() == 200 && body.getBoolean("success")) 
+			{
+				meal.setMealID(body.getInt("mid"));
+				foodList.add(meal);
+				return body.getInt("mid");
+			} else {
+				System.out.println(body.getString("message"));//TODO show this in a popup message
+			}
+		} catch (UnirestException | JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		foodList.add(meal);
-		
-		Random r = new Random();
-		return r.nextInt(10000);
-		//return -1;
+		return -1;
 	}
 
 	public boolean updateUser(User user)
@@ -241,10 +302,6 @@ public class APIEndpoint implements DataAccessible{
 			}
 		}
 		
-		//for(FoodItem food : foodList)
-	//	{
-			//System.out.println(food.getName() + " " + food.getCalories() + " " +  food.getProtein()+ " " + food.getCarbs() + " " + food.getFat() + " " + food.getMealID() + " " + food.getDate());
-		//}
 	}
 
 
@@ -261,13 +318,12 @@ public class APIEndpoint implements DataAccessible{
 	@Override
 	public ArrayList<FoodItem> searchForFood(String keyword) {
 		ArrayList<FoodItem> results = new ArrayList<FoodItem>();
-		System.out.println("searchForFood called");
 		try {
 			HttpResponse<JsonNode> response = Unirest.get(APIURL + "/foodSearch/{search}")
-			        .routeParam("search", keyword)
-					.header("accept", "application/json")
-			        .header("Content-Type", "application/json")
-			        .asJson();
+		        .routeParam("search", keyword)
+				.header("accept", "application/json")
+		        .header("Content-Type", "application/json")
+		        .asJson();
 			JSONObject body = response.getBody().getObject();
 			
 			
@@ -282,7 +338,6 @@ public class APIEndpoint implements DataAccessible{
 		catch (UnirestException | JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Size: " + results.size());
 		return results;
 	}
 	
