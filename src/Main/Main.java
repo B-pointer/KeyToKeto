@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import Controllers.LoginPageController;
 import Controllers.StageLoader;
 import DataAccess.APIEndpoint;
-import DataAccess.DataConnection;
+import DataAccess.DataAccessible;
 import Models.FoodItem;
 import Models.User;
 import javafx.application.Application;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	
-	DataConnection data;
+	DataAccessible data;
 	
 	
 	@Override
@@ -26,7 +26,7 @@ public class Main extends Application{
 		
 		primaryStage.setOnCloseRequest(e -> Platform.exit());
 		
-		DataConnection data = new DataConnection();
+		data = new APIEndpoint();
 		StageLoader.loadLogin(primaryStage, data);
 		primaryStage.show();
 		

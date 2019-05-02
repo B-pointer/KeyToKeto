@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,7 +93,7 @@ public class APIEndpoint implements DataAccessible{
 					  .header("Content-Type", "application/x-www-form-urlencoded")
 					  .header("cache-control", "no-cache")
 					  .header("Postman-Token", "535f3255-6849-45e2-b465-1d0abb1dbf24")
-					  .body("username=" + username + "&password=" + password + "&birthdate=" +dateString + "&weight=" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender +"&calorie_goal=" + calories)//TODO add calories to method signature
+					  .body("username=" + username + "&password=" + password + "&birthdate=" +dateString + "&weight=" + weight + "&height=" + height + "&email=" + email + "&gender=" + gender +"&calorie_goal=" + calories)
 					  .asJson();
 			JSONObject body = response.getBody().getObject();
 			if (response.getStatus() == 200 && body.getBoolean("success")) {
@@ -137,7 +138,7 @@ public class APIEndpoint implements DataAccessible{
 				String gender = body.getString("gender");
 				int height = body.getInt("height");
 				int weight = body.getInt("weight");
-				int calories = body.getInt("calorie_goal");
+				int calories = body.optInt("calorie_goal", 0);
 				User u = new User(name, email, "nopass", date, gender, height, weight, calories);
 				return u;
 			} else {
@@ -259,8 +260,30 @@ public class APIEndpoint implements DataAccessible{
 
 	@Override
 	public ArrayList<FoodItem> searchForFood(String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<FoodItem> results = new ArrayList<FoodItem>();
+		System.out.println("searchForFood called");
+		try {
+			HttpResponse<JsonNode> response = Unirest.get(APIURL + "/foodSearch/{search}")
+			        .routeParam("search", keyword)
+					.header("accept", "application/json")
+			        .header("Content-Type", "application/json")
+			        .asJson();
+			JSONObject body = response.getBody().getObject();
+			
+			
+			if (response.getStatus() == 200 && body.has("results")) {
+				JSONArray foods = body.getJSONArray("results");
+				int size = foods.length();
+				
+				for (int i=0; i<size; i++)
+					results.add(new FoodItem(foods.getJSONObject(i)));
+			}
+		}
+		catch (UnirestException | JSONException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Size: " + results.size());
+		return results;
 	}
 	
 	

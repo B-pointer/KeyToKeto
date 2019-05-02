@@ -2,6 +2,9 @@ package Models;
 
 import java.time.LocalDate;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class FoodItem {
 	
 	private String name;
@@ -44,6 +47,10 @@ public class FoodItem {
 		this.mealID = insertionID;
 		this.date = date;
 		
+	}
+	
+	public FoodItem(JSONObject food) throws JSONException {
+		this(food.getString("name") + " " + food.getString("servingsize"), food.getInt("fid"), food.getInt("calories"), food.getInt("carbohydrates"), food.getInt("proteins"), food.getInt("fats"), -1.0);
 	}
 	
 	public void setName(String name)
