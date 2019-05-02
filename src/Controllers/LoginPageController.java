@@ -38,7 +38,7 @@ public class LoginPageController {
 	{
 		this.data = data;
 	}
-	
+	//called after the @FXML annotated fields are injected
 	@FXML private void initialize()
 	{
 		Platform.runLater(()-> {
@@ -46,7 +46,8 @@ public class LoginPageController {
 		});
 	}
 	
-	
+	//after login button is clicked, checks if username and password are valid. if so, gets the user's information and constructs 
+	//a user object, then loads the tabs with a call to the StageLoader class
 	@FXML protected void loginClick(ActionEvent event) throws FileNotFoundException
 	{			
 		if(data.login(username.getText(), password.getText())){
@@ -67,7 +68,7 @@ public class LoginPageController {
 	}
 	
 	
-	
+	//if create user is clicked, loads that page
 	@FXML protected void createUserPageClick(ActionEvent event)
 	{
 		try {

@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class StageLoader {
+	
+	//loads the stage that is passed in with the tab view
 	public static void loadTabs(Stage stage, User user, DataAccessible data) throws Exception
 	{
 		Callback<Class<?>, Object> controllerFactory = new Callback<Class<?>, Object>() {
@@ -35,7 +37,7 @@ public class StageLoader {
 		stage.setScene(new Scene(root, stage.getWidth(), stage.getHeight()));
 		stage.show();	
 	}
-	
+	//loads the login page
 	public static void loadLogin(Stage stage, DataAccessible data) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader(StageLoader.class.getResource("/fxml/LoginPage.fxml"));

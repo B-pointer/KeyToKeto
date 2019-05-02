@@ -38,7 +38,7 @@ public class DataConnection implements DataAccessible{
 		setupMealTable();
 	}
 	
-
+	//testing method
 	public void utility()
 	{
 		try {
@@ -66,7 +66,7 @@ public class DataConnection implements DataAccessible{
 	
 	
 
-	
+	//logs in by checking to see if username and password are valid 
 	public boolean login(String username, String password)
 	{	
 		try {
@@ -91,7 +91,7 @@ public class DataConnection implements DataAccessible{
 	}
 	
 	
-	
+	//checks if username is already in the database
 	public boolean isUsernameAvailable(String username)
 	{
 		try {
@@ -187,7 +187,7 @@ public class DataConnection implements DataAccessible{
 	
 	
 	
-
+	//gets food from the databse for a username and a date
 	public ArrayList<FoodItem> getFoodByDate(LocalDate date, String username)
 	{
 		ArrayList<FoodItem> theList = new ArrayList<FoodItem>();
@@ -222,7 +222,7 @@ public class DataConnection implements DataAccessible{
 	}
 	
 	
-	
+	//deletes from the database the meal with the ID passed in
 	public boolean deleteMeal(int mealID)
 	{
 		try {
@@ -238,7 +238,7 @@ public class DataConnection implements DataAccessible{
 		return false;
 	}
 	
-
+	//adds the food Item to database to the user's meal diary
 	public int addMeal(FoodItem meal, String username)
 	{
 
@@ -273,7 +273,7 @@ public class DataConnection implements DataAccessible{
 		return newMealID;
 	}
 	
-	
+	//updates the user's databse entries with the current info in the user object
 	public boolean updateUser(User u)
 	{
 
@@ -306,7 +306,7 @@ public class DataConnection implements DataAccessible{
 		}
 	}
 	
-	
+	//closes the connection to Derby, generally called when the application is exited
 	public void closeConnection()
 	{
 		try {

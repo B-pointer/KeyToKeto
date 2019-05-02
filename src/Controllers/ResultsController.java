@@ -38,14 +38,14 @@ public class ResultsController {
 	{
 	 
 	}
- 
+	//constructor with fields for user and data access layer
 	public ResultsController(User aUser, DataAccessible aData)
 	{
 		user = aUser;
 		data = aData;
 	}
  
-	
+	//called after the @FXML fields are injected
 	@FXML private void initialize()
 	{
 		setFormatter();
@@ -57,13 +57,14 @@ public class ResultsController {
 			}
 		});	
 	}
- 
+	//fires when the Recalculate button is clicked. recalculates the user's calorie goal based on current weight height and age and gender, 
+	//but does not save it to the user object
 	@FXML public void newResults(ActionEvent e)
 	{
 		int totalCalories = KetoCalculations.calculateCalories(user.getAge(), user.getHeight(), user.getWeight(), user.getGender());
 		fillFields(totalCalories);
 	}
-	
+	//reloads the login page
 	@FXML private void logoutClick(ActionEvent event)
 	{
 		try {	
@@ -74,7 +75,7 @@ public class ResultsController {
 			System.out.println("Error changing scenes with back button");
 		}
 	}
-	
+	//saves the current calculations (the current values of the fields) to the user object and the database 
 	@FXML private void saveClick(ActionEvent e)
 	{
 		
@@ -84,7 +85,7 @@ public class ResultsController {
 			data.updateUser(user);
 		}
 	}
-	
+	//resets to the current values stored in the user object
 	@FXML private void resetClick(ActionEvent e)
 	{
 		fillFields(user.getCalories());
@@ -100,7 +101,7 @@ public class ResultsController {
 		String homeCarbs = String.valueOf((KetoCalculations.calculateCarbs(Integer.parseInt(calories.getText()))));
 		home.setCals(homeCarbs);
 	}
-	
+	//prevents non integers from being entered in the calorie field
 	private void setFormatter()
 	{
 		UnaryOperator<Change> filter = change ->{
@@ -113,7 +114,7 @@ public class ResultsController {
 		};
 		calories.setTextFormatter(new TextFormatter<String>(filter));
 	}
-	
+	//checks if any fields are empty and displays an alert box if so
 	private boolean checkFields()
 	{
 		if(calories.getText().isEmpty())

@@ -48,6 +48,7 @@ public class CreateUserPageController {
 		this.data = data;
 	}
 	
+	//called at during the JavaFX lifecycle, after all fields with @FXML annotation have been injected. Effectively a constructor after the constructor
 	@FXML private void initialize()
 	{
 		birthDatePicker.setValue(LocalDate.now());
@@ -63,7 +64,10 @@ public class CreateUserPageController {
 	}
 	
 	
-	
+	//executes when create account button is clicked
+	//checks if fields are valid and none are empty. if valid and filled, then constructs a user object from the values in the fields
+	//then checks if username is available
+	//finally creates the user and loads the main page of the application, passing the user object into the next set of pages
 	@FXML protected void createClick(ActionEvent event)
 	{
 		//System.out.println("Create clicked, create new userObject from data here then save to database. if successful , move on to next page");
@@ -104,7 +108,7 @@ public class CreateUserPageController {
 	}
 	
 	
-	
+	//executes when back button is clicked, reloads the login page
 	@FXML private void backClick(ActionEvent event)
 	{
 		try {	
@@ -117,7 +121,8 @@ public class CreateUserPageController {
 	}
 	
 	
-	
+	//sets the TextFormatter for the height and weight field. As written only allows integers (character 0-9) to be entered into the
+	//aforementioned fields
 	private void setFormatter()
 	{
 		UnaryOperator<Change> filter = change ->{
@@ -133,7 +138,7 @@ public class CreateUserPageController {
 	}
 	
 	
-	
+	//checks if all the user input fields are filled and valid. if filled and valid returns true, else false
 	private boolean checkFields()
 	{
 		boolean emptyFields = usernameField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || passwordConfirmField.getText().isEmpty() 
@@ -150,7 +155,7 @@ public class CreateUserPageController {
 	}
 	
 	
-	
+	//shows a alert box that informs the user of input errors such as empty fields and mismatched password and confirmation of password
 	private void showErrors(boolean emptyFields, boolean mismatchedPasswords)
 	{
 		String message = "";
@@ -166,6 +171,7 @@ public class CreateUserPageController {
 		alert.showAndWait();
 	}
 	
+	//shows an alert that informs the user that the username they have selected is already in use
 	private void showExistingUserName()
 	{
 		String message = "A user with that name already exists";

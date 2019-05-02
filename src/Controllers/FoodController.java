@@ -112,14 +112,14 @@ public class FoodController {
 	User user;
 	DataAccessible data;
 	
-	
+	//constructor with fields for data access layer and user object
 	public FoodController(User user, DataAccessible data)
 	{
 		this.user = user;
 		this.data = data;
 	}
 	
-	
+	//called after @FXML fields are injected
 	@FXML private void initialize()
 	{
 		SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 10.0, 1.0, 0.1);
@@ -134,7 +134,7 @@ public class FoodController {
 		getFoodList();
 	}
 	
-	
+	//gets the food for a given data. uses the date in the data picker and the username of the user object
 	private void getFoodList()
 	{
 		
@@ -143,7 +143,7 @@ public class FoodController {
 		sumFields();
 		
 	}
-	
+	//sets up the cell value factories for the columns of both the search and diary tables
 	private void setupTable()
 	{
 
@@ -186,7 +186,9 @@ public class FoodController {
 	}
 	
 	
-	
+	//executes after the save button is clicked
+	//saves the currently populated fields on the right side below the table view as a meal to the database
+	//only executes if the fields are properly filled and valid 
 	@FXML private void saveClick(ActionEvent e)
 	{
 		if(checkFields())
@@ -215,7 +217,7 @@ public class FoodController {
 	}
 	
 	
-	
+	//deleted the currently highlighted food item from the food diary
 	@FXML private void deleteClick(ActionEvent e)
 	{
 		if(!MealTable.getSelectionModel().isEmpty())
@@ -230,16 +232,16 @@ public class FoodController {
 	
 	
 	
-	
+	//gets the food list after the date has been changed in the date picker, getting the diary for said day
 	@FXML private void dateChange(ActionEvent e)
 	{
 		date = datePicker.getValue();
-		System.out.println(datePicker.getValue());
+		//System.out.println(datePicker.getValue());
 		getFoodList();
 	}
 
 	
-	
+	//searches the currently entered term, query the API and returning a list of food items if any matches are found
 	@FXML void searchFood(ActionEvent e)
 	{
 
@@ -252,7 +254,7 @@ public class FoodController {
 		}
 	}
 	
-	
+	//reloads login page when the logout button is clicked
 	@FXML private void logoutClick(ActionEvent event)
 	{
 		try {	
@@ -266,7 +268,7 @@ public class FoodController {
 	
 	
 	
-	//makes it so that only numbers can be added to the macr nutrient and calorie fields. may not be used depending on API
+	//makes it so that only numbers can be added to the macro nutrients and calorie fields. may not be used depending on API
 	private void setFormatter()
 	{
 		UnaryOperator<Change> filter = change ->{
@@ -293,7 +295,7 @@ public class FoodController {
 		return true;
 	}
 	
-
+	//alert box if fields are empty
 	private void showErrors()
 	{
 		String message = "No fields may be left empty\n";
@@ -305,7 +307,7 @@ public class FoodController {
 	}
 	
 	
-	
+	//wipes all of the fields on the right below the search area
 	private void clearFields()
 	{
 		food.clear();
@@ -316,7 +318,8 @@ public class FoodController {
 		servingSpinner.getValueFactory().setValue(1.0);
 	}
 	
-	
+	//binds all the calorie and macro nutrient labels on the lower left to their respective properties, ensuring they are updated when 
+	//info throughout the program is changed
 	private void getBindings()
 	{
 		IntegerProperty in = user.CalorieProperty();
@@ -339,7 +342,7 @@ public class FoodController {
 		
 	}
 	
-	
+	//sums the macros and calories for the foods in the diary, allowing up to date caloric goals to be displayed
 	private void sumFields()
 	{
 		

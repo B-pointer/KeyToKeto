@@ -1,5 +1,5 @@
 package Controllers;
-
+//Author: brandon pointer
 import java.util.function.UnaryOperator;
 
 import DataAccess.DataAccessible;
@@ -33,14 +33,15 @@ public class CurrentStatsTabController {
 	
 	private User user;
 	private DataAccessible data;
-	
+	//constructor, with fields for the data access later and a user object that is created during login or account creation
 	public CurrentStatsTabController(User user, DataAccessible data)
 	{
 		this.user = user;
 		this.data = data;
 	}
 	
-	
+	//called during the JavaFX lifecycle, after the @FXML annotated fields are injected
+	//basically a constructor, but relies on fields that are created after the constructor is called
 	@FXML private void initialize()
 	{
 		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
@@ -58,7 +59,9 @@ public class CurrentStatsTabController {
 		}
 		setFormatter();
 	}
-		
+	//executes when the save button is clicked, sets the user object's fields to match those in the fields displayed on the screen, then saves that to the 
+	//data access layer
+	//only executes fully if the fields are properly filled and valid
 	@FXML private void saveClick(ActionEvent e)
 	{	 
 		if(checkFields())
@@ -108,7 +111,7 @@ public class CurrentStatsTabController {
 		weightField.setTextFormatter(new TextFormatter<String>(filter));
 	}
 	
-	
+	//executes when logout is clicked, reloads the login page
 	@FXML private void logoutClick(ActionEvent event)
 	{
 		try {	
