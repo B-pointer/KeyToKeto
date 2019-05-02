@@ -15,7 +15,7 @@ class KetoCalculationsTest {
 		height = 72;
 		weight = 200;
 		String gender = "Male";
-		double myBMR = 2067.8175248;
+		double myBMR = 2067;
 		assertEquals(myBMR, KetoCalculations.calculateCalories(age,height,weight,gender));
 	}
 
@@ -26,7 +26,7 @@ class KetoCalculationsTest {
 		height = 66;
 		weight = 130;
 		String gender = "Female";
-		double myBMR = 1425.60919912;
+		double myBMR = 1425;
 		assertEquals(myBMR, KetoCalculations.calculateCalories(age,height,weight,gender));
 	}
 
@@ -40,8 +40,8 @@ class KetoCalculationsTest {
 	@Test
 	void testCalculateFat() {
 		int testCals = 2000;
-		int testFat = 169;
-		assertEquals(testFat, KetoCalculations.calculateCarbs(testCals));
+		int testFat = 166;
+		assertEquals(testFat, KetoCalculations.calculateFat(testCals));
 	}
 
 	@Test

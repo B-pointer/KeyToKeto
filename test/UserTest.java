@@ -36,7 +36,7 @@ class UserTest {
 		String newEmail = "test2@email.com";
 		User user = new User();
 		user.setEmail(newEmail);
-		String testEmail = user.getName(); 
+		String testEmail = user.getEmail(); 
 		assertEquals(newEmail, testEmail);
 	}
 
@@ -59,18 +59,19 @@ class UserTest {
 
 	@Test
 	void testSetGetGender() {
+		String genderString = "Male";
 		User user = new User();
-		user.setGender("Male");
-		String testGender = user.getPass(); 
-		assertEquals("Male", testGender);
+		user.setGender(genderString);
+		String testGender = user.getGender(); 
+		assertEquals(genderString, testGender);
 	}
 
 	@Test
 	void testSetGetHeight() {
 		User user = new User();
-		user.setAge(72);
+		user.setHeight(72);
 		int testHeight = user.getHeight(); 
-		assertEquals(20, testHeight);
+		assertEquals(72, testHeight);
 	}
 
 	@Test
@@ -81,20 +82,14 @@ class UserTest {
 		assertEquals(200, testWeight);
 	}
 
-	@Test
-	void testSetGetGetAdmin() {
-		User user = new User();
-		user.setAdmin(true);
-		String testAdmin = user.getPass(); 
-		assertEquals(true, testAdmin);
-	}
+
 
 	@Test
 	void testSetGetCalories() {
 		User user = new User();
 		user.setCalories(2000);
-		int testHeight = user.getCalories(); 
-		assertEquals(20, testHeight);
+		int testCalories = user.getCalories(); 
+		assertEquals(2000, testCalories);
 	}
 
 }

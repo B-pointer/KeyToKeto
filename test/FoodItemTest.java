@@ -47,7 +47,7 @@ class FoodItemTest {
 	void testSetGetCalories() {
 		int newInt = 220;
 		FoodItem newFood = new FoodItem();
-		newFood.setID(newInt);
+		newFood.setCalories(newInt);
 		int testInt = newFood.getCalories(); 
 		assertEquals(newInt, testInt);
 	}
@@ -56,7 +56,7 @@ class FoodItemTest {
 	void testSetGetCarbs() {
 		int newInt = 18;
 		FoodItem newFood = new FoodItem();
-		newFood.setID(newInt);
+		newFood.setCarbs(newInt);
 		int testInt = newFood.getCarbs(); 
 		assertEquals(newInt, testInt);
 	}
@@ -65,7 +65,7 @@ class FoodItemTest {
 	void testSetGetProtein() {
 		int newInt = 7;
 		FoodItem newFood = new FoodItem();
-		newFood.setID(newInt);
+		newFood.setProtein(newInt);
 		int testInt = newFood.getProtein(); 
 		assertEquals(newInt, testInt);
 	}
@@ -74,18 +74,18 @@ class FoodItemTest {
 	void testSetGetFat() {
 		int newInt = 13;
 		FoodItem newFood = new FoodItem();
-		newFood.setID(newInt);
+		newFood.setFat(newInt);
 		int testInt = newFood.getFat(); 
 		assertEquals(newInt, testInt);
 	}
 
 	@Test
 	void testSetGetServings() {
-		int newInt = 3;
+		double newDouble = 1.75;
 		FoodItem newFood = new FoodItem();
-		newFood.setID(newInt);
-		double testInt = newFood.getServings(); 
-		assertEquals(newInt, Double.valueOf(testInt));
+		newFood.setServings(newDouble);
+		double testDouble = newFood.getServings(); 
+		assertEquals(newDouble, testDouble);
 	}
 
 	@Test
@@ -93,7 +93,7 @@ class FoodItemTest {
 		int newInt = 1313;
 		FoodItem newFood = new FoodItem();
 		newFood.setID(newInt);
-		int testInt = newFood.getMealID(); 
+		int testInt = newFood.getID(); 
 		assertEquals(newInt, testInt);
 	}
 
